@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
-  title: "Starknet Basecamp XI",
-  description: "Counter App",
+  title: "InheritX",
+  description:
+    "InheritX is a revolutionary blockchain-powered digital asset inheritance platform that enables secure, automated transfer of cryptocurrencies and NFTs to designated heirs. Built on StarkNet's Layer 2 solution, InheritX offers a trustless, efficient system for digital estate planning while ensuring complete security and privacy",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
