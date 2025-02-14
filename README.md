@@ -132,4 +132,4 @@ Stay updated on InheritX developments through our community channels:
 
 
 
-We invite you to join our effort in transforming the way skills meet jobs alongside learning possibilities.
+Join us in revolutionizing digital inheritance and securing your digital legacy with InheritX!
