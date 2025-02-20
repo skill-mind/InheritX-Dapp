@@ -104,7 +104,7 @@ const WhyInheritX = () => {
                 ensure your heirs receive the most suitable and optimized
                 portfolio based on current market conditions. Beneficiaries can
                 also swap inherited assets post-transfer, allowing them to
-                adjust their holdings to align with their preferences or
+                adjust their holdings t0 align with their preferences or
                 financial goals.
               </p>
             </div>
