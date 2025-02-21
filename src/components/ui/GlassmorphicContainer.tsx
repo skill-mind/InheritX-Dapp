@@ -12,7 +12,6 @@ export default function GlassmorphicContainer({children, className}: Glassmorphi
           boxShadow: '0 4px 24px -1px rgba(0, 0, 0, 0.25)',
         }}
       >
-        {/* Border glow effect */}
         <div 
           className="absolute inset-0 rounded-3xl"
           style={{
@@ -20,7 +19,6 @@ export default function GlassmorphicContainer({children, className}: Glassmorphi
           }}
         />
         
-        {/* Content */}
         <div className="relative z-10">
           {children}
         </div>
