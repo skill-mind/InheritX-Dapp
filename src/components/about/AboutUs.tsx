@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import GlassmorphicContainer from "../GlassmorphicContainer";
+import GlassmorphicContainer from "../ui/GlassmorphicContainer";
 
 const AboutUs = () => {
   return (
