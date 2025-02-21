@@ -12,6 +12,7 @@ interface EthicsSection {
         right: EthicsItem;
         left2: EthicsItem;
         right2: EthicsItem;
+        middle: EthicsItem;
       };
     }
   const ethicsData: EthicsSection[] = [
@@ -34,7 +35,7 @@ interface EthicsSection {
         },
         right: {
           title: "Security",
-          sub:  "We prioritize the safety of user assets through",
+          sub:  "We prioritize the safety of user assets through:",
           points: [
           
             "Regular security assessments and audits.",
@@ -46,7 +47,7 @@ interface EthicsSection {
         },
         left2: {
           title: "Privacy",
-          sub:  " We protect user data by",
+          sub:  " We protect user data by:",
           points: [
             "Enforcing strict data protection policies.",
             "Minimizing data collection to essential information",
@@ -55,15 +56,27 @@ interface EthicsSection {
             "Giving users control over their personal data"
           ]
         },
-        right2: {
+        right2: {                  
           title: "Innovation",
-          sub:  "We continuously improve our platform by",
+          sub:  "We continuously improve our platform by:",
           points: [
             "Advancing blockchain and security technology.",
             "Enhancing the user experience.",
             "Developing new features for better usability.",
             "Strengthening security measures.",
             "Leading the industry in responsible innovation"
+          ]
+        },
+
+        middle: {     
+          title: "Community Engagement",
+          sub:  "We foster an ethical and responsible user community by:",
+          points: [
+            "Encouraging active participation and feedback.",
+            "Upholding fair treatment for all users.",
+            "Maintaining open lines of communication.",
+            "Supporting users through education and assistance.",
+            "Promoting ethical digital asset management."
           ]
         },
       }
@@ -117,6 +130,18 @@ interface EthicsSection {
           sub:  "",
           points: []
         },
+
+        middle: {                  
+          title: "",
+          sub:  "",
+          points: [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
       }
     },
     {
@@ -154,6 +179,18 @@ interface EthicsSection {
           title: "",
           sub:  "",
           points: []
+        },
+
+        middle: {                  
+          title: "",
+          sub:  "",
+          points: [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
         },
         
       }
