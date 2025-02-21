@@ -17,7 +17,7 @@ interface NavbarProps {
 const navLinks: NavLink[] = [
   { name: "Home", href: "#" },
   { name: "About", href: "#" },
-  { name: "FAQ", href: "#" },
+  { name: "FAQ", href: "/ethics" },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
