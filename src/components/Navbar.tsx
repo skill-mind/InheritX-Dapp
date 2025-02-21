@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
@@ -17,7 +19,7 @@ interface NavbarProps {
 const navLinks: NavLink[] = [
   { name: "Home", href: "#" },
   { name: "About", href: "about-us" },
-  { name: "FAQ", href: "#" },
+  { name: "FAQ", href: "faq" },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
