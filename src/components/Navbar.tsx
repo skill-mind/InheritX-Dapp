@@ -16,7 +16,7 @@ interface NavbarProps {
 
 const navLinks: NavLink[] = [
   { name: "Home", href: "#" },
-  { name: "About", href: "#" },
+  { name: "About", href: "about" },
   { name: "FAQ", href: "#" },
 ];
 
