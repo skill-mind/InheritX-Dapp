@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Navbar from "../Navbar";
-import Footer from "../Footer";
+
 
 const Accounts = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
