@@ -4,15 +4,22 @@ import Image from "next/image";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 
+interface ConnectModalProps {
+  isModalOpen: boolean;
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}
+
 const walletOptions = [
   { id: "argent-mobile", src: "/argent.svg", name: "Argent (Mobile)" },
   { id: "argent-web", src: "/argent.svg", name: "Argent (Website)" },
   { id: "bravos", src: "/bravos.svg", name: "Bravos" },
 ];
 
-export default function ConnectModal() {
+export default function ConnectModal({
+  isModalOpen,
+  setIsModalOpen,
+}: ConnectModalProps) {
   const [activeWallet, setActiveWallet] = useState("argent-mobile");
-  const [isModalOpen, setIsModalOpen] = useState(true);
 
   return (
     <div
