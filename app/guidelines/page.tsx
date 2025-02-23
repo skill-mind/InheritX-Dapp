@@ -1,3 +1,4 @@
+
 "use client";
 import Footer from "@/components/Footer";
 import CodeOfEthics from "@/components/guidelines/code-of-ethics";
