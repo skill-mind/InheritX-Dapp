@@ -1,9 +1,12 @@
+"use client";
+
 import React, { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
 
 import Image from "next/image";
 import Link from "next/link";
+import ConnectModal from "./ConnectModal";
 
 interface NavLink {
   name: string;
@@ -16,15 +19,21 @@ interface NavbarProps {
 
 const navLinks: NavLink[] = [
   { name: "Home", href: "#" },
-  { name: "About", href: "#" },
-  { name: "FAQ", href: "/ethics" },
+  { name: "About", href: "about-us" },
+  { name: "FAQ", href: "faq" },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
+  };
+
+  const handleConnectWallet = () => {
+    setIsModalOpen(true);
+    onConnectWallet?.();
   };
 
   return (
@@ -58,7 +67,7 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
           <div className="hidden md:block">
             {" "}
             <button
-              onClick={onConnectWallet}
+              onClick={handleConnectWallet}
               className="border border-[#B5B3B4]  text-white hover:bg-[#B5B3B4]  px-6 py-2 rounded-full transition-colors"
             >
               Connect Wallet
@@ -74,39 +83,46 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
           </button>
         </div>
 
-      
-{/* Mobile Menu */}
-<div
-  className={`
+        {/* Mobile Menu */}
+        <div
+          className={`
     md:hidden absolute top-full left-0 w-full bg-[#06020E]/95 backdrop-blur-md transition-all duration-300 ease-in-out
-    ${isOpen ? "opacity-100 visible max-h-[50vh] py-5" : "opacity-0 invisible max-h-0"}
+    ${
+      isOpen
+        ? "opacity-100 visible max-h-[50vh] py-5"
+        : "opacity-0 invisible max-h-0"
+    }
   `}
->
-  <div className="flex flex-col items-center gap-6">
-    {navLinks.map((link) => (
-      <Link
-        key={link.name}
-        href={link.href}
-        className="text-white/80 hover:text-white transition-colors text-lg"
-        onClick={() => setIsOpen(false)}
-      >
-        {link.name}
-      </Link>
-    ))}
-    <button
-      onClick={() => {
-        onConnectWallet?.();
-        setIsOpen(false);
-      }}
-      className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full transition-colors text-base mt-2"
-    >
-      Connect Wallet
-    </button>
-  </div>
-</div>
-
-
+        >
+          <div className="flex flex-col items-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-white/80 hover:text-white transition-colors text-lg"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <button
+              onClick={() => {
+                handleConnectWallet();
+                setIsOpen(false);
+              }}
+              className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full transition-colors text-base mt-2"
+            >
+              Connect Wallet
+            </button>
+          </div>
+        </div>
       </div>
+      {isModalOpen && (
+        <ConnectModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
     </nav>
   );
 };
