@@ -5,7 +5,7 @@ import HowitWorks from "./HowItWorks";
 
 const Hero = () => {
   return (
-    <main className="relative  min-h-screen">
+    <main className="relative  ">
       
       <section className="w-full   flex  justify-center px-6 ">
         <div className="max-w-7xl pt-20 text-center">
