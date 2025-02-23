@@ -72,7 +72,7 @@ const Accounts: React.FC<AccountsFaqProps> = ({ activeTab, setActiveTab }) => {
               className="cursor-pointer w-full max-w-[948px] py-5 flex flex-col items-start gap-3 border-b-[1px] border-[#413F54]"
             >
               <header className="w-full flex flex-row items-center justify-between">
-                <h1 className="text-white font-semibold text-lg">
+                <h1 className="text-white text-left font-semibold text-lg">
                   {tab.heading}
                 </h1>
 
