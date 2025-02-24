@@ -37,7 +37,7 @@ export default function General({ activeTab, setActiveTab }: GeneralFaqProps) {
   return (
     <section className="px-4">
       {/* Heading */}
-      <div className="max-w-2xl md:max-w-3xl text-center mx-auto mb-10 md:mb-16 py-8">
+      <div className="max-w-2xl w-[95] md:max-w-3xl text-center mx-auto  md:mb-16 pt-8">
         <h1 className="text-3xl md:text-5xl font-semibold mb-4">
           Frequently Asked Questions
         </h1>
@@ -63,7 +63,7 @@ export default function General({ activeTab, setActiveTab }: GeneralFaqProps) {
       </div>
 
       {/* FAQ Section */}
-      <div className="max-w-2xl md:max-w-3xl mx-auto">
+      <div className="max-w-2xl w-[90%] md:max-w-3xl mx-auto">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b border-gray-700">
             <button
