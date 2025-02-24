@@ -3,7 +3,6 @@ import GlassmorphicContainer from "../ui/GlassmorphicContainer";
 
 export default function TermsAndCondition() {
 
-
   return (
     <section className="gap-[18px] px-4 md:px-8 lg:px-16 w-full">
       <h1 className="text-[40px] text-center font-black my-16">
