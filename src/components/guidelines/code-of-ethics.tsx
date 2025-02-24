@@ -26,13 +26,11 @@ const ethicsData: EthicsSection[] = [
   {
     id: 1,
     title: "Core Principles",
-
     subsections: {
       left: {
         title: "Transparency",
         sub: "We are committed to open and honest communication by:",
         points: [
-          "We are committed to open and honest communication by",
           "Clearly communicating all processes",
           "Providing regular updates on platform status.",
           "Maintaining open documentation of procedures.",
@@ -53,7 +51,7 @@ const ethicsData: EthicsSection[] = [
       },
       left2: {
         title: "Privacy",
-        sub: " We protect user data by:",
+        sub: "We protect user data by:",
         points: [
           "Enforcing strict data protection policies.",
           "Minimizing data collection to essential information",
@@ -73,7 +71,6 @@ const ethicsData: EthicsSection[] = [
           "Leading the industry in responsible innovation",
         ],
       },
-
       middle: {
         title: "Community Engagement",
         sub: "We foster an ethical and responsible user community by:",
@@ -87,14 +84,13 @@ const ethicsData: EthicsSection[] = [
       },
     },
   },
-
   {
     id: 2,
     title: "User & Platform Responsibilities",
     subsections: {
       left: {
         title: "User Responsibilities",
-        sub: " To maintain platform integrity, users must:",
+        sub: "To maintain platform integrity, users must:",
         points: [
           "Provide accurate and truthful information.",
           "Follow security best practices.",
@@ -111,7 +107,7 @@ const ethicsData: EthicsSection[] = [
           "Incorporating user feedback to improve services.",
           "Ensuring transparency in all decision-making.",
           "Offering fair and unbiased dispute resolution.",
-          "Providing reliable community suppot",
+          "Providing reliable community support",
         ],
       },
       left2: {
@@ -124,11 +120,10 @@ const ethicsData: EthicsSection[] = [
         sub: "",
         points: [],
       },
-
       middle: {
         title: "",
         sub: "",
-        points: ["", "", "", "", ""],
+        points: [],
       },
     },
   },
@@ -149,7 +144,7 @@ const ethicsData: EthicsSection[] = [
       },
       right: {
         title: "Ethical Standards",
-        sub: " We uphold the highest professional and ethical standards by:",
+        sub: "We uphold the highest professional and ethical standards by:",
         points: [
           "Maintaining integrity in all operations.",
           "Treating all users fairly and equally.",
@@ -168,106 +163,55 @@ const ethicsData: EthicsSection[] = [
         sub: "",
         points: [],
       },
-
       middle: {
         title: "",
         sub: "",
-        points: ["", "", "", "", ""],
+        points: [],
       },
     },
   },
 ];
 
 const EthicsSection: React.FC<EthicsSectionProps> = ({ section }) => {
+  // Helper function to render a subsection only if it has content
+  const renderSubsection = (subsection: EthicsItem) => {
+    if (!subsection.title || !subsection.points.length) return null;
+
+    return (
+      <div className="p-4 sm:p-6 bg-opacity-10 bg-white rounded-lg">
+        <h2 className="text-lg sm:text-2xl font-semibold mb-2 sm:mb-4 text-white">
+          {subsection.title}
+        </h2>
+        <h4 className="text-sm sm:text-base font-medium mb-2 sm:mb-3 text-white">
+          {subsection.sub}
+        </h4>
+        <ul className="space-y-1.5 sm:space-y-2">
+          {subsection.points.map((point, index) => (
+            <li key={index} className="text-gray-300 text-xs sm:text-sm flex">
+              <span className="mr-2">•</span>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-semibold my-8 ">
+      <h2 className="text-xl sm:text-2xl font-semibold my-4 sm:my-8">
         {section.id}. {section.title}
       </h2>
-      <div className="grid md:grid-cols-2 gap-8 mt-6">
-        {/* first */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4 text-white b">
-            {section.subsections.left.title}
-          </h2>
-          <h4 className="text-base font-medium mb-3 text-white">
-            {section.subsections.left.sub}
-          </h4>
-          <ul className="space-y-2">
-            {section.subsections.left.points.map((point, index) => (
-              <li key={index} className="text-gray-300 text-sm ">
-                •{point}
-              </li>
-            ))}
-          </ul>
-        </div>
-        {/* second  */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4 text-white">
-            {section.subsections.right.title}
-          </h2>
-          <h4 className="text-base font-medium mb-3 text-white">
-            {section.subsections.right.sub}
-          </h4>
-          <ul className="space-y-2">
-            {section.subsections.right.points.map((point, index) => (
-              <li key={index} className="text-gray-300 text-sm">
-                • {point}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* third */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4 text-white">
-            {section.subsections.left2.title}
-          </h2>
-          <h4 className="text-base font-medium mb-3 text-white">
-            {section.subsections.left2.sub}
-          </h4>
-          <ul className="space-y-2">
-            {section.subsections.left2.points.map((point, index) => (
-              <li key={index} className="text-gray-300 text-sm">
-                • {point}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Four */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4 text-white">
-            {section.subsections.right2.title}
-          </h2>
-          <h4 className="text-base font-medium mb-3 text-white">
-            {section.subsections.right2.sub}
-          </h4>
-          <ul className="space-y-2">
-            {section.subsections.right2.points.map((point, index) => (
-              <li key={index} className="text-gray-300 text-sm">
-                •{point}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* five */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4 text-white">
-            {section.subsections.middle.title}
-          </h2>
-          <h4 className="text-base font-medium mb-3 text-white">
-            {section.subsections.right2.sub}
-          </h4>
-          <ul className="space-y-2">
-            {section.subsections.right2.points.map((point, index) => (
-              <li key={index} className="text-gray-300 text-sm">
-                •{point}
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mt-4 sm:mt-6">
+        {renderSubsection(section.subsections.left)}
+        {renderSubsection(section.subsections.right)}
+        {renderSubsection(section.subsections.left2)}
+        {renderSubsection(section.subsections.right2)}
+        {renderSubsection(section.subsections.middle) && (
+          <div className="md:col-span-2">
+            {renderSubsection(section.subsections.middle)}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -275,15 +219,14 @@ const EthicsSection: React.FC<EthicsSectionProps> = ({ section }) => {
 
 const CodeOfEthics: React.FC = () => {
   return (
-    <main className="min-h-screen ">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8  md:py-3 lg:py-3">
-        <div className="max-w-7xl mx-auto space-y-10 md:space-y-12 lg:space-y-16  flex flex-col items-center">
-          {/* Header Section */}
-          <header className="space-y-6 md:space-y-5">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center">
+    <main className="min-h-screen py-8 sm:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">
+          <header className="space-y-3 sm:space-y-4">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center">
               Code of Ethics
             </h1>
-            <p className="text-sm md:text-base lg:text-[15px] leading-relaxed md:leading-relaxed lg:leading-relaxed max-w-3xl mx-auto text-center px-4 md:px-6 lg:px-8 ">
+            <p className="text-sm sm:text-base lg:text-lg leading-relaxed max-w-3xl mx-auto text-center px-4 sm:px-6">
               At InheritX, we are committed to upholding the highest standards
               of integrity, security, and transparency. Our Code of Ethics
               ensures that our platform operates ethically, securely, and in
@@ -291,13 +234,12 @@ const CodeOfEthics: React.FC = () => {
             </p>
           </header>
 
-          {/* Ethics Sections */}
-          <div className="space-y-12 md:space-y-12 lg:space-y-16 md:w-[950px] bg-gradient-to-b from-[#323246] to-[#14101c] md:px-7 rounded-2xl px-7">
+          <div className="space-y-8 sm:space-y-12 w-full sm:max-w-5xl lg:max-w-6xl mx-auto bg-gradient-to-b from-[#323246] to-[#14101c] p-4 sm:p-6 lg:p-8 rounded-2xl">
             {ethicsData.map((section, index) => (
               <div
                 key={section.id}
                 className={`pb-6 ${
-                  index < 2 ? "border-b border-gray-500" : ""
+                  index < ethicsData.length - 1 ? "border-b border-gray-500" : ""
                 }`}
               >
                 <EthicsSection section={section} />
