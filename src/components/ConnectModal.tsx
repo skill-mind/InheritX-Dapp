@@ -3,22 +3,25 @@
 import Image from "next/image";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
+import { useConnect } from "@starknet-react/core";
+import { useAccount } from "@starknet-react/core";
 
 interface ConnectModalProps {
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
 }
 
-const walletOptions = [
-  { id: "argent-mobile", src: "/argent.svg", name: "Argent (Mobile)" },
-  { id: "argent-web", src: "/argent.svg", name: "Argent (Website)" },
-  { id: "bravos", src: "/bravos.svg", name: "Bravos" },
-];
-
 export default function ConnectModal({
   isModalOpen,
   setIsModalOpen,
 }: ConnectModalProps) {
+  // connect hooks
+  const { connect, connectors } = useConnect();
+
+  const { isConnected, connector } = useAccount();
+
+  const [selectedWallet, setSelectedWallet] = useState(connectors?.[0] || null);
+
   const [activeWallet, setActiveWallet] = useState("argent-mobile");
 
   return (
@@ -49,10 +52,13 @@ export default function ConnectModal({
           </div>
 
           <div className="flex flex-col md:flex-row gap-3 mt-6 sm:mt-8">
-            {walletOptions.map((wallet) => (
-              <div
+            {connectors.map((wallet) => (
+              <button
                 key={wallet.id}
-                onClick={() => setActiveWallet(wallet.id)}
+                onClick={() => {
+                  setActiveWallet(wallet.id);
+                  setSelectedWallet(wallet);
+                }}
                 className={`flex items-center sm:flex-col sm:items-center justify-start sm:justify-center p-3 sm:p-4 space-x-3 sm:space-x-0 sm:space-y-2 rounded-xl border border-gray-400 cursor-pointer transition-all duration-200 hover:shadow-lg w-full ${
                   activeWallet === wallet.id
                     ? "bg-[#21202A] border-2"
@@ -60,8 +66,12 @@ export default function ConnectModal({
                 }`}
               >
                 <Image
-                  src={wallet.src}
-                  alt={wallet.name}
+                  src={
+                    typeof wallet.icon === "object"
+                      ? wallet.icon.dark
+                      : wallet.icon
+                  }
+                  alt={wallet.name || "Unknown Wallet"}
                   height={40}
                   width={40}
                   className="sm:h-[50px] sm:w-[50px]"
@@ -69,7 +79,7 @@ export default function ConnectModal({
                 <p className="text-sm sm:text-base text-center">
                   {wallet.name}
                 </p>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -81,8 +91,13 @@ export default function ConnectModal({
               Create One
             </button>
           </p>
-          <button className="bg-[#1B0055] border border-gray-400 py-3 px-6 w-full rounded-full hover:scale-[1.02] transition duration-200 text-base sm:text-lg font-medium shadow-lg hover:shadow-xl active:scale-[0.98]">
-            Continue
+          <button
+            onClick={() => {
+              connect({ connector: selectedWallet });
+            }}
+            className="bg-[#1B0055] border border-gray-400 py-3 px-6 w-full rounded-full hover:scale-[1.02] transition duration-200 text-base sm:text-lg font-medium shadow-lg hover:shadow-xl active:scale-[0.98]"
+          >
+            {isConnected ? `${connector?.name}  Connected` : "Continue"}
           </button>
         </div>
       </div>
