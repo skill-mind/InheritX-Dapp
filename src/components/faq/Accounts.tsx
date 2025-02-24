@@ -41,7 +41,7 @@ const Accounts: React.FC<AccountsFaqProps> = ({ activeTab, setActiveTab }) => {
 
   return (
     <section className="px-4">
-      <div className="max-w-2xl md:max-w-3xl text-center mx-auto mb-10 md:mb-16 py-8">
+      <div className="max-w-2xl w-[95%] md:max-w-3xl text-center mx-auto mb-10 md:mb-16 py-8">
         <h1 className="text-3xl md:text-5xl font-semibold mb-4">
           Frequently Asked Questions
         </h1>
@@ -64,7 +64,7 @@ const Accounts: React.FC<AccountsFaqProps> = ({ activeTab, setActiveTab }) => {
         ))}
       </div>
       <div className="flex flex-col gap-[60px] items-center justify-center text-center py-5 px-6">
-        <div className="flex flex-col items-start gap-1">
+        <div className="flex flex-col items-start gap-1 max-w-2xl  md:max-w-3xl mx-auto">
           {FaqTabs.map((tab, index) => (
             <div
               key={tab.id}
