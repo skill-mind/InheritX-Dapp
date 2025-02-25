@@ -155,11 +155,23 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
               className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full transition-colors text-base mt-2"
             >
               {isConnected ? (
-                <div>
-                  <img src="/placeholder-wallet.svg" alt="placeholder-wallet" />
-                  {address?.slice(0, 6)}...${address?.slice(-4)}
-                  <Plus />
-                  <ChevronDown />
+                <div className="flex items-center gap-[16px] justify-between">
+                  <div className="flex items-center gap-[5px]">
+                    <div>
+                      <img
+                        src="/placeholder-wallet.svg"
+                        alt="placeholder-wallet"
+                      />
+                    </div>
+
+                    <div>
+                      {address?.slice(0, 6)}....${address?.slice(-4)}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-[2px]">
+                    <Plus />
+                    <ChevronDown />
+                  </div>
                 </div>
               ) : (
                 "Connect Wallet"
