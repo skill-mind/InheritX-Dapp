@@ -8,6 +8,9 @@ import { ImCancelCircle } from "react-icons/im";
 import { useAccount } from "@starknet-react/core";
 import { useDisconnect } from "@starknet-react/core";
 
+//icons
+import { Plus, ChevronDown } from "lucide-react";
+
 import Image from "next/image";
 import Link from "next/link";
 import ConnectModal from "./ConnectModal";
@@ -22,7 +25,7 @@ interface NavbarProps {
 }
 
 const navLinks: NavLink[] = [
-  { name: "Home", href: "#" },
+  { name: "Home", href: "/" },
   { name: "About", href: "about-us" },
   { name: "FAQ", href: "faq" },
 ];
@@ -83,11 +86,30 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
                   disconnect();
                 }
               }}
-              className="border border-[#B5B3B4]  text-white hover:bg-[#B5B3B4]  px-6 py-2 rounded-full transition-colors"
+              className="border border-[#B5B3B4]  text-white hover:bg-[#B5B3B4]  px-3 py-2 rounded-full transition-colors"
             >
-              {isConnected
-                ? `${address?.slice(0, 6)}...${address?.slice(-4)}`
-                : "Connect Wallet"}
+              {isConnected ? (
+                <div className="flex items-center gap-[16px] justify-between">
+                  <div className="flex items-center gap-[5px]">
+                    <div>
+                      <img
+                        src="/placeholder-wallet.svg"
+                        alt="placeholder-wallet"
+                      />
+                    </div>
+
+                    <div>
+                      {address?.slice(0, 6)}....${address?.slice(-4)}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-[2px]">
+                    <Plus />
+                    <ChevronDown />
+                  </div>
+                </div>
+              ) : (
+                "Connect Wallet"
+              )}
             </button>
           </div>
 
@@ -132,9 +154,16 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
               }}
               className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full transition-colors text-base mt-2"
             >
-              {isConnected
-                ? `${address?.slice(0, 6)}...${address?.slice(-4)}`
-                : "Connect Wallet"}
+              {isConnected ? (
+                <div>
+                  <img src="/placeholder-wallet.svg" alt="placeholder-wallet" />
+                  {address?.slice(0, 6)}...${address?.slice(-4)}
+                  <Plus />
+                  <ChevronDown />
+                </div>
+              ) : (
+                "Connect Wallet"
+              )}
             </button>
           </div>
         </div>
