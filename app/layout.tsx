@@ -1,12 +1,10 @@
+
 import type { Metadata } from "next";
 import { Providers } from "@/components/Providers";
+import { METADATA_CONFIG } from "../Config/app.config";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "InheritX",
-  description:
-    "InheritX is a revolutionary blockchain-powered digital asset inheritance platform that enables secure, automated transfer of cryptocurrencies and NFTs to designated heirs. Built on StarkNet's Layer 2 solution, InheritX offers a trustless, efficient system for digital estate planning while ensuring complete security and privacy",
-};
+export const metadata: Metadata = METADATA_CONFIG;
 
 export default function RootLayout({
   children,
@@ -15,6 +13,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+      </head>
       <body className="">
         <Providers>{children}</Providers>
       </body>
