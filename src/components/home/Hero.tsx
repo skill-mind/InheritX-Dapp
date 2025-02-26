@@ -11,10 +11,10 @@ const Hero = () => {
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Secure Your Digital Legacy <br /> With InheritX
           </h1>
-          <p className="py-6 text-base sm:text-lg text-gray-300 text-pretty max-w-2xl mx-auto">
+          <p className="py-4 text-base sm:text-lg text-gray-300 text-pretty max-w-3xl mx-auto">
             InheritX revolutionizes digital asset inheritance by offering a secure and automated platform for transferring cryptocurrencies and NFTs to your heirs. Experience peace of mind knowing your digital legacy is protected and easily passed on.
           </p>
-          <button className="border border-[#B5B3B4] mt-6 sm:mt-16 text-white hover:bg-[#B5B3B4] px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-colors">
+          <button className="border border-[#B5B3B4] sm:mt-16 text-white hover:bg-[#B5B3B4] px-6 sm:px-8 sm:py-3 rounded-full transition-colors">
             Get Started
           </button>
         </div>

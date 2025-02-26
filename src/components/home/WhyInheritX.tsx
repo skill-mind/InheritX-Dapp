@@ -78,23 +78,46 @@ const WhyInheritX = () => {
           </div>
 
           {/* 4th Card */}
-          <div className="bg-[#413F54] text-white p-6 rounded-2xl w-full md:w-[360px] lg:w-[390px] min-h-[300px] relative overflow-hidden">
-            <h2 className="text-[20px] sm:text-[24px] font-semibold">
-              Clear & Legal Process
-            </h2>
-            <p className="text-gray-400 mt-1 text-[12px] sm:text-sm">
-              InheritX follows strict legal and compliance standards, ensuring
-              your inheritance is safe, transparent, and dispute-free.
-            </p>
+          
+          <div className="bg-[#413F54] text-white p-6 rounded-2xl shadow-lg w-full md:w-[360px] lg:w-[390px] min-h-[300px] relative overflow-hidden">
+            <div>
+              <h2 className="text-[20px] sm:text-[24px] font-semibold">
+                Clear & Legal Process
+              </h2>
+              <p className="text-gray-400 mt-1 text-[12px] sm:text-sm">
+                inheritX followers strict legal and compliance standards, ensuring your inheritance is safe, transparent, and dispute-free.
+              </p>
+            </div>
 
-            <div className="absolute bottom-[15px] left-1/2 -translate-x-1/2 rounded-full">
-              <Image src="/legal.png" width={51} height={54} alt="Legal" />
+            <div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[380px] h-[172px] bg-gradient-to-b from-[#4F4E4F] to-transparent rounded-t-full"></div>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[310px] h-[143px] bg-gradient-to-b from-[#7A7879] to-transparent rounded-t-full"></div>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[250px] h-[118px] bg-gradient-to-b from-[#B5B3B4] to-transparent rounded-t-full"></div>
+
+              <div className="absolute bottom-[16px] left-1/2 -translate-x-1/2 rounded-full">
+                <Image src="/Vector.png" width={51} height={50} alt="Lock" />
+              </div>
+              <div className="relative flex justify-center mt-[100px] items-center">
+                {/* User Icons (Top, Bottom, Left, Right) */}
+                <div className="absolute top-[-48px] left-2/3 transform -translate-x-1/2">
+                  <Image src="/vect.png" width={22.5} height={22.5} alt="vector" />
+                </div>
+                <div className="absolute top-[-68px] left-[93px] transform -translate-x-1/2">
+                  <Image src="/vect.png" width={22.5} height={22.5} alt="vector" />
+                </div>
+                <div className="absolute left-[12px] top-10 transform -translate-y-1/2">
+                  <Image src="/vect.png" width={22.5} height={22.5} alt="vector" />
+                </div>
+                <div className="absolute right-[50px] top-10 transform -translate-y-1/2">
+                  <Image src="/vect.png" width={22.5} height={22.5} alt="vector" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="lg:flex flex-col gap-10 bg-[#413F54] md:w-full lg:w-[358px] rounded-2xl p-6">
-          <div>
+          <div className="mb-8">
             <h2 className="text-[20px] sm:text-[24px] font-semibold">
               Optimized Asset Control
             </h2>
@@ -106,7 +129,7 @@ const WhyInheritX = () => {
             </p>
           </div>
 
-          <div className="flex flex-col items-center gap-5">
+          <div className="flex flex-col items-center mt-12 gap-5">
             <Image src="/usdc.png" width={250} height={90} alt="USDC" />
             <Image src="/stark.png" width={250} height={90} alt="Stark" />
           </div>
