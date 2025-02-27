@@ -3,14 +3,10 @@
 import React, { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
-
-// wallet connect hooks
+import { usePathname } from "next/navigation";
 import { useAccount } from "@starknet-react/core";
 import { useDisconnect } from "@starknet-react/core";
-
-//icons
 import { Plus, ChevronDown } from "lucide-react";
-
 import Image from "next/image";
 import Link from "next/link";
 import ConnectModal from "./ConnectModal";
@@ -26,18 +22,15 @@ interface NavbarProps {
 
 const navLinks: NavLink[] = [
   { name: "Home", href: "/" },
-  { name: "About", href: "about-us" },
-  { name: "FAQ", href: "faq" },
+  { name: "About", href: "/about-us" },
+  { name: "FAQ", href: "/faq" },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // account hooks
+  const pathname = usePathname();
   const { address, isConnected } = useAccount();
-
-  //disconnect hooks
   const { disconnect } = useDisconnect({});
 
   const toggleMenu = (): void => {
@@ -49,12 +42,20 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
     onConnectWallet?.();
   };
 
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === href;
+    }
+    return pathname.startsWith(href);
+  };
+
   return (
     <nav className="w-full py-10 px-6 relative z-50">
       <div className="max-w-7xl mx-auto flex justify-center ">
         <div className="flex items-center justify-between  bg-[#413F54] rounded-full border border-[#B5B3B4] px-6 py-3  w-[1063px]">
           {/* Logo */}
-          <div className="text-white h-[38.67px] w-[110px]">
+       <Link href={"/"}>
+       <div className="text-white h-[38.67px] w-[110px]">
             <Image
               src="/Logo.png"
               width={50}
@@ -63,6 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
               className="w-full h-full object-fill"
             />
           </div>
+       </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -70,7 +72,11 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-[#FFFFFF] text-base  hover:text-white transition-colors"
+                className={`text-base transition-colors ${
+                  isActive(link.href)
+                    ? "text-white font-medium border-b-2 border-white"
+                    : "text-[#FFFFFF]/80 hover:text-white"
+                }`}
               >
                 {link.name}
               </Link>
@@ -138,7 +144,11 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-white/80 hover:text-white transition-colors text-lg"
+                className={`transition-colors text-lg ${
+                  isActive(link.href)
+                    ? "text-white font-medium border-b border-white"
+                    : "text-white/80 hover:text-white"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
