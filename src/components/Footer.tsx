@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface FooterLinks {
   label: string;
@@ -8,10 +9,11 @@ interface FooterLinks {
 }
 
 const footerLinks: FooterLinks[] = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#" },
-  { label: "FAQs", href: "#" },
-  { label: "Guidelines", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about-us"  },
+  { label: "FAQs", href: "/faq" },
+  { label: "Guidelines", href: "/guidelines" },
+  { label: "Support", href: "/support" },
 ];
 
 const socialLinks = [
@@ -28,6 +30,9 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
   return (
     <footer className="text-white mt-10 md:mt-[100px] py-6 md:py-10 px-4">
       <div className="container mx-auto max-w-[1280px] bg-[#413F54] rounded-2xl p-4 sm:p-6">
@@ -56,7 +61,11 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-gray-300 hover:text-white transition-colors text-xs sm:text-sm"
+                      className={`transition-colors text-xs sm:text-sm ${
+                        pathname === link.href
+                          ? "text-white font-semibold" // Active state
+                          : "text-gray-300 hover:text-white"
+                      }`}
                     >
                       {link.label}
                     </Link>
@@ -69,7 +78,7 @@ export default function Footer() {
 
         <div className="mt-8 sm:mt-12 md:mt-[100px] text-xs sm:text-sm py-4 px-4 sm:px-5 bg-[#21202A99] rounded-2xl text-gray-300 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-center sm:text-left">
-            Copyright © InheritX 2025, All rights Reserved
+            Copyright © InheritX {currentYear}, All rights Reserved
           </p>
           <ul className="flex flex-row justify-center items-center gap-4 sm:gap-5">
             {socialLinks.map((social) => (
