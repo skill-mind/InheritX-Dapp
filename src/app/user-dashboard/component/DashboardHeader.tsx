@@ -7,9 +7,8 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import Logo from "../../../public/Logo.png";
-import Notification from "../../../public/svg/notification.svg";
-import Avatar from "../../../public/svg/Avatar.svg";
+import Notification from "../../../../public/svg/notification.svg";
+import Avatar from "../../../../public/svg/Avatar.svg";
 import { Button } from "@headlessui/react";
 import { DashBoardContext } from "../../useContext/dashboardContext";
 import { useWalletContext } from "../../useContext/WalletContext";
@@ -23,8 +22,6 @@ function Header() {
   // Dynamic navigation based on active section
   const getNavigation = () => {
     switch (activeSection) {
-      // case "home":
-      //   return [{ name: "Home", href: "/dashboard/dashboard" }];
       case "assets":
         return [{ name: "Assets", href: "/dashboard/assets" }];
       case "plans":
@@ -42,7 +39,7 @@ function Header() {
       case "support":
         return [{ name: "Support", href: "/dashboard/support" }];
       default:
-        return [{ name: "Home", href: "/account/dashboard/dashboard" }];
+        return [{ name: "Dashboard", href: "/account/dashboard/dashboard" }];
     }
   };
 
@@ -52,19 +49,10 @@ function Header() {
   const navigation = getNavigation();
 
   return (
-    <header className="bg-[#101110] py-5">
-      <div className="flex  pl-4 md:px-24 pr-8 px-3 py-3 sm:px-6 ">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center ">
-            <Image
-              src={Logo}
-              width={100}
-              height={40}
-              className="w-[100px] h-[40px]"
-              alt="Logo"
-            />
-          </Link>
-        </div>
+    <header className="pt-2">
+        
+      <div className="flex justify-between items-center pt-2 md:px-7  pr-8  sm:px-6  ">
+      
         {/* Mobile menu button */}
         <button
           className="lg:hidden md:hidden text-white"
@@ -74,7 +62,7 @@ function Header() {
         </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex  gap-4">
+        <nav className=" ">
           {navigation.map((item, index) => (
             <div key={item.name} className="flex items-center">
               {index > 0 && (
@@ -83,7 +71,7 @@ function Header() {
               <Link
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium",
+                  "text-[40px] font-normal",
                   pathname === item.href ? "text-[#FCFCFC]" : "text-[#ABABAB]"
                 )}
               >

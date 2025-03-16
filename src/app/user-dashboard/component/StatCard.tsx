@@ -10,12 +10,12 @@ interface StatCardProps {
 export function StatCard({ icon, value, label, bgCol }: StatCardProps) {
   return (
     <div
-      className={` bg-[#1E1E1E] cursor-pointer hover:bg-[#FFFFFF1A] p-6 rounded-lg`}
+      className={` bg-[#100030] cursor-pointer hover:bg-[#413F54] p-6 rounded-lg w-[px]`}
     >
-      <div className="flex min-h-[64px]  items-center justify-start gap-3">
-        <div className="min-h-[64px] ">
+      <div className=" min-h-[60px] justify-start ">
+        <div className="min-h-[px] ">
           <div
-            className={`p-2 rounded-full h-[64px] w-[64px] flex items-center justify-center align-middle hover:bg-opacity-[50%] bg-opacity-[40%] ${bgCol}`}
+            className={`mb-2  rounded-full h-[30px] w-[64px]  hover:bg-opacity-[50%] bg-opacity-[40%] ${bgCol}`}
           >
             {icon}
           </div>
@@ -23,7 +23,7 @@ export function StatCard({ icon, value, label, bgCol }: StatCardProps) {
 
         <div>
           <p className="text-2xl font-bold mb-1 text-[30px]">{value}</p>
-          <p className="text-gray-400 text-[13px] md:text-[14px]">{label}</p>
+          <p className="text-white text-[13px] md:text-[14px]">{label}</p>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 
 import type { Metadata } from "next";
 import { Providers } from "@/components/Providers";
-import { METADATA_CONFIG } from "../Config/app.config";
+import { METADATA_CONFIG } from "../../Config/app.config";
 import "./globals.css";
 
 export const metadata: Metadata = METADATA_CONFIG;

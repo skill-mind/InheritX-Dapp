@@ -12,17 +12,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <DashBoardContextProvider>
-      <main className="bg-[#101110] h-[90vh] max-h-screen">
-        <Header />
-        <div
+      <main className="h-screen mt-2 max-h-screen flex gap-2 w-full">
+       <div className="mx-5">
+       <div
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="md:hidden px-8"
         >
           <Logs size={30} className="text-white" />
         </div>
-        <div className="flex h-[100%] text-white overflow-y-auto scrollbar-hide scroll-smooth">
+        <div className="flex h-full text-white overflow-y-auto scrollbar-hide scroll-smooth">
           {isSidebarOpen && (
-            <section className="">
+            <section className="h-full">
               {" "}
               <Sidebar />
             </section>
@@ -32,11 +32,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             {" "}
             <Sidebar />
           </section>
-
-          <main className="flex-grow overflow-y-scroll scrollbar-hide h-auto hide-scrollbar">
+        </div>
+       </div>
+       <div className="flex flex-col w-full">
+        <Header/>
+       <main className="flex-grow overflow-y-scroll scrollbar-hide h-auto hide-scrollbar">
             {children}
           </main>
-        </div>
+       </div>
       </main>
     </DashBoardContextProvider>
   );
