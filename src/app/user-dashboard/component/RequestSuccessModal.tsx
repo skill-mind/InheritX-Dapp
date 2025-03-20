@@ -50,7 +50,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose }) => {
       style={{ opacity: isVisible ? 1 : 0 }}
     >
       <div
-        className="bg-[#2B2A38] text-white rounded-3xl p-8 max-w-md w-full mx-4 relative z-50 transition-all duration-300"
+        className="bg-[#2B2A38] text-white rounded-3xl p-3 sm:p-8 max-w-md w-full mx-4 relative z-50 transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
         style={{
           transform: isVisible
@@ -66,7 +66,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose }) => {
           <X />
         </button>
 
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col pt-4 sm:pt-0 items-center text-center">
           <div
             className=" rounded-full flex items-center justify-center mb-10 transition-all duration-500"
             style={{
@@ -83,7 +83,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose }) => {
           </div>
 
           <h2
-            className="text-[40px] font-bold mb-4 transition-all duration-300"
+            className="text-2xl sm:text-[40px] font-bold mb-4 transition-all duration-300"
             style={{
               opacity: isTextVisible ? 1 : 0,
               transform: isTextVisible ? "translateY(0)" : "translateY(10px)",
@@ -93,7 +93,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose }) => {
           </h2>
 
           <p
-            className="text-white mb-10 text-base transition-all duration-300"
+            className="text-white mb-10 text-xs sm:text-base transition-all duration-300"
             style={{
               opacity: isTextVisible ? 1 : 0,
               transform: isTextVisible ? "translateY(0)" : "translateY(10px)",

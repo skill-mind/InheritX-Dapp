@@ -104,11 +104,12 @@ const SupportRequestForm: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-transparent">
-      <div className="w-full max-w-2xl p-8 rounded-lg  border-gray-200">
+      <div className="w-full max-w-2xl sm:p-8 rounded-lg  border-gray-200">
         <div
-          className="p-8 rounded-[20px] flex flex-col gap-7 bg-grdient-to-t from-[#4F4E4F] via-[#4F4E4F] via-70% to-[#413F54] border border-[#413F54]"
+          className="px-4 py-3 sm:p-8 rounded-[20px] flex flex-col gap-7 bg-grdient-to-t from-[#4F4E4F] via-[#4F4E4F] via-70% to-[#413F54] border border-[#413F54]"
           style={{
-            background: "linear-gradient(to top, #2B2A38 , #413F54 , #2B2A38  )",
+            background:
+              "linear-gradient(to top, #2B2A38 , #413F54 , #2B2A38  )",
           }}
         >
           <div>
@@ -125,7 +126,10 @@ const SupportRequestForm: React.FC = () => {
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="">
-              <label htmlFor="email" className="block text-sm font-normal text-white mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-normal text-white mb-2"
+              >
                 Email
               </label>
               <input
@@ -133,9 +137,10 @@ const SupportRequestForm: React.FC = () => {
                 id="email"
                 name="email"
                 placeholder="Your Email Address"
-                className="w-full bg-[#1F1F29] text-xs text-white font-semibold placeholder:text-[#807F8D] py-5 px-2.5 rounded-2xl focus:outline-none border border-white"
+                className="w-full bg-[#1F1F29] text-xs text-white font-semibold placeholder:text-[#807F8D] py-2.5 px-2 sm:py-5 sm:px-2.5 rounded-lg sm:rounded-2xl focus:outline-none border border-white"
                 value={formData.email}
                 onChange={handleInputChange}
+                required
               />
             </div>
 
@@ -149,7 +154,7 @@ const SupportRequestForm: React.FC = () => {
               <div className="relative">
                 <button
                   type="button"
-                  className="w-full bg-[#1F1F29] text-white text-xs font-semibold py-5 px-2.5 rounded-2xl focus:outline-none border border-white flex justify-between items-center"
+                  className="w-full bg-[#1F1F29] text-white text-xs font-semibold py-2.5 px-2 sm:py-5 sm:px-2.5 rounded-lg sm:rounded-2xl focus:outline-none border border-white flex justify-between items-center"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
                   <span>{formData.subject}</span>
@@ -190,9 +195,10 @@ const SupportRequestForm: React.FC = () => {
                 name="description"
                 rows={5}
                 placeholder="Enter specific details of your inquiry. Please be as detailed as possible."
-                className="w-full bg-[#1F1F29] text-xs font-semibold text-white py-5 px-2.5 placeholder:text-[#807F8D] rounded-2xl focus:outline-none border border-white"
+                className="w-full bg-[#1F1F29] text-xs font-semibold text-white py-2.5 px-2 sm:py-5 sm:px-2.5 rounded-lg placeholder:text-[#807F8D] sm:rounded-2xl focus:outline-none border border-white"
                 value={formData.description}
                 onChange={handleInputChange}
+                required
               ></textarea>
             </div>
 
@@ -201,7 +207,7 @@ const SupportRequestForm: React.FC = () => {
                 Upload an attachment (Optional)
               </label>
               <div
-                className={`border border-dashed border-gray-400 rounded-lg p-8 text-center flex flex-col items-center gap-4 cursor-pointer transition-colors duration-200 ${
+                className={`border border-dashed border-gray-400 rounded-lg p-3 sm:p-8 text-center flex flex-col items-center gap-1 sm:gap-4 cursor-pointer transition-colors duration-200 ${
                   isDragging ? "bg-[#2A2A36]" : "bg-[#1F1F29]"
                 }`}
                 onDragOver={handleDragOver}
@@ -216,15 +222,15 @@ const SupportRequestForm: React.FC = () => {
                   accept=".jpg,.jpeg,.png,.pdf"
                   onChange={handleFileChange}
                 />
-                <Upload/>
+                <Upload />
                 <div className="font-light">
-                    <div className="text-xs text-white">
-                      Drag and Drop Document or{" "}
-                      <span className="font-normal">Browse</span>
-                    </div>
-                    <div className="text-[10px] text-gray-400 mt-1">
-                      Supports JPG, PNG (not more than 5 MB)
-                    </div>
+                  <div className="text-xs text-white">
+                    Drag and Drop Document or{" "}
+                    <span className="font-normal">Browse</span>
+                  </div>
+                  <div className="text-[10px] text-gray-400 mt-1">
+                    Supports JPG, PNG (not more than 5 MB)
+                  </div>
                 </div>
                 {formData.attachment && (
                   <div className="mt-2 text-green-400 text-sm">
@@ -232,7 +238,7 @@ const SupportRequestForm: React.FC = () => {
                   </div>
                 )}
               </div>
-              <p className="text-xs text-gray-400 mt-2">
+              <p className="text-[10px] sm:text-xs text-gray-400 mt-2">
                 Please attach a screenshot of any errors or issues to help us
                 assist you faster. For files over 5 MB or additional images,
                 reply to your support confirmation email.
@@ -241,7 +247,7 @@ const SupportRequestForm: React.FC = () => {
 
             <button
               type="submit"
-              className="bg-[#1B0055] mt-1 hover:bg-gray-700 text-white font-medium py-2.5 w-fit px-12 rounded-full focus:outline-none border border-white transition-all duration-200"
+              className="bg-[#1B0055] mt-1 hover:bg-gray-700 text-white font-medium py-2.5 sm:w-fit px-12 rounded-full focus:outline-none border border-white transition-all duration-200"
               disabled={isSubmitting}
               style={{
                 transform: isSubmitting ? "scale(0.98)" : "scale(1)",
@@ -249,26 +255,6 @@ const SupportRequestForm: React.FC = () => {
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
-                  <svg
-                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
                   Submitting...
                 </span>
               ) : (
