@@ -1,14 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import dashboardIcon from "../../../../public/svg/dashboardIcon.svg";
-import assetsIcon from "../../../../public/svg/assetsIcon.svg";
-import plansIcon from "../../../../public/svg/plansIcon.svg";
-import exchangeIcon from "../../../../public/svg/exchangeIcon.svg";
-import claimsIcon from "../../../../public/svg/claimsIcons.svg";
-import notificationIcon from "../../../../public/svg/bell.svg";
-import advisoryIcon from "../../../../public/svg/advisoryIcons.svg";
-import ProfileIcon from "../../../../public/svg/profileIcon.svg";
-import SupportIcon from "../../../../public/svg/SupportIcon.svg";
 
 
 interface NavItem {
@@ -23,7 +14,7 @@ const navItems: NavItem[] = [
     href: "#",
     icon: "/svg/dashboardIcon.svg",
     label: "Dashboard",
-    className: "bg-[#1E0B40]",
+    className: "bg-[#1E0B40] border border-[#807F8D]",
   },
   {
     href: "#",
@@ -57,7 +48,12 @@ export default function AdminDashboardSidebar() {
     <nav className="p-4">
       <div className="w-64 rounded-xl h-full border border-[#413F54] bg-[#29242F] bg-[linear-gradient(180deg,rgba(41,36,47,1)_52%,rgba(20,16,26,1)_100%)] flex flex-col">
         <div className="p-6">
-          <h1 className="text-2xl font-bold">InheritX</h1>
+          <h1 className="text-2xl font-bold">
+            {" "}
+            <Link href="/">
+              <Image src="/svg/whitelogo.svg" width={19} height={6} className=" h-[40px]  w-fit" alt="Logo" />
+            </Link>
+          </h1>
         </div>
 
         {/* Navigation Items */}

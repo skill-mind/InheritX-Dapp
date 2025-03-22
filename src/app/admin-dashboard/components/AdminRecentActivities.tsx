@@ -1,16 +1,6 @@
 import React from "react";
 import {
-    Bell,
-    ChevronDown,
-    Grid,
     Clock,
-    RefreshCw,
-    FileText,
-    User,
-    Headphones,
-    Bitcoin,
-    Users,
-    UserPlus,
     BarChart2,
   } from "lucide-react";
 
