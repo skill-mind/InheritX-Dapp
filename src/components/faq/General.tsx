@@ -1,19 +1,25 @@
-"use client";
+import FaqLayout from "./FaqLayout";
 
-import { useState } from "react";
+interface GeneralFaqProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
 
-const faqs = [
+const generalFaqs = [
   {
+    id: 1,
     question: "What is InheritX?",
     answer:
       "InheritX is a decentralized digital asset inheritance platform built on StarkNet’s Layer 2 solution. We enable secure, automated transfer of cryptocurrencies and NFTs through smart contracts, providing a trustless solution for digital estate planning.",
   },
   {
+    id: 2,
     question: "How does InheritX work?",
     answer:
       "InheritX is a decentralized digital asset inheritance platform built on StarkNet’s Layer 2 solution. We enable secure, automated transfer of cryptocurrencies and NFTs through smart contracts, providing a trustless solution for digital estate planning.",
   },
   {
+    id: 3,
     question:
       "What makes InheritX different from traditional inheritance solutions?",
     answer:
@@ -21,68 +27,12 @@ const faqs = [
   },
 ];
 
-interface GeneralFaqProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-}
-
 export default function General({ activeTab, setActiveTab }: GeneralFaqProps) {
-  const [openIndex, setOpenIndex] = useState(null);
-  const toggleFAQ = (index: any) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const tabs = ["General", "Security", "Account"];
-
   return (
-    <section className="px-4">
-      {/* Heading */}
-      <div className="max-w-2xl w-[95] md:max-w-3xl text-center mx-auto  md:mb-16 pt-8">
-        <h1 className="text-3xl md:text-5xl font-semibold mb-4">
-          Frequently Asked Questions
-        </h1>
-        <p className="text-gray-300 text-sm md:text-base">
-          Find answers to common questions about InheritX, from security and
-          asset support to inheritance planning and regulatory compliance.
-        </p>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex flex-wrap justify-center gap-4 py-6">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-full border border-gray-500 text-white transition-colors duration-300 ${
-              activeTab === tab ? "bg-[#1B0055]" : "bg-transparent"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* FAQ Section */}
-      <div className="max-w-2xl w-[90%] md:max-w-3xl mx-auto">
-        {faqs.map((faq, index) => (
-          <div key={index} className="border-b border-gray-700">
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="w-full text-left py-4 flex justify-between items-center focus:outline-none"
-            >
-              <h3 className="text-base md:text-lg font-semibold">
-                {faq.question}
-              </h3>
-              <span className="text-xl">{openIndex === index ? "-" : "+"}</span>
-            </button>
-            {openIndex === index && (
-              <p className="text-gray-300 pb-4 text-sm md:text-base">
-                {faq.answer}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
+    <FaqLayout
+      faqs={generalFaqs}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+    />
   );
 }
