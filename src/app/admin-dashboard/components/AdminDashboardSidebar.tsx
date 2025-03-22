@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface NavItem {
   href: string;
   icon: string; // now this is a string path
   label: string;
-  className?: string;
+  // className?: string;
 }
 
 const navItems: NavItem[] = [
@@ -13,33 +14,21 @@ const navItems: NavItem[] = [
     href: "/admin-dashboard",
     icon: "/svg/dashboardIcon.svg",
     label: "Dashboard",
-    className: "bg-[#1E0B40] border border-[#807F8D]",
-  },
-  {
-    href: "/admin-dashboard/assets",
-    icon: "/svg/assetsIcon.svg",
-    label: "Assets",
   },
   {
     href: "/admin-dashboard/plans",
-    icon: "/svg/plansIcon.svg",
+    icon: "/svg/plansIcon.svg", // "bg-[#1E0B40] border border-[#807F8D]"
     label: "Plans",
-  },
-  {
-    href: "/admin-dashboard/exchange",
-    icon: "/svg/exchangeIcon.svg",
-    label: "Exchange",
   },
   {
     href: "/admin-dashboard/claims",
     icon: "/svg/claimsIcons.svg",
     label: "Claims",
-  },
-  {
-    href: "/admin-dashboard/advisory",
-    icon: "/svg/advisoryIcons.svg",
-    label: "Advisory",
-  },
+  }, {
+    href: "/admin-dashboard/support",
+    icon: "/svg/supportIcon.svg",
+    label: "Support",
+  }
 ];
 
 export default function AdminDashboardSidebar({
@@ -49,6 +38,9 @@ export default function AdminDashboardSidebar({
   sidebarOpen: boolean;
   setSidebarOpen: any;
 }) {
+
+  const pathname = usePathname();
+
   return (
     <nav className={`p-4 md:static fixed ${sidebarOpen ? "" : "left-[-100vw]"} transition-all left-0 top-0 bottom-0 h-full`}>
       <div className="w-64 rounded-xl h-full border border-[#413F54] bg-[#29242F] bg-[linear-gradient(180deg,rgba(41,36,47,1)_52%,rgba(20,16,26,1)_100%)] flex flex-col">
@@ -69,11 +61,11 @@ export default function AdminDashboardSidebar({
 
         {/* Navigation Items */}
         <nav className="flex-1 px-4 space-y-2">
-          {navItems.map(({ href, icon, label, className }) => (
+          {navItems.map(({ href, icon, label }) => (
             <Link
               key={label}
               href={href}
-              className={`flex items-center gap-3 p-3 ${className} text-white hover:bg-[#1E0B40] rounded-md transition-colors`}
+              className={`flex items-center gap-3 p-3  text-white hover:bg-[#1E0B40] rounded-md transition-colors ${pathname === href ? "bg-[#1E0B40] border border-[#807F8D]" : ""}`}
             >
               <Image src={icon} alt={`${label} icon`} width={20} height={20} />
               <span>{label}</span>
@@ -82,7 +74,7 @@ export default function AdminDashboardSidebar({
         </nav>
 
         {/* Bottom links */}
-        <div className="mt-auto px-4 pb-6 space-y-2">
+        {/* <div className="mt-auto px-4 pb-6 space-y-2">
           <Link
             href="#"
             className="flex items-center gap-3 p-3 text-white hover:bg-[#1E0B40] rounded-md transition-colors"
@@ -108,7 +100,7 @@ export default function AdminDashboardSidebar({
             />
             <span>Support</span>
           </Link>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

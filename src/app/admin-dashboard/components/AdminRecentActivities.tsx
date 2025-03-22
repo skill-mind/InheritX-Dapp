@@ -29,24 +29,35 @@ export default function AdminRecentActivities() {
             <tbody className="font-light">
               <tr>
                 <td className="py-3">24 - 01 - 2025</td>
-                <td className="py-3">Plan</td>
-                <td className="py-3">Created Inheritance Plan</td>
+                <td className="py-3">Support</td>
+                <td className="py-3">Responded to support ticket</td>
                 <td className="py-3">
                   <a href="#" className="text-purple-500 hover:text-purple-400">
-                    View Plan
+                    View Ticket
                   </a>
                 </td>
               </tr>
               <tr>
                 <td className="py-3">24 - 01 - 2025</td>
-                <td className="py-3">Transaction</td>
-                <td className="py-3">Swapped Assets</td>
+                <td className="py-3">Claims</td>
+                <td className="py-3">Approved Claim</td>
                 <td className="py-3">
                   <a href="#" className="text-purple-500 hover:text-purple-400">
-                    View Transaction History
+                    View Claim
                   </a>
                 </td>
               </tr>
+              <tr>
+                <td className="py-3">24 - 01 - 2025</td>
+                <td className="py-3">Support</td>
+                <td className="py-3">Added FAQ</td>
+                <td className="py-3"> 
+                  <a href="#" className="text-purple-500 hover:text-purple-400">
+                    View FAQs
+                  </a>
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </div>

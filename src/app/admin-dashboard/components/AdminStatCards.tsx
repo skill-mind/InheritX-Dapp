@@ -8,19 +8,19 @@ interface Stat {
 
 const stats: Stat[] = [
   {
-    icon: "/svg/bitcoin.svg",
-    label: "Total value of digital assets:",
-    value: "$2,500",
-  },
-  {
     icon: "/svg/plansIcon.svg",
-    label: "Number of Active Plans",
-    value: "3",
+    label: "Total Inheritance Plans",
+    value: "325",
   },
   {
-    icon: "/svg/people.svg",
-    label: "Number of Beneficiaries",
-    value: "16",
+    icon: "/svg/claimsIcons.svg",
+    label: "Total Claims",
+    value: "325",
+  },
+  {
+    icon: "/svg/ticket.svg",
+    label: "Unanswerd Support Tickets",
+    value: "45",
   },
 ];
 

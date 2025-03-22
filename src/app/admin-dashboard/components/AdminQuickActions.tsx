@@ -7,9 +7,9 @@ interface Button {
 }
 
 const buttons: Button[] = [
-  { icon: "/svg/mdi_clock-plus.svg", label: "Create an Inheritance Plan" },
-  { icon: "/svg/swap-icon.svg", label: "Swap Assets" },
-  { icon: "/svg/people.svg", label: "View Plans" },
+  { icon: "/svg/people.svg", label: "View All Plans" },
+  { icon: "/svg/claimsIcons.svg", label: "View All Claims" },
+  { icon: "/svg/ticket.svg", label: "View All Support Tickets" },
 ];
 
 export default function AdminQuickActions() {

@@ -4,6 +4,7 @@ import Avatar from "../../../../public/svg/Avatar.svg";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Menu, Plus } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function AdminDashboardHeader({
   sidebarOpen,
@@ -12,6 +13,7 @@ export default function AdminDashboardHeader({
   sidebarOpen: boolean;
   setSidebarOpen: any;
 }) {
+
   return (
     <header className="flex justify-between items-center p-6">
       <h1 className="lg:text-3xl text-2xl font-semibold">Dashboard</h1>
