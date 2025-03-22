@@ -42,9 +42,15 @@ const navItems: NavItem[] = [
   },
 ];
 
-export default function AdminDashboardSidebar() {
+export default function AdminDashboardSidebar({
+  sidebarOpen,
+  setSidebarOpen,
+}: {
+  sidebarOpen: boolean;
+  setSidebarOpen: any;
+}) {
   return (
-    <nav className="p-4">
+    <nav className={`p-4 md:static fixed ${sidebarOpen ? "" : "left-[-100vw]"} transition-all left-0 top-0 bottom-0 h-full`}>
       <div className="w-64 rounded-xl h-full border border-[#413F54] bg-[#29242F] bg-[linear-gradient(180deg,rgba(41,36,47,1)_52%,rgba(20,16,26,1)_100%)] flex flex-col">
         <div className="p-6">
           <h1 className="text-2xl font-bold">
