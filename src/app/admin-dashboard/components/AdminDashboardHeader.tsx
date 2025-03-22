@@ -4,11 +4,9 @@ import Avatar from "../../../../public/svg/Avatar.svg";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Menu, X, Plus } from "lucide-react";
 import Image from "next/image";
-import { useWalletContext } from "../../useContext/WalletContext";
 
 
 export default function AdminDashboardHeader() {
-    const { account, disconnectWallet } = useWalletContext();
 
     return (
         <header className="flex justify-between items-center p-6">
@@ -23,10 +21,7 @@ export default function AdminDashboardHeader() {
                     alt="Notification"
                 />
 
-                <div
-                    className="flex items-center gap-2 hover:bg-[#FFFFFF1A] bg-[#161716] p-2 rounded-full cursor-pointer border"
-                    onClick={account ? disconnectWallet : undefined}
-                >
+                <div className="flex items-center gap-2 hover:bg-[#FFFFFF1A] bg-[#161716] p-2 rounded-full cursor-pointer border">
                     <Image
                         src={Avatar}
                         width={25}
@@ -35,7 +30,7 @@ export default function AdminDashboardHeader() {
                         alt="Avatar"
                     />
                     <span className="text-sm text-[#F3F5FF]">
-                        {account ? account : "Not connected"}
+                        Not Connected
                     </span>
                     <Plus />
                     <MdOutlineKeyboardArrowDown />
