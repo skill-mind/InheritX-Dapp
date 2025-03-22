@@ -15,7 +15,7 @@ const buttons: Button[] = [
 export default function AdminQuickActions() {
   return (
     <div className="px-6 mt-10">
-      <h2 className="text-[32px] font-[400] mb-6">Quick Actions</h2>
+      <h2 className="lg:text-[32px] text-xl font-[400] mb-6">Quick Actions</h2>
       <div className="flex flex-wrap gap-4">
         {buttons.map((button, index) => (
           <button

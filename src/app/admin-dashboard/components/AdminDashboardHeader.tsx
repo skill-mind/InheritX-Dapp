@@ -10,9 +10,9 @@ export default function AdminDashboardHeader() {
 
     return (
         <header className="flex justify-between items-center p-6">
-            <h1 className="text-3xl font-semibold">Dashboard</h1>
+            <h1 className="lg:text-3xl text-2xl font-semibold">Dashboard</h1>
 
-            <div className="hidden lg:flex items-center gap-4 ">
+            <div className=" flex items-center gap-4 ">
                 <Image
                     src={Notification}
                     width={40}
@@ -21,7 +21,7 @@ export default function AdminDashboardHeader() {
                     alt="Notification"
                 />
 
-                <div className="flex items-center gap-2 hover:bg-[#FFFFFF1A] bg-[#161716] p-2 rounded-full cursor-pointer border">
+                <div className="flex items-center gap-2 hover:bg-[#FFFFFF1A] bg-[#161716] lg:p-2 p-1 rounded-full cursor-pointer border">
                     <Image
                         src={Avatar}
                         width={25}
@@ -29,7 +29,7 @@ export default function AdminDashboardHeader() {
                         className="rounded-full"
                         alt="Avatar"
                     />
-                    <span className="text-sm text-[#F3F5FF]">
+                    <span className="lg:text-sm text-xs text-[#F3F5FF]">
                         Not Connected
                     </span>
                     <Plus />
