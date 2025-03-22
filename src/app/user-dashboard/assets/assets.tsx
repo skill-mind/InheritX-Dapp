@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { ChevronDown, Files, QrCode } from 'lucide-react';
+import React, { useState } from "react";
+import { ChevronDown, Files, QrCode, X } from "lucide-react";
 import NftIcon from "../../../../public/svg/NFT.svg";
-import Image from 'next/image';
-
+import Image from "next/image";
 
 interface AssetData {
   name: string;
@@ -27,9 +26,10 @@ interface NftData {
 }
 
 const Assets = () => {
-  const [activeTab, setActiveTab] = useState<'tokens' | 'nfts'>('tokens');
+  const [activeTab, setActiveTab] = useState<"tokens" | "nfts">("tokens");
   const totalBalance = "$2,521.23";
-  
+  const [selectedNft, setSelectedNft] = useState<NftData | null>(null);
+
   const assets: AssetData[] = [
     {
       name: "Ethereum",
@@ -41,7 +41,7 @@ const Assets = () => {
       pnl: "+0.25%",
       pnlPercent: "+0.25%",
       isPositive: true,
-      chartData: [10, 13, 15, 14, 12, 15, 17, 19, 18, 20]
+      chartData: [10, 13, 15, 14, 12, 15, 17, 19, 18, 20],
     },
     {
       name: "USDT",
@@ -53,7 +53,7 @@ const Assets = () => {
       pnl: "-$2,405.22",
       pnlPercent: "-1.2%",
       isPositive: false,
-      chartData: [14, 16, 15, 17, 16, 18, 17, 19, 18, 20]
+      chartData: [14, 16, 15, 17, 16, 18, 17, 19, 18, 20],
     },
     {
       name: "USDC",
@@ -65,7 +65,7 @@ const Assets = () => {
       pnl: "-$2,405.22",
       pnlPercent: "-0.8%",
       isPositive: false,
-      chartData: [15, 17, 16, 18, 17, 19, 16, 18, 17, 19]
+      chartData: [15, 17, 16, 18, 17, 19, 16, 18, 17, 19],
     },
     {
       name: "USDC",
@@ -77,8 +77,8 @@ const Assets = () => {
       pnl: "-$2,405.22",
       pnlPercent: "-1.5%",
       isPositive: false,
-      chartData: [20, 18, 16, 15, 13, 11, 9, 7, 5, 4]
-    }
+      chartData: [20, 18, 16, 15, 13, 11, 9, 7, 5, 4],
+    },
   ];
 
   const nfts: NftData[] = [
@@ -88,7 +88,7 @@ const Assets = () => {
       collection: "BoredApesYachtClub",
       tokenId: "#1234",
       blockchain: "Ethereum",
-      image: "/api/placeholder/48/48"
+      image: "/api/placeholder/48/48",
     },
     {
       id: "2",
@@ -96,7 +96,7 @@ const Assets = () => {
       collection: "ArtBlocks",
       tokenId: "#1233",
       blockchain: "Ethereum",
-      image: "/api/placeholder/48/48"
+      image: "/api/placeholder/48/48",
     },
     {
       id: "3",
@@ -104,7 +104,7 @@ const Assets = () => {
       collection: "N/A",
       tokenId: "#12134",
       blockchain: "Ethereum",
-      image: "/api/placeholder/48/48"
+      image: "/api/placeholder/48/48",
     },
     {
       id: "4",
@@ -112,8 +112,8 @@ const Assets = () => {
       collection: "N/A",
       tokenId: "#1235",
       blockchain: "Ethereum",
-      image: "/api/placeholder/48/48"
-    }
+      image: "/api/placeholder/48/48",
+    },
   ];
 
   // Function to render mini chart
@@ -121,16 +121,24 @@ const Assets = () => {
     const maxVal = Math.max(...data);
     const minVal = Math.min(...data);
     const range = maxVal - minVal;
-    
+
     // Scale the points to fit in the available space
-    const points = data.map((val, index) => {
-      const x = (index / (data.length - 1)) * 100;
-      const y = 100 - ((val - minVal) / range) * 100;
-      return `${x},${y}`;
-    }).join(' ');
-    
+    const points = data
+      .map((val, index) => {
+        const x = (index / (data.length - 1)) * 100;
+        const y = 100 - ((val - minVal) / range) * 100;
+        return `${x},${y}`;
+      })
+      .join(" ");
+
     return (
-      <svg width="100" height="30" viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
+      <svg
+        width="100"
+        height="30"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        className="w-full h-full"
+      >
         <polyline
           points={points}
           fill="none"
@@ -142,7 +150,17 @@ const Assets = () => {
       </svg>
     );
   };
-  
+
+  // Function to handle NFT image click
+  const handleNftImageClick = (nft: NftData) => {
+    setSelectedNft(nft);
+  };
+
+  // Function to close modal
+  const closeModal = () => {
+    setSelectedNft(null);
+  };
+
   return (
     <div className="flex justify-center items-start w-full min-h-screen bg-[#06020E] p-4">
       <div className="w-full flex flex-col items-start">
@@ -184,7 +202,7 @@ const Assets = () => {
             <button
               className={`${
                 activeTab === "tokens" ? "bg-[#100033]" : "bg-gray-800"
-              } hover:bg-purple-700 text-white px-4 py-2 border border-[#C0BFC6] border-solid border-1 rounded-full text-sm`}
+              }  text-white px-4 py-2 border border-[#C0BFC6] border-solid border-1 rounded-full text-sm`}
               onClick={() => setActiveTab("tokens")}
             >
               Tokens
@@ -193,15 +211,15 @@ const Assets = () => {
           <div>
             <button
               className={`${
-                activeTab === "nfts" ? "bg-purple-800" : "bg-gray-800"
-              } hover:bg-purple-700 text-white px-4 py-2 rounded-full text-sm  `}
+                activeTab === "nfts" ? "bg-[#100033]" : "bg-gray-800 "
+              }  text-white px-4 py-2 rounded-full text-sm border border-[#C0BFC6] border-solid border-1  `}
               onClick={() => setActiveTab("nfts")}
             >
               NFTs
             </button>
           </div>
           <div className="ml-auto">
-            <button className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center">
+            <button className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center border border-[#C0BFC6] border-solid border-1">
               USD <ChevronDown size={14} className="ml-1" />
             </button>
           </div>
@@ -338,7 +356,7 @@ const Assets = () => {
             </>
           ) : (
             <>
-              <div className="flex items-center mb-6">
+              <div className="flex items-center mb-6 ">
                 <h2 className="text-white text-lg font-medium">NFTs</h2>
               </div>
 
@@ -354,7 +372,6 @@ const Assets = () => {
                   <div>Action</div>
                 </div>
 
-                
                 {/* NFT Rows */}
                 <div className="space-y-4">
                   {nfts.map((nft) => (
@@ -362,7 +379,10 @@ const Assets = () => {
                       key={nft.id}
                       className="grid grid-cols-6 items-center py-2 border-t border-gray-700"
                     >
-                      <div>
+                      <div
+                        onClick={() => handleNftImageClick(nft)}
+                        className="cursor-pointer"
+                      >
                         {/* Using SVG with image tag */}
                         <svg
                           width="48"
@@ -395,6 +415,35 @@ const Assets = () => {
             </>
           )}
         </div>
+
+        {/* NFT Modal */}
+        {selectedNft && (
+          <div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+            onClick={closeModal}
+          >
+            <div
+              className="bg-transparent p-2 rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <svg
+                width="400"
+                height="400"
+                viewBox="0 0 400 400"
+                xmlns="http://www.w3.org/2000/svg"
+                className="rounded-lg"
+              >
+                <image
+                  href={NftIcon.src}
+                  x="0"
+                  y="0"
+                  width="400"
+                  height="400"
+                />
+              </svg>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
