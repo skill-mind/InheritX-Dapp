@@ -61,14 +61,14 @@ function NotificationDropdown({
   const [notifications, setNotifications] =
     useState<NotificationMessageProp[]>(notificationMessages);
 
-  const dropdownRef = useRef(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        !dropdownRef.current?.contains(event.target as Node)
       ) {
         onClose();
       }

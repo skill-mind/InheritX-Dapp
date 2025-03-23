@@ -154,7 +154,12 @@ function Notification() {
 }
 
 // Notification Card Component
-function NotificationCard({ notification, onView }) {
+interface NotificationCardProps {
+  notification: Notification;
+  onView: () => void;
+}
+
+function NotificationCard({ notification, onView }: NotificationCardProps) {
   return (
     <div className="bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 border border-gray-600 rounded-xl p-4 flex items-center">
       <div className="mr-4 mt-1">
