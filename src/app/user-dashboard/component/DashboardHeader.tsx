@@ -19,6 +19,7 @@ function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
 
   // Dynamic navigation based on active section
   const getNavigation = () => {
@@ -53,7 +54,9 @@ function Header() {
   // Toggle notification dropdown
   const toggleNotification = () => {
     setIsNotificationOpen(!isNotificationOpen);
-    console.log(isNotificationOpen);
+    if (hasUnreadNotifications) {
+      setHasUnreadNotifications(false);
+    }
   };
 
   // Close dropdown when clicking outside or changing page
@@ -104,7 +107,9 @@ function Header() {
               className="w-10 h-10 rounded-full bg-[#121217] flex items-center justify-center border border-[#1D1D1C] hover:bg-[#1D1D1C] transition-colors"
             >
               <Bell size={20} className="text-white" />
-
+              {hasUnreadNotifications && ( // Render blue dot if there are unread notifications
+                <div className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"/>
+              )}
             </button>
             
             <NotificationDropdown 
