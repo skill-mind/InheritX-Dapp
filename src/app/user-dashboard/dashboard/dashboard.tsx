@@ -51,7 +51,7 @@ const quickActions = [
 
 function Dashboard() {
   return (
-    <main className='flex-1 px-8 pb-8 pt-2 mt-2 mb-4 overflow-scroll scrollbar-hide'>
+    <main className='flex-1 lg:px-8 pb-8 pt-2 mt-2 mb-4 overflow-scroll scrollbar-hide'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8'>
         {stats.map((stat, index) => (
           <StatCard key={index} {...stat} />

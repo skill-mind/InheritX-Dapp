@@ -43,8 +43,8 @@ export function Sidebar() {
     useContext(DashBoardContext);
 
   return (
-    <aside className='border h-full overflow-y-auto border-r bg-gradient-dark border-[#413F54] rounded-[12px]'>
-      <div className='p-4 w-[272px] '>
+    <aside className='border h-full overflow-y-auto border-r bg-gradient-dark border-[#413F54] rounded-[12px] w-full'>
+      <div className='p-4 w-full '>
         <div className='py-3'>
           <Link href='/'>
             <Image src={Logo} className='w-[300px] h-[40px]' alt='Logo' />
@@ -53,12 +53,12 @@ export function Sidebar() {
         <div
           onClick={() => onSectionChange('home')}
           className={`flex relative cursor-pointer items-center gap-3 mb-2 rounded-lg p-3 hover:bg-[#100033] 
-    ${
-      activeSection === 'home'
-        ? 'bg-[#100033] rounded-lg border border-[#807F8D]'
-        : 'border-none bg-transparent'
-    }
-  `}
+            ${
+              activeSection === 'home'
+                ? 'bg-[#100033] rounded-lg border border-[#807F8D]'
+                : 'border-none bg-transparent'
+            }
+          `}
           style={{ marginTop: '5px' }}
         >
           <div className='relative overflow-hidden'>
@@ -70,7 +70,7 @@ export function Sidebar() {
         </div>
 
         <nav className=' flex flex-col gap-[2rem] justify-between'>
-          <div>
+          <div className='space-y-2'>
             <NavItem
               label='Assets'
               active={activeSection === 'assets'}

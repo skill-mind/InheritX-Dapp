@@ -105,7 +105,7 @@ const RecentActivities: React.FC = () => {
               <p className='text-white text-sm mb-2'>{activity.details}</p>
               <Link
                 href={activity.actionLink}
-                className='text-blue-400 text-sm hover:underline'
+                className='text-[#5000FF] font-semibold text-sm hover:underline'
               >
                 {activity.actionLabel}
               </Link>
