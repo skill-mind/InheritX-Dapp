@@ -1,7 +1,15 @@
-function Page(){
-    return(
-        <h1>Admin dashboard</h1>
-    )
-}
+import AdminStatCards from "./components/AdminStatCards";
+import AdminQuickActions from "./components/AdminQuickActions";
+import AdminRecentActivities from "./components/AdminRecentActivities";
 
-export default Page;
+export default function page() {
+  return (
+    <>
+      <AdminStatCards />
+
+      <AdminQuickActions />
+
+      <AdminRecentActivities />
+    </>
+  );
+}
