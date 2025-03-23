@@ -1,7 +1,8 @@
 import React from 'react'
+import { PlansDashboard } from './components/plans-dashboard'
 
 export default function plans() {
   return (
-    <div>plans</div>
+    <div><PlansDashboard/></div>
   )
 }
