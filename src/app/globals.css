@@ -8,6 +8,11 @@
   --background-rgb: 6, 2, 14, 1;  /* This is the RGB values for #06020E */
 }
 
+html,
+body {
+  height: 100% !important;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
