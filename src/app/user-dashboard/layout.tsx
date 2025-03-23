@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -6,7 +5,6 @@ import Header from './component/DashboardHeader';
 import { Sidebar } from './component/UserDashboardSidebar';
 import DashBoardContextProvider from '../useContext/dashboardContext';
 import { Logs } from 'lucide-react';
-
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
