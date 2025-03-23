@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Calendar, List, Bolt, Zap } from 'lucide-react';
+import { Calendar, Zap } from 'lucide-react';
+import { TbListDetails } from 'react-icons/tb';
+import { LuClock } from 'react-icons/lu';
 
 type Activity = {
   date: string;
@@ -43,14 +45,14 @@ const RecentActivities: React.FC = () => {
                 <tr className='hidden md:table-row'>
                   <th className='py-2 px-3 min-w-[100px]'>
                     <div className='flex items-center gap-2'>
-                      <Calendar className='w-4 h-4 text-gray-400' />
+                      <LuClock className='w-4 h-4 text-gray-400' />
                       Date
                     </div>
                   </th>
                   <th className='py-2 px-3 min-w-[100px]'>Type</th>
                   <th className='py-2 px-3 min-w-[150px]'>
                     <div className='flex items-center gap-2'>
-                      <List className='w-4 h-4 text-gray-400' />
+                      <TbListDetails className='w-4 h-4 text-gray-400' />
                       Details
                     </div>
                   </th>
