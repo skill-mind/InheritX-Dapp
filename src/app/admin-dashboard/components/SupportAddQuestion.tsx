@@ -3,12 +3,17 @@
 import { useState, useEffect } from "react";
 import { CheckCircle } from "lucide-react";
 
-export default function AddQuestionModal({ isOpen, setIsOpen }) {
+interface AddQuestionModalProps {
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+}
+
+export default function AddQuestionModal({ isOpen, setIsOpen }: AddQuestionModalProps) {
   const [isAddingQuestion, setIsAddingQuestion] = useState(true); 
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false); 
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsOpen(false);
     };
     document.addEventListener("keydown", handleKeyDown);

@@ -6,25 +6,32 @@ import { ChevronDown } from "lucide-react";
 import SupportAddQuestion from "../components/SupportAddQuestion"; 
 import SupportEditQuestion from "../components/SupportEditQuestion";
 
+interface FAQ {
+  question: string;
+  answer: string;
+  category: string;
+}
+
 export default function SupportFaqs() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [selectedQuestion, setSelectedQuestion] = useState<FAQ | undefined>(undefined);
 
-  const faqs = [
+
+  const faqs: FAQ[] = [
     {
       question: "How Secure is the Platform?",
-      answer: `InheritX ensures top-tier security with multi-signature validation, time-locked smart contracts, and zero-knowledge proofs for privacy. We conduct regular thrid-party audits, sopport hardware wallet intergration, and use advanced encryption to protect users assests `,
+      answer: `InheritX ensures top-tier security with multi-signature validation, time-locked smart contracts, and zero-knowledge proofs for privacy. We conduct regular third-party audits, support hardware wallet integration, and use advanced encryption to protect users' assets.`,
       category: "Security",
     },
     {
-      question: "What makes InheritX different form traditional inheritance platforms?",
-      answer: `InheritX leverages blockchain technology to ensure automated execution of inheritance plans through smart contracts, eliminating the need for intermidaries while maintaining decentralized security. Our platform provides transparent verification of inheritance conditions, enabling beneficaries to access assets with complete trust. Additionally, immutable record-keeping ensures that all transactions and inheritance plans remain tamper-proof and permanently verfiable on the blockchain.`,
+      question: "What makes InheritX different from traditional inheritance platforms?",
+      answer: `InheritX leverages blockchain technology to ensure automated execution of inheritance plans through smart contracts, eliminating the need for intermediaries while maintaining decentralized security. Our platform provides transparent verification of inheritance conditions, enabling beneficiaries to access assets with complete trust. Additionally, immutable record-keeping ensures that all transactions and inheritance plans remain tamper-proof and permanently verifiable on the blockchain.`,
       category: "Security",
     },
   ];
 
-  const handleEditClick = (faq) => {
+  const handleEditClick = (faq: FAQ) => {
     setSelectedQuestion(faq);
     setIsEditOpen(true);
   };

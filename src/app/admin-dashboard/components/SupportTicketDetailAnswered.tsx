@@ -1,23 +1,39 @@
+"use client";
+
 import { useState } from "react";
 import { FileText, Link } from "lucide-react";
-import SupportReply from "../components/SupportReply"; 
+import SupportReply from "../components/SupportReply";
 
-export default function SupportTicketDetailsAnswered({ ticket, onClose }) {
-  const [isReplyOpen, setIsReplyOpen] = useState(false); 
+interface SupportTicketType {
+  id: string;
+  userId?: string;
+  subject: string;
+  email: string;
+  status: string;
+  description?: string;
+  attachments?: string[];
+}
+
+interface SupportTicketDetailsAnsweredProps {
+  ticket: SupportTicketType;
+  onClose: () => void;
+}
+
+export default function SupportTicketDetailsAnswered({ ticket, onClose }: SupportTicketDetailsAnsweredProps) {
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   if (!ticket) {
-    return null; 
+    return null;
   }
 
-  const defaultUserId = "12345"; 
+  const defaultUserId = "12345";
   const defaultDescription = `For some reason, I can't create an inheritance plan.
-  How do I go about this? I want to leave a huge sum of money for my daughter.`;    
-  const defaultAttachments = ["Screenshot23422332", "Screenshot23422332"]; 
+  How do I go about this? I want to leave a huge sum of money for my daughter.`;
+  const defaultAttachments = ["Screenshot23422332", "Screenshot23422332"];
 
   if (isReplyOpen) {
     return <SupportReply isOpen={isReplyOpen} onClose={() => setIsReplyOpen(false)} />;
   }
-
 
   return (
     <div className="fixed inset-0 bg-[#0D0D11CC] bg-opacity-50 flex items-center justify-center">
@@ -43,32 +59,44 @@ export default function SupportTicketDetailsAnswered({ ticket, onClose }) {
         </div>
 
         <div className="flex justify-center space-x-4 mt-4">
-          <button 
-            onClick={() => setIsReplyOpen(true)} 
+          <button
+            onClick={() => setIsReplyOpen(true)}
             className="bg-[#280080] border border-[#C0BFC6] px-10 py-1 rounded-2xl hover:bg-[#290080a4]"
           >
             Reply
           </button>
-          <button onClick={onClose} className="bg-[#F23821] border border-[#C0BFC6] px-10 py-1 rounded-2xl hover:bg-[#f23921b6]">
+          <button
+            onClick={onClose}
+            className="bg-[#F23821] border border-[#C0BFC6] px-10 py-1 rounded-2xl hover:bg-[#f23921b6]"
+          >
             Close
           </button>
         </div>
       </div>
 
-      {/* Reply Modal */}
       <SupportReply isOpen={isReplyOpen} onClose={() => setIsReplyOpen(false)} />
     </div>
   );
 }
 
-const TicketRow = ({ label, value, multiLine }) => (
+interface TicketRowProps {
+  label: string;
+  value: string;
+  multiLine?: boolean;
+}
+
+const TicketRow = ({ label, value, multiLine }: TicketRowProps) => (
   <div className="flex justify-between bg-[#2B2A38] text-sm border border-[#413F54] p-2 rounded-lg">
     <span className="text-white">{label}</span>
     <span className={`text-white ${multiLine ? "max-w-md text-right" : ""}`}>{value}</span>
   </div>
 );
 
-const Attachment = ({ fileName }) => (
+interface AttachmentProps {
+  fileName: string;
+}
+
+const Attachment = ({ fileName }: AttachmentProps) => (
   <div className="flex items-center justify-between bg-[#21202A] p-2 rounded-md">
     <div className="flex items-center space-x-2">
       <FileText className="w-4 h-4 text-gray-400" />

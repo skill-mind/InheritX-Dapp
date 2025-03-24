@@ -3,7 +3,19 @@
 import { useEffect, useState } from "react";
 import { CheckCircle } from "lucide-react";
 
-export default function SupportEditQuestion({ isOpen, setIsOpen, questionData }) {
+interface QuestionData {
+  question: string;
+  answer: string;
+  category: string;
+}
+
+interface SupportEditQuestionProps {
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+  questionData?: QuestionData; 
+}
+
+export default function SupportEditQuestion({ isOpen, setIsOpen, questionData }: SupportEditQuestionProps) {
   const [question, setQuestion] = useState(questionData?.question || "");
   const [answer, setAnswer] = useState(questionData?.answer || "");
   const [category, setCategory] = useState(questionData?.category || "");

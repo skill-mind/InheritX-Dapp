@@ -5,8 +5,20 @@ import { ChevronDown } from "lucide-react";
 import SupportTicketDetailUnanswered from "../components/SupportTicketDetailUnanswered";
 import SupportTicketDetailAnswered from "../components/SupportTicketDetailAnswered";
 
+interface SupportTicketType {
+  date: string;
+  id: string;
+  email: string;
+  subject: string;
+  status: string;
+  userId: string; 
+  description: string; 
+  attachments: string[];
+}
+
 export default function SupportTicket() {
-  const [selectedTicket, setSelectedTicket] = useState(null);
+  
+  const [selectedTicket, setSelectedTicket] = useState<SupportTicketType | null>(null);
 
   return (
     <div className="px-4 sm:px-6 mt-10 pb-10">
@@ -47,9 +59,15 @@ export default function SupportTicket() {
                     <button
                       className="text-[#5000FF] hover:text-[#5100ffb0] underline"
                       onClick={(e) => {
-                        e.preventDefault(); 
-                        setSelectedTicket(ticket); 
+                        e.preventDefault();
+                        setSelectedTicket({
+                          ...ticket,
+                          userId: "N/A", 
+                          description: "No description available.", 
+                          attachments: [], 
+                        });
                       }}
+                      
                     >
                       View
                     </button>
