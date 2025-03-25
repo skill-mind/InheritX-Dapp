@@ -22,3 +22,8 @@ body {
   background: rgb(var(--background-rgb));
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
