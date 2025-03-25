@@ -212,7 +212,7 @@ const Assets = () => {
             <div>
               <button
                 className={`${
-                  activeTab === "nfts" ? "bg-[#100033]" : "bg-gray-800 "
+                  activeTab === "nfts" ? "bg-[#100033]" : "bg-[#211A1D] "
                 }  text-white px-4 py-2 rounded-full text-sm border border-[#C0BFC6] border-solid border-1  `}
                 onClick={() => setActiveTab("nfts")}
               >
@@ -220,7 +220,7 @@ const Assets = () => {
               </button>
             </div>
           </div>
-          <button className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center border border-[#C0BFC6] border-solid border-1">
+          <button className="bg-[#211A1D] hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center border border-[#C0BFC6] border-solid border-1">
             USD <ChevronDown size={14} className="ml-1" />
           </button>
         </div>
@@ -405,7 +405,7 @@ const Assets = () => {
                       <div className="text-white text-sm">{nft.blockchain}</div>
                       <div>
                         <button
-                          className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs"
+                          className="bg-[#211A1D] hover:bg-[#211A1D] text-white px-3 py-1 rounded text-xs"
                           onClick={() => handleNftImageClick(nft)}
                         >
                           View
