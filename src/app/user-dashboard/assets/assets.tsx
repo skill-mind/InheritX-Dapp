@@ -197,36 +197,36 @@ const Assets = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex mb-6 w-full">
-          <div className="mr-2">
-            <button
-              className={`${
-                activeTab === "tokens" ? "bg-[#100033]" : "bg-gray-800"
-              }  text-white px-4 py-2 border border-[#C0BFC6] border-solid border-1 rounded-full text-sm`}
-              onClick={() => setActiveTab("tokens")}
-            >
-              Tokens
-            </button>
+        <div className="flex mb-6 w-full md:w-[900px] justify-between items-center">
+          <div className="flex">
+            <div className="mr-2">
+              <button
+                className={`${
+                  activeTab === "tokens" ? "bg-[#100033]" : "bg-gray-800"
+                }  text-white px-4 py-2 border border-[#C0BFC6] border-solid border-1 rounded-full text-sm`}
+                onClick={() => setActiveTab("tokens")}
+              >
+                Tokens
+              </button>
+            </div>
+            <div>
+              <button
+                className={`${
+                  activeTab === "nfts" ? "bg-[#100033]" : "bg-gray-800 "
+                }  text-white px-4 py-2 rounded-full text-sm border border-[#C0BFC6] border-solid border-1  `}
+                onClick={() => setActiveTab("nfts")}
+              >
+                NFTs
+              </button>
+            </div>
           </div>
-          <div>
-            <button
-              className={`${
-                activeTab === "nfts" ? "bg-[#100033]" : "bg-gray-800 "
-              }  text-white px-4 py-2 rounded-full text-sm border border-[#C0BFC6] border-solid border-1  `}
-              onClick={() => setActiveTab("nfts")}
-            >
-              NFTs
-            </button>
-          </div>
-          <div className="ml-auto">
-            <button className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center border border-[#C0BFC6] border-solid border-1">
-              USD <ChevronDown size={14} className="ml-1" />
-            </button>
-          </div>
+          <button className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center border border-[#C0BFC6] border-solid border-1">
+            USD <ChevronDown size={14} className="ml-1" />
+          </button>
         </div>
 
         {/* Main Wallet Panel - Contents change based on active tab */}
-        <div className="w-full md:w-[1055px] h-[505px] bg-gray-800 rounded-[20px] p-6 shadow-lg border border-gray-700 overflow-y-auto overflow-x-auto">
+        <div className="w-full md:w-[900px] bg-gray-800 rounded-[20px] p-6 shadow-lg border border-gray-700 overflow-x-auto">
           {activeTab === "tokens" ? (
             <>
               <div className="flex items-center mb-6">
@@ -236,7 +236,7 @@ const Assets = () => {
               </div>
 
               {/* Table with minimum width to ensure horizontal scroll when needed */}
-              <div className="min-w-[800px]">
+              <div className="min-w-[700px]">
                 {/* Table Headers */}
                 <div className="grid grid-cols-5 mb-4 text-gray-400 text-sm">
                   <div>Asset</div>
@@ -356,12 +356,12 @@ const Assets = () => {
             </>
           ) : (
             <>
-              <div className="flex items-center mb-6 ">
+              <div className="flex items-center mb-6">
                 <h2 className="text-white text-lg font-medium">NFTs</h2>
               </div>
 
               {/* NFTs Table */}
-              <div className="min-w-[800px]">
+              <div className="min-w-[700px]">
                 {/* Table Headers */}
                 <div className="grid grid-cols-6 mb-4 text-gray-400 text-sm">
                   <div>Image</div>
@@ -404,7 +404,10 @@ const Assets = () => {
                       <div className="text-white text-sm">{nft.tokenId}</div>
                       <div className="text-white text-sm">{nft.blockchain}</div>
                       <div>
-                        <button className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs">
+                        <button
+                          className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs"
+                          onClick={() => handleNftImageClick(nft)}
+                        >
                           View
                         </button>
                       </div>
