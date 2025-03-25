@@ -3,13 +3,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 6, 2, 14, 1;  /* This is the RGB values for #06020E */
 }
 
+html,
+body {
+  height: 100% !important;
+  font-family: 'Manrope', sans-serif;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
