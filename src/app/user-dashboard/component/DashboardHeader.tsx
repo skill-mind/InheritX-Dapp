@@ -211,4 +211,5 @@ function Header({ onMenuClick }: HeaderProps) {
       </div>
     )}
   </header>
-);
+  );
+}
