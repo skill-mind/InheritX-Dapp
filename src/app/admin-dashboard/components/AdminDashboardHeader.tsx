@@ -1,10 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Notification from "../../../../public/svg/notification.svg";
 import Avatar from "../../../../public/svg/Avatar.svg";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Menu, Plus } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
+
+const navItems = [
+  { href: "/admin-dashboard", label: "Dashboard" },
+  { href: "/admin-dashboard/plans", label: "Inheritance Plans" },
+  { href: "/admin-dashboard/claims", label: "Claims" },
+  { href: "/admin-dashboard/support", label: "Support" },
+];
 
 export default function AdminDashboardHeader({
   sidebarOpen,
@@ -13,17 +22,25 @@ export default function AdminDashboardHeader({
   sidebarOpen: boolean;
   setSidebarOpen: any;
 }) {
+  const pathname = usePathname();
+  const [currentPage, setCurrentPage] = useState("Dashboard");
+
+  useEffect(() => {
+    const matchedPage =
+      navItems.find((item) => pathname === item.href)?.label || "Dashboard";
+    setCurrentPage(matchedPage);
+  }, [pathname]);
 
   return (
     <header className="flex justify-between items-center p-6">
-      <h1 className="lg:text-3xl text-2xl font-semibold">Dashboard</h1>
+      <h1 className="lg:text-3xl text-2xl font-semibold">{currentPage}</h1>
 
-      <div className=" flex items-center gap-4 ">
+      <div className="flex items-center gap-4">
         <Image
           src={Notification}
           width={40}
           height={40}
-          className="text-white cursor-pointer "
+          className="text-white cursor-pointer"
           alt="Notification"
         />
 
@@ -41,8 +58,11 @@ export default function AdminDashboardHeader({
           <Plus />
           <MdOutlineKeyboardArrowDown />
         </div>
-        <button className="md:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
-          <Menu  />
+        <button
+          className="md:hidden"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <Menu />
         </button>
       </div>
     </header>
