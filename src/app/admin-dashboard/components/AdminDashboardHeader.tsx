@@ -52,9 +52,7 @@ export default function AdminDashboardHeader({
             className="rounded-full"
             alt="Avatar"
           />
-          <span className="lg:text-sm text-xs text-[#F3F5FF]">
-            Not Connected
-          </span>
+          <span className="lg:text-sm text-xs text-[#F3F5FF]">Not Connected</span>
           <Plus />
           <MdOutlineKeyboardArrowDown />
         </div>
