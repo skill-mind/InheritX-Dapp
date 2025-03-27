@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Notification from "../../../../public/svg/notification.svg";
 import Avatar from "../../../../public/svg/Avatar.svg";
@@ -22,7 +23,6 @@ export default function AdminDashboardHeader({
   setSidebarOpen: any;
 }) {
   const pathname = usePathname();
-
   const [currentPage, setCurrentPage] = useState("Dashboard");
 
   useEffect(() => {
