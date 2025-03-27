@@ -1,16 +1,18 @@
 'use client';
 
-import { useState, useEffect, useContext, useRef } from 'react';
-import { Menu, X, Plus } from 'lucide-react';
-import Link from 'next/link';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { usePathname } from 'next/navigation';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import Notification from '../../../../public/svg/notification.svg';
-import Avatar from '../../../../public/svg/Avatar.svg';
-import { DashBoardContext } from '../../useContext/dashboardContext';
-import { useWalletContext } from '../../useContext/WalletContext';
+import { useState, useEffect, useContext, useRef } from "react";
+import { Menu, X, Plus, Bell } from "lucide-react";
+import Link from "next/link";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import Avatar from "../../../../public/svg/Avatar.svg";
+import Notification from "../../../../public/svg/notification.svg";
+import { DashBoardContext } from "../../useContext/dashboardContext";
+import { useWalletContext } from "../../useContext/WalletContext";
+import NotificationDropdown from "./NotificationDropdown";
+
 
 // Add to props
 interface HeaderProps {
@@ -21,6 +23,9 @@ function Header({ onMenuClick }: HeaderProps) {
   const { activeSection } = useContext(DashBoardContext);
   const { account, disconnectWallet } = useWalletContext();
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
 
@@ -35,11 +40,12 @@ function Header({ onMenuClick }: HeaderProps) {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
 
   // Dynamic navigation based on active section
   const getNavigation = () => {
@@ -68,103 +74,143 @@ function Header({ onMenuClick }: HeaderProps) {
   useEffect(() => {
     console.log('Updated activeSection:', activeSection);
   }, [activeSection]);
+  
   const navigation = getNavigation();
 
-  return (
-    <header className='md:pt-2'>
-      <div className='flex justify-between items-center md:pt-2 lg:px-7  md:pr-8    '>
-        {/* Mobile menu button */}
-        <button
-          className='lg:hidden md:hidden text-white'
-          onClick={onMenuClick}
-        >
-          <Menu size={24} />
-        </button>
+  // Toggle notification dropdown
+  const toggleNotification = () => {
+    setIsNotificationOpen(!isNotificationOpen);
+    if (hasUnreadNotifications) {
+      setHasUnreadNotifications(false);
+    }
+  };
 
-        {/* Desktop Navigation */}
-        <nav className=' '>
-          {navigation.map((item, index) => (
-            <div key={item.name} className='flex items-center'>
+  // Close dropdown when clicking outside or changing page
+  useEffect(() => {
+    setIsNotificationOpen(false);
+  }, [pathname]);
+
+ return (
+  <header className="pt-2 relative">
+    <div className="flex justify-between items-center pt-2 md:px-7 pr-8 sm:px-6">
+      {/* Mobile menu button */}
+      <button className="lg:hidden md:hidden text-white" onClick={onMenuClick}>
+        <Menu size={24} />
+      </button>
+
+      {/* Dashboard Title or Navigation */}
+      <nav className="">
+        {pathname === "/dashboard" ? (
+          <h1 className="text-[40px] font-normal text-[#FCFCFC]">Dashboard</h1>
+        ) : (
+          navigation.map((item, index) => (
+            <div key={item.name} className="flex items-center">
               {index > 0 && (
-                <div className='bg-[#1D1D1C] w-[3px] h-4 rounded-lg mx-2'></div>
+                <div className="bg-[#1D1D1C] w-[3px] h-4 rounded-lg mx-2"></div>
               )}
               <Link
                 href={item.href}
                 className={cn(
-                  'text-[28px] md:text-[40px] font-normal',
-                  pathname === item.href ? 'text-[#FCFCFC]' : 'text-[#ABABAB]'
+                  "text-[40px] font-normal",
+                  pathname === item.href ? "text-[#FCFCFC]" : "text-[#ABABAB]"
                 )}
               >
                 {item.name}
               </Link>
             </div>
+          ))
+        )}
+      </nav>
+
+      <div className="hidden lg:flex items-center gap-4 relative">
+        {/* Notification Icon */}
+        <div className="relative">
+          <button
+            onClick={toggleNotification}
+            className="w-10 h-10 rounded-full bg-[#121217] flex items-center justify-center border border-[#1D1D1C] hover:bg-[#1D1D1C] transition-colors"
+          >
+            <Bell size={20} className="text-white" />
+            {hasUnreadNotifications && (
+              <div className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full" />
+            )}
+          </button>
+
+          <NotificationDropdown
+            isOpen={isNotificationOpen}
+            setIsNotificationOpen={setIsNotificationOpen}
+            onClose={() => setIsNotificationOpen(false)}
+          />
+        </div>
+
+        {/* Profile Container */}
+        <div className="relative" ref={profileRef}>
+          <button
+            onClick={() => setIsProfileOpen(!isProfileOpen)}
+            className="flex items-center gap-2 hover:bg-[#FFFFFF1A] bg-[#161716] p-2 rounded-full cursor-pointer border"
+          >
+            <Image
+              src={Avatar}
+              width={25}
+              height={25}
+              className="rounded-full"
+              alt="Avatar"
+            />
+            <MdOutlineKeyboardArrowDown className="text-white" />
+          </button>
+
+          {/* Dropdown Menu */}
+          {isProfileOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-[#161716] rounded-lg border border-[#413F54] shadow-lg overflow-hidden z-50">
+              <div className="p-3 border-b border-[#413F54]">
+                <span className="text-sm text-[#F3F5FF] break-all">
+                  {account ? account : "Not connected"}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    {/* Mobile Navigation */}
+    {isMenuOpen && (
+      <div className="lg:hidden mt-4 px-4 sm:px-6">
+        <nav className="flex flex-col gap-4">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "text-sm font-medium py-2",
+                pathname === item.href ? "text-[#FCFCFC]" : "text-[#ABABAB]"
+              )}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
           ))}
         </nav>
-
-        <div className='hidden md:flex items-center gap-4'>
-          <Image
-            src={Notification}
-            width={40}
-            height={40}
-            className='text-white cursor-pointer'
-            alt='Notification'
-          />
-
-          {/* Profile Container */}
-          <div className='relative' ref={profileRef}>
-            <button
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className='lg:hidden flex items-center gap-2 hover:bg-[#FFFFFF1A] bg-[#161716] p-2 rounded-full cursor-pointer border'
-            >
+        <div className="mt-4 flex flex-col gap-4">
+          <div className="flex items-center justify-between bg-[#161716] p-2 rounded-lg border">
+            <div className="flex items-center gap-2">
               <Image
                 src={Avatar}
                 width={25}
                 height={25}
-                className='rounded-full'
-                alt='Avatar'
+                className="rounded-full"
+                alt="Avatar"
               />
-              <MdOutlineKeyboardArrowDown className='text-white' />
-            </button>
-
-            <div
-              className='hidden lg:flex items-center gap-2 hover:bg-[#FFFFFF1A] bg-[#161716] p-2 rounded-full cursor-pointer border'
-              onClick={account ? disconnectWallet : undefined}
-            >
-              <Image
-                src={Avatar}
-                width={25}
-                height={25}
-                className='rounded-full'
-                alt='Avatar'
-              />
-              <span className='text-sm text-[#F3F5FF]'>
-                {account ? account : 'Not connected'}
+              <span className="text-sm text-[#F3F5FF]">
+                {account ? account : "Not connected"}
               </span>
-              <Plus />
-              <MdOutlineKeyboardArrowDown />
             </div>
-
-            {/* Dropdown Menu (md to lg) */}
-            {/* This can be changed too what we want  */}
-            {isProfileOpen && (
-              <div className='lg:hidden absolute right-0 mt-2 w-48 bg-[#161716] rounded-lg border border-[#413F54] shadow-lg overflow-hidden z-50'>
-                <div className='p-3 border-b border-[#413F54]'>
-                  <span className='text-sm text-[#F3F5FF] break-all'>
-                    {account ? account : 'Not connected'}
-                  </span>
-                </div>
-                {/* <button
-                  onClick={disconnectWallet}
-                  className='w-full p-3 text-left text-sm text-[#F3F5FF] hover:bg-[#FFFFFF1A] transition-colors'
-                >
-                  Disconnect
-                </button> */}
-              </div>
-            )}
+            <Plus size={18} />
+            <MdOutlineKeyboardArrowDown />
           </div>
         </div>
       </div>
-    </header>
+    )}
+  </header>
   );
 }
 
