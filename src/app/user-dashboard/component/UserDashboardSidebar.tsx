@@ -43,11 +43,15 @@ export function Sidebar() {
     useContext(DashBoardContext);
 
   return (
-    <aside className='border h-full overflow-y-auto border-r bg-gradient-dark border-[#413F54] rounded-[12px] w-full'>
-      <div className='p-4 w-full '>
-        <div className='py-3'>
-          <Link href='/'>
-            <Image src={Logo} className='w-[300px] h-[40px]' alt='Logo' />
+    <aside className=" h-screen sticky top-0 bg-gradient-to-b from-[#29262F] via-[#1C1923] to-[#16131D] rounded-[12px]">
+      <div className="p-4 w-[272px] ">
+        <div className="py-3">
+          <Link href="/">
+            <Image
+              src={Logo}
+              className="w-[300px] h-[40px]"
+              alt="Logo"
+            />
           </Link>
         </div>
         <div
