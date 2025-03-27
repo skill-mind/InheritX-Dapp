@@ -178,7 +178,7 @@ const EthicsSection: React.FC<EthicsSectionProps> = ({ section }) => {
     if (!subsection.title || !subsection.points.length) return null;
 
     return (
-      <div className="p-4 sm:p-6 bg-opacity-10 bg-white rounded-lg">
+      <div className="p-4 sm:p-6 bg-opacity-10 rounded-lg">
         <h2 className="text-lg sm:text-2xl font-semibold mb-2 sm:mb-4 text-white">
           {subsection.title}
         </h2>
@@ -234,12 +234,14 @@ const CodeOfEthics: React.FC = () => {
             </p>
           </header>
 
-          <div className="space-y-8 sm:space-y-12 w-full sm:max-w-5xl lg:max-w-6xl mx-auto bg-gradient-to-b from-[#323246] to-[#14101c] p-4 sm:p-6 lg:p-8 rounded-2xl">
+          <div className="space-y-8 sm:space-y-12 w-full sm:max-w-5xl lg:max-w-6xl mx-auto bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 p-4 sm:p-6 lg:p-8 rounded-2xl">
             {ethicsData.map((section, index) => (
               <div
                 key={section.id}
                 className={`pb-6 ${
-                  index < ethicsData.length - 1 ? "border-b border-gray-500" : ""
+                  index < ethicsData.length - 1
+                    ? "border-b border-gray-500"
+                    : ""
                 }`}
               >
                 <EthicsSection section={section} />
