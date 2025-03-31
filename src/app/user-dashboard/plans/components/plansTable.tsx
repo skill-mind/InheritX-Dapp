@@ -16,7 +16,7 @@ export default function PlanTable({
           Create Plan <BTCIcon />
         </Button>
       </div>
-      <table className="border border-[#2B2A38] rounded-[15px] w-full flex flex-col bg-gradient-to-r from-[#7A7879] to-[#4F4E4F] p-5 pb-6">
+      <table className="border hidden border-[#2B2A38] rounded-[15px] w-full md:flex flex-col bg-gradient-dark p-5 pb-6">
         <thead className="w-full text-[#D9D9DD] font-semibold text-base pb-7">
           <tr className="grid grid-cols-5 w-full text-start">
             <th className="text-start">Plan Name</th>
@@ -35,7 +35,10 @@ export default function PlanTable({
                   <td className="text-start">{data.totalAssest}</td>
                   <td className="text-center">{data.beneficiaries}</td>
                   <td className="text-center">{data.timeLockStatus}</td>
-                  <td className="text-end text-[#5000FF] font-medium text-base" onClick={activeTab}>
+                  <td
+                    className="text-end cursor-pointer text-[#5000FF] font-medium text-base"
+                    onClick={activeTab}
+                  >
                     {data.action}
                   </td>
                 </tr>
@@ -44,6 +47,42 @@ export default function PlanTable({
           </thead>
         </tbody>
       </table>
+
+      <div className="md:hidden w-full space-y-4 mt-4">
+        {planTableDetails.map((data: plansTableType, index) => (
+          <div
+            key={index}
+            className="border border-[#2B2A38] rounded-[15px] bg-gradient-dark p-4 text-[#D9D9DD]"
+          >
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="font-semibold">{data.planName}</h3>
+              <span
+                className="text-[#5000FF] font-medium text-sm cursor-pointer"
+                onClick={activeTab}
+              >
+                {data.action}
+              </span>
+            </div>
+
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-[#D9D9DD]/70">Total Assets:</span>
+                <span>{data.totalAssest}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-[#D9D9DD]/70">Beneficiaries:</span>
+                <span>{data.beneficiaries}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-[#D9D9DD]/70">Time-Lock Status:</span>
+                <span>{data.timeLockStatus}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </>
   );
 }

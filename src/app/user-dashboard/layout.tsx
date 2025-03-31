@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Header from './component/DashboardHeader';
-import { Sidebar } from './component/UserDashboardSidebar';
-import { MobileNav } from './component/MobileNav';
-import DashBoardContextProvider from '../useContext/dashboardContext';
+import { useState } from "react";
+import Header from "./component/DashboardHeader";
+import { Sidebar } from "./component/UserDashboardSidebar";
+import { MobileNav } from "./component/MobileNav";
+import DashBoardContextProvider from "../useContext/dashboardContext";
 
 export default function DashboardLayout({
   children,
@@ -15,13 +15,13 @@ export default function DashboardLayout({
 
   return (
     <DashBoardContextProvider>
-      <div className='flex h-screen'>
-        <div className='h-full'>
-          <div className='w-[282px] py-2 px-5 hidden md:block h-full'>
+      <div className="flex h-auto">
+        <div className="h-full">
+          <div className="w-[282px] py-2 px-5 hidden md:block h-full">
             <Sidebar />
           </div>
         </div>
-        <div className='flex-1 p-4 overflow-auto'>
+        <div className="flex-1 p-4 overflow-hidden">
           <Header onMenuClick={() => setIsMobileNavOpen(true)} />
           {children}
         </div>

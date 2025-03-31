@@ -1,162 +1,156 @@
-'use client';
-import Image from 'next/image';
-import React, { ReactNode, useContext } from 'react';
-import dashboardIcon from '../../../../public/svg/dashboardIcon.svg';
-import assetsIcon from '../../../../public/svg/assetsIcon.svg';
-import plansIcon from '../../../../public/svg/plansIcon.svg';
-import exchangeIcon from '../../../../public/svg/exchangeIcon.svg';
-import claimsIcon from '../../../../public/svg/claimsIcons.svg';
-import notificationIcon from '../../../../public/svg/bell.svg';
-import advisoryIcon from '../../../../public/svg/advisoryIcons.svg';
-import ProfileIcon from '../../../../public/svg/profileIcon.svg';
-import SupportIcon from '../../../../public/svg/SupportIcon.svg';
-import { DashBoardContext } from '../../useContext/dashboardContext';
-import Logo from '../../../../public/svg/whitelogo.svg';
-import Link from 'next/link';
+"use client";
+import Image from "next/image";
+import React, { MouseEventHandler, useContext } from "react";
+import { DashBoardContext } from "../../useContext/dashboardContext";
+import Link from "next/link";
 
-interface NavItemProps {
-  icon: ReactNode;
+// Import icons
+import Logo from "../../../../public/svg/whitelogo.svg";
+import dashboardIcon from "../../../../public/svg/dashboardIcon.svg";
+import assetsIcon from "../../../../public/svg/assetsIcon.svg";
+import plansIcon from "../../../../public/svg/plansIcon.svg";
+import exchangeIcon from "../../../../public/svg/exchangeIcon.svg";
+import claimsIcon from "../../../../public/svg/claimsIcons.svg";
+import notificationIcon from "../../../../public/svg/bell.svg";
+import advisoryIcon from "../../../../public/svg/advisoryIcons.svg";
+import ProfileIcon from "../../../../public/svg/profileIcon.svg";
+import SupportIcon from "../../../../public/svg/SupportIcon.svg";
+import { DirectionAnimation } from "@/motion/Animation";
+
+// NavItem component
+const NavItem = ({
+  icon,
+  label,
+  active,
+  onClick,
+  customId,
+}: {
+  icon: string;
   label: string;
-  active?: boolean;
-  onClick?: () => void;
-}
-
-function NavItem({ icon, label, active, onClick }: NavItemProps) {
-  //console.log(active)
+  active: boolean;
+  onClick: MouseEventHandler<HTMLButtonElement> | undefined;
+  customId: number;
+}) => {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center  gap-3 w-full px-4 py-3 rounded-lg transition-colors ${
+      data-custom-id={customId}
+      className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${
         active
-          ? 'bg-[#100033] border border-[#e8e7eb] px-4 py-2'
-          : 'hover:bg-[#FFFFFF1A]'
+          ? "bg-[#100033] border border-[#e8e7eb] px-4 py-2"
+          : "hover:bg-[#FFFFFF1A]"
       }`}
     >
-      {icon}
+      <Image src={icon} alt={label} height={20} width={20} />
       <span>{label}</span>
     </button>
   );
-}
+};
+
+// Define navigation items with custom IDs
+const navigationItems = [
+  {
+    section: "main",
+    items: [
+      {
+        id: "home",
+        label: "Dashboard",
+        icon: dashboardIcon,
+        special: true,
+        customId: 1,
+      },
+      { id: "assets", label: "Assets", icon: assetsIcon, customId: 2 },
+      { id: "plans", label: "Plans", icon: plansIcon, customId: 3 },
+      { id: "exchange", label: "Exchange", icon: exchangeIcon, customId: 4 },
+      { id: "claims", label: "Claims", icon: claimsIcon, customId: 5 },
+      {
+        id: "notification",
+        label: "Notification",
+        icon: notificationIcon,
+        customId: 6,
+      },
+      { id: "advisory", label: "Advisory", icon: advisoryIcon, customId: 7 },
+    ],
+  },
+  {
+    section: "footer",
+    items: [
+      { id: "profile", label: "Profile", icon: ProfileIcon, customId: 8 },
+      { id: "support", label: "Support", icon: SupportIcon, customId: 9 },
+    ],
+  },
+];
 
 export function Sidebar() {
   const { activeSection, setActiveSection: onSectionChange } =
     useContext(DashBoardContext);
 
   return (
-    <aside className=" h-screen sticky top-0 bg-gradient-to-b from-[#29262F] via-[#1C1923] to-[#16131D] rounded-[12px]">
-      <div className="p-4 w-[272px] ">
-        <div className="py-3">
+    <aside className="min-h-screen sticky min-w-[272px] top-0 bg-gradient-to-b from-[#29262F] via-[#1C1923] to-[#16131D] rounded-[12px]">
+      <div className="p-4 w-[272px]">
+        <div className="py-3 md:mb-[50px]">
           <Link href="/">
             <Image
               src={Logo}
-              className="w-[300px] h-[40px]"
+              className="w-[300px] md:left-[-20%] md:absolute h-[40px]"
               alt="Logo"
             />
           </Link>
         </div>
+
+        {/* Special treatment for Dashboard */}
         <div
-          onClick={() => onSectionChange('home')}
+          onClick={() => onSectionChange("home")}
+          data-custom-id={1}
           className={`flex relative cursor-pointer items-center gap-3 mb-2 rounded-lg p-3 hover:bg-[#100033] 
             ${
-              activeSection === 'home'
-                ? 'bg-[#100033] rounded-lg border border-[#807F8D]'
-                : 'border-none bg-transparent'
+              activeSection === "home"
+                ? "bg-[#100033] rounded-lg border border-[#807F8D]"
+                : "border-none bg-transparent"
             }
           `}
-          style={{ marginTop: '5px' }}
+          style={{ marginTop: "5px" }}
         >
-          <div className='relative overflow-hidden'>
-            <Image src={dashboardIcon} alt='Dashboard' height={20} width={20} />
+          <div className="relative overflow-hidden">
+            <Image src={dashboardIcon} alt="Dashboard" height={20} width={20} />
           </div>
           <div>
-            <h2 className='font-semibold'>Dashboard</h2>
+            <h2 className="font-semibold">Dashboard</h2>
           </div>
         </div>
 
-        <nav className=' flex flex-col gap-[2rem] justify-between'>
-          <div className='space-y-2'>
-            <NavItem
-              label='Assets'
-              active={activeSection === 'assets'}
-              icon={
-                <Image src={assetsIcon} alt='Assets' height={20} width={20} />
-              }
-              onClick={() => onSectionChange('assets')}
-            />
-            <NavItem
-              icon={
-                <Image src={plansIcon} alt='Plans' height={20} width={20} />
-              }
-              label='Plans'
-              active={activeSection === 'plans'}
-              onClick={() => onSectionChange('plans')}
-            />
-            <NavItem
-              icon={
-                <Image
-                  src={exchangeIcon}
-                  alt='Exchange'
-                  height={20}
-                  width={20}
+        <nav className="flex flex-col gap-[2rem] justify-between">
+          {/* Main navigation items */}
+          <div className="space-y-2">
+            {navigationItems[0].items.slice(1).map((item) => (
+              <DirectionAnimation
+                direction="left-to-right"
+                delay={item.customId * 0.05}
+              >
+                <NavItem
+                  key={item.id}
+                  label={item.label}
+                  icon={item.icon}
+                  customId={item.customId}
+                  active={activeSection === item.id}
+                  onClick={() => onSectionChange(item.id)}
                 />
-              }
-              label='Exchange'
-              active={activeSection === 'exchange'}
-              onClick={() => onSectionChange('exchange')}
-            />
-            <NavItem
-              icon={
-                <Image src={claimsIcon} alt='Claims' height={20} width={20} />
-              }
-              label='Claims'
-              active={activeSection === 'claims'}
-              onClick={() => onSectionChange('claims')}
-            />
-            <NavItem
-              icon={
-                <Image
-                  src={notificationIcon}
-                  alt='Notification'
-                  height={20}
-                  width={20}
-                />
-              }
-              label='Notification'
-              active={activeSection === 'notification'}
-              onClick={() => onSectionChange('notification')}
-            />
-            <NavItem
-              icon={
-                <Image
-                  src={advisoryIcon}
-                  alt='Advisory'
-                  height={20}
-                  width={20}
-                />
-              }
-              label='Advisory'
-              active={activeSection === 'advisory'}
-              onClick={() => onSectionChange('advisory')}
-            />
+              </DirectionAnimation>
+            ))}
           </div>
-          <div className='mt-[1rem]'>
-            <NavItem
-              icon={
-                <Image src={ProfileIcon} alt='Profile' height={20} width={20} />
-              }
-              label='Profile'
-              active={activeSection === 'profile'}
-              onClick={() => onSectionChange('profile')}
-            />
 
-            <NavItem
-              icon={
-                <Image src={SupportIcon} alt='Support' height={20} width={20} />
-              }
-              label='Support'
-              active={activeSection === 'support'}
-              onClick={() => onSectionChange('support')}
-            />
+          {/* Footer navigation items */}
+          <div className="mt-[1rem]">
+            {navigationItems[1].items.map((item) => (
+              <NavItem
+                key={item.id}
+                label={item.label}
+                icon={item.icon}
+                customId={item.customId}
+                active={activeSection === item.id}
+                onClick={() => onSectionChange(item.id)}
+              />
+            ))}
           </div>
         </nav>
       </div>

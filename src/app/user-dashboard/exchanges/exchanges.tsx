@@ -14,7 +14,7 @@ interface Token {
   name: string;
   symbol: string;
   logo: any; // Changed to accept imported image
-  isStable: boolean;  
+  isStable: boolean;
   balance: number;
   value: number;
 }
@@ -306,12 +306,14 @@ const Exchange = () => {
             </div>
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold">
               {fromToken.symbol}
-            </div>
-            <div className="text-lg sm:text-xl md:text-2xl text-gray-400">
+            </div>{" "}
+            <div className="text-lg sm:text-xl hidden md:flex md:text-2xl text-gray-400">
               ≈${(parseFloat(fromAmount) * fromToken.value).toLocaleString()}
             </div>
           </div>
-
+          <div className="text-gray-400 md:hidden">
+            ≈${(parseFloat(fromAmount) * fromToken.value).toLocaleString()}
+          </div>
           <div className="pt-2 text-sm sm:text-base">
             Balance: {fromToken.balance.toLocaleString()} {fromToken.symbol}
             <span className="ml-1">
@@ -319,7 +321,6 @@ const Exchange = () => {
             </span>
           </div>
         </div>
-
         {/* Swap Button */}
         <div className="flex justify-center relative h-0 z-10 mt-2 mb-2">
           <button
@@ -422,7 +423,6 @@ const Exchange = () => {
                           </div>
                         </div>
                         <div className="text-right text-sm sm:text-base">
-                          <div>{token.balance.toLocaleString()}</div>
                           <div className="text-xs sm:text-sm text-gray-900">
                             ${(token.balance * token.value).toLocaleString()}
                           </div>
@@ -449,16 +449,18 @@ const Exchange = () => {
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold">
               {toToken.symbol}
             </div>
-            <div className="text-lg sm:text-xl md:text-2xl text-gray-400">
+            <div className="text-lg hidden md:flex sm:text-xl md:text-2xl text-gray-400">
               ≈${(parseFloat(toAmount) * toToken.value).toLocaleString()}
             </div>
+          </div>
+          <div className="text-gray-400 md:hidden">
+            ≈${(parseFloat(toAmount) * toToken.value).toLocaleString()}
           </div>
 
           <div className="flex items-center justify-between pt-2 text-sm sm:text-base">
             <div>Gas Fee: 0.001 ETH</div>
           </div>
         </div>
-
         {/* Swap Button */}
         <div className="pt-4">
           <button
@@ -471,11 +473,11 @@ const Exchange = () => {
       </div>
 
       {/* Activity log */}
-      <div className="bg-[#201f2a] rounded-[24px] shadow-md overflow-hidden mt-4 sm:mt-8">
+      <div className="bg-gradient-dark rounded-[24px] shadow-md overflow-hidden mt-4 sm:mt-8">
         <div className="p-4 sm:p-6">
           <h2 className="text-xl sm:text-2xl">Activity Log</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto hidden md:flex">
           <table className="w-full">
             <thead>
               <tr className="text-xs sm:text-sm">
@@ -561,6 +563,102 @@ const Exchange = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile card view - shown only on small screens */}
+        <div className="sm:hidden space-y-4">
+          {transactions.map((transaction) => (
+            <div
+              key={transaction.id}
+              className="bg-[#2B2A38] rounded-lg p-4 shadow"
+            >
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-xs text-gray-400">
+                  {transaction.date}
+                </span>
+                <span
+                  className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                    transaction.status === "Completed"
+                      ? "bg-green-100 text-green-800"
+                      : transaction.status === "Pending"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {transaction.status}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-400 mb-1">From</span>
+                  <div className="flex items-center gap-1">
+                    <div className="w-5 h-5 rounded-full overflow-hidden">
+                      {getTokenImageBySymbol(transaction.fromToken) && (
+                        <Image
+                          src={getTokenImageBySymbol(transaction.fromToken)}
+                          alt={transaction.fromToken}
+                          width={20}
+                          height={20}
+                          className="w-full h-full object-contain"
+                        />
+                      )}
+                    </div>
+                    <span className="font-medium">
+                      {transaction.fromAmount.toLocaleString()}{" "}
+                      {transaction.fromToken}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 text-gray-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+
+                <div className="flex flex-col items-end">
+                  <span className="text-xs text-gray-400 mb-1">To</span>
+                  <div className="flex items-center gap-1">
+                    <div className="w-5 h-5 rounded-full overflow-hidden">
+                      {getTokenImageBySymbol(transaction.toToken) && (
+                        <Image
+                          src={getTokenImageBySymbol(transaction.toToken)}
+                          alt={transaction.toToken}
+                          width={20}
+                          height={20}
+                          className="w-full h-full object-contain"
+                        />
+                      )}
+                    </div>
+                    <span className="font-medium">
+                      {transaction.toAmount.toLocaleString()}{" "}
+                      {transaction.toToken}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-gray-700">
+                <div className="flex items-center">
+                  <span className="text-xs text-gray-400 mr-2">TX ID:</span>
+                  <span className="text-xs font-mono">
+                    {transaction.id.substring(0, 10)}...
+                    {transaction.id.substring(transaction.id.length - 4)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -151,15 +151,18 @@ export function BeneficiaryInfo() {
   );
 }
 
-export function CustomMedia(){
+export function CustomMedia() {
   return (
-    <div className="bg-[#16151C] py-4 px-[14px] rounded-xl">
+    <div className="bg-[#16151C] py-4 px-3 md:px-[14px] rounded-xl">
       <div className="bg-[#363546] flex justify-between items-center rounded-xl px-3 py-[8px]">
         <div className=" flex justify-between items-center gap-3">
           <DocIcon />
           <div className=" flex justify-between items-start flex-col">
             <span>File 1</span>
-            <span>tribute_and_instructions.mp4</span>
+            <span className="hidden md:block">
+              tribute_and_instructions.mp4
+            </span>
+            <span className="md:hidden">tribute_and_in...</span>
           </div>
         </div>
         <div className="flex items-center gap-3">
