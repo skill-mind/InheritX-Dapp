@@ -10,6 +10,7 @@ import { Plus, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ConnectModal from "./ConnectModal";
+import navLogo from "@/svg/Logo.svg";
 
 interface NavLink {
   name: string;
@@ -52,19 +53,19 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
   return (
     <nav className="w-full py-10 px-6 relative z-50">
       <div className="max-w-7xl mx-auto flex justify-center ">
-        <div className="flex items-center justify-between  bg-[#413F54] rounded-full border border-[#B5B3B4] px-6 py-3  w-[1063px]">
+        <div className="flex items-center justify-between  bg-[#413F54]/50 rounded-full border border-[#413F54] px-6 py-3  w-[1063px]">
           {/* Logo */}
-       <Link href={"/"}>
-       <div className="text-white h-[38.67px] w-[110px]">
-            <Image
-              src="/Logo.png"
-              width={50}
-              height={50}
-              alt="Logo"
-              className="w-full h-full object-fill"
-            />
-          </div>
-       </Link>
+          <Link href={"/"}>
+            <div className="text-white h-[38.67px] w-[110px]">
+              <Image
+                src={navLogo}
+                width={60}
+                height={50}
+                alt="Logo"
+                className="w-full h-full object-fill"
+              />
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -72,10 +73,10 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-base transition-colors ${
+                className={`text-base transition-colors animated-underline ${
                   isActive(link.href)
-                    ? "text-white font-medium border-b-2 border-white"
-                    : "text-[#FFFFFF]/80 hover:text-white"
+                    ? "text-white font-bold"
+                    : "text-[#FFFFFF]/30 hover:text-white"
                 }`}
               >
                 {link.name}
@@ -92,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
                   disconnect();
                 }
               }}
-              className="border border-[#B5B3B4]  text-white hover:bg-[#B5B3B4]  px-3 py-2 rounded-full transition-colors"
+              className="border border-[#413F54] bg-[#211A1D]  text-white hover:bg-black  px-3 py-2 rounded-full transition-colors"
             >
               {isConnected ? (
                 <div className="flex items-center gap-[16px] justify-between">

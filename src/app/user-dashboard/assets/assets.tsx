@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { ChevronDown, Files, QrCode, X } from "lucide-react";
 import NftIcon from "../../../../public/svg/NFT.svg";
 import Image from "next/image";
+import ethIcon from "@/svg/ethIcon.svg";
+import usdtIcon from "@/svg/usctIcon.svg";
+import usdcIcon from "@/svg/usdc.svg";
 
 interface AssetData {
   name: string;
@@ -14,6 +17,7 @@ interface AssetData {
   pnlPercent: string;
   isPositive: boolean;
   chartData: number[];
+  currencyIcon: any;
 }
 
 interface NftData {
@@ -30,6 +34,17 @@ const Assets = () => {
   const totalBalance = "$2,521.23";
   const [selectedNft, setSelectedNft] = useState<NftData | null>(null);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const currencies = ["USD", "ETH", "USDC", "USDT"];
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const selectCurrency = (currency: string) => {
+    setSelectedCurrency(currency);
+    setIsOpen(false);
+  };
+
   const assets: AssetData[] = [
     {
       name: "Ethereum",
@@ -42,6 +57,7 @@ const Assets = () => {
       pnlPercent: "+0.25%",
       isPositive: true,
       chartData: [10, 13, 15, 14, 12, 15, 17, 19, 18, 20],
+      currencyIcon: ethIcon,
     },
     {
       name: "USDT",
@@ -54,6 +70,7 @@ const Assets = () => {
       pnlPercent: "-1.2%",
       isPositive: false,
       chartData: [14, 16, 15, 17, 16, 18, 17, 19, 18, 20],
+      currencyIcon: usdtIcon,
     },
     {
       name: "USDC",
@@ -66,6 +83,7 @@ const Assets = () => {
       pnlPercent: "-0.8%",
       isPositive: false,
       chartData: [15, 17, 16, 18, 17, 19, 16, 18, 17, 19],
+      currencyIcon: usdcIcon,
     },
     {
       name: "USDC",
@@ -78,6 +96,7 @@ const Assets = () => {
       pnlPercent: "-1.5%",
       isPositive: false,
       chartData: [20, 18, 16, 15, 13, 11, 9, 7, 5, 4],
+      currencyIcon: usdcIcon,
     },
   ];
 
@@ -162,10 +181,10 @@ const Assets = () => {
   };
 
   return (
-    <div className="flex justify-center items-start w-full min-h-screen bg-[#06020E] p-4">
+    <div className="flex justify-center items-start w-full min-h-screen bg-[#06020E] p-8">
       <div className="w-full flex flex-col items-start">
         {/* Order Card - Left aligned with specific dimensions */}
-        <div className="w-[198px] h-[183px] bg-[#06020E] rounded-[20px] p-4 flex flex-col items-center justify-center shadow-lg border border-gray-700 mb-6 self-start">
+        <div className="w-[198px] md:mb-20 h-[183px] bg-[#06020E] rounded-[20px] p-4 flex flex-col items-center justify-center shadow-lg border border-gray-700 mb-6 self-start">
           <div className="flex flex-col items-center">
             <div className="p-2 rounded-full mb-2">
               <svg
@@ -220,17 +239,38 @@ const Assets = () => {
               </button>
             </div>
           </div>
-          <button className="bg-[#211A1D] hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center border border-[#C0BFC6] border-solid border-1">
-            USD <ChevronDown size={14} className="ml-1" />
-          </button>
+          <div className="relative">
+            <button
+              className="bg-[#211A1D] hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm flex items-center border border-[#C0BFC6] border-solid"
+              onClick={toggleDropdown}
+            >
+              {selectedCurrency} <ChevronDown size={14} className="ml-1" />
+            </button>
+
+            {isOpen && (
+              <div className="absolute mt-1 w-full bg-gray-800 rounded-md shadow-lg z-10">
+                <ul className="py-1">
+                  {currencies.map((currency) => (
+                    <li
+                      key={currency}
+                      className="px-4 py-2 text-sm text-white hover:bg-gray-700 cursor-pointer"
+                      onClick={() => selectCurrency(currency)}
+                    >
+                      {currency}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Main Wallet Panel - Contents change based on active tab */}
-        <div className="w-full md:w-[900px] bg-gray-800 rounded-[20px] p-6 shadow-lg border border-gray-700 overflow-x-auto">
+        <div className="w-full md:w-[900px] bg-gradient-dark rounded-[20px] p-6 shadow-lg border border-gray-700 overflow-x-auto">
           {activeTab === "tokens" ? (
             <>
               <div className="flex items-center mb-6">
-                <h2 className="text-white text-lg font-medium">
+                <h2 className="text-white text-[28px] font-medium">
                   Wallet • {totalBalance}
                 </h2>
               </div>
@@ -254,71 +294,11 @@ const Assets = () => {
                       className="grid grid-cols-5 items-center py-2 border-t border-gray-700"
                     >
                       <div className="flex items-center">
-                        <div
-                          className={`w-8 h-8 rounded-full mr-2 flex items-center justify-center ${
-                            asset.symbol === "ETH"
-                              ? "bg-blue-600"
-                              : asset.symbol === "USDT"
-                              ? "bg-green-600"
-                              : "bg-blue-400"
-                          }`}
-                        >
-                          {asset.symbol === "ETH" ? (
-                            // Ethereum SVG (Updated)
-                            <svg
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-5 h-5"
-                            >
-                              <path
-                                fill="white"
-                                d="M12 2L5 12L12 17L19 12L12 2Z"
-                              />
-                              <path
-                                fill="white"
-                                d="M5 13L12 22L19 13L12 17L5 13Z"
-                              />
-                            </svg>
-                          ) : asset.symbol === "USDT" ? (
-                            <span className="text-white text-xs">T</span>
-                          ) : (
-                            // USDC SVG
-                            <svg
-                              width="19"
-                              height="19"
-                              viewBox="0 0 19 19"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-5 h-5"
-                            >
-                              <path
-                                d="M16.4667 4.14457C15.2189 2.64868 13.5075 1.61205 11.6038 1.19897C9.70009 0.785887 7.71297 1.01999 5.95738 1.86417C4.20178 2.70835 2.77815 4.11431 1.91212 5.85923C1.04609 7.60414 0.787193 9.58819 1.17647 11.4969M18.2666 7.7385C18.726 9.6769 18.5101 11.7141 17.6546 13.5131C16.7991 15.3122 15.3553 16.7654 13.5618 17.6325C11.7683 18.4996 9.73259 18.7286 7.79126 18.2817C5.84993 17.8348 4.11924 16.7388 2.88537 15.1748"
-                                stroke="white"
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M16.8961 2.16992V4.50289H14.5631M4.93966 15.0012H2.60669V17.3342"
-                                stroke="white"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M9.75146 5.08594V14.4178"
-                                stroke="white"
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M11.8628 7.5965C11.7228 6.97826 10.9261 6.29004 9.75842 6.29004C8.59077 6.29004 7.69374 7.04825 7.69374 8.00477C7.69374 10.1791 12.0226 9.0616 12.0226 11.5859C12.0226 12.4969 10.9261 13.2703 9.75958 13.2703C8.5931 13.2703 7.78356 12.5529 7.54443 11.7842"
-                                stroke="white"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          )}
-                        </div>
+                        <Image
+                          className="mx-2"
+                          src={asset.currencyIcon}
+                          alt={asset.name}
+                        />
                         <div>
                           <div className="text-white text-sm">{asset.name}</div>
                           <div className="text-gray-500 text-xs">

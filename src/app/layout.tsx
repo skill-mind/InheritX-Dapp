@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Providers } from "@/components/Providers";
 import { METADATA_CONFIG } from "../../Config/app.config";

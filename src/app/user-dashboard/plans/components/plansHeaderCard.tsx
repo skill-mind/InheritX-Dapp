@@ -19,17 +19,29 @@ const plans = [
   },
 ];
 
-
 export default function PlanCard() {
   return (
-    <div className="flex justify-between flex-wrap">
+    <div className=" gap-5 w-[100%] grid grid-flow-row md:grid-flow-col">
       {plans.map((data) => {
         return (
-          <div className="bg-[#100030] justify-between w-[340px] max-h-[136px] p-3 rounded-xl flex flex-col gap-6 border border-[#413F54]">
-            {data.icon}
-            <div>
-              <h3 className="font-medium text-base">{data.detail}</h3>
-              <h2 className="font-normal text-2xl">{data.amount}</h2>
+          <div
+            className={`bg-[#100030] grid-cols-2 border border-[#413F54] cursor-pointer hover:bg-[#413F54] p-6 rounded-lg `}
+          >
+            <div className=" min-h-[60px] justify-start ">
+              <div className="">
+                <div
+                  className={`mb-2  rounded-full h-[30px] w-[64px]  hover:bg-opacity-[50%] bg-opacity-[40%] `}
+                >
+                  {data.icon}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-white mb-3 font-extralight text-[13px] md:text-[14px]">
+                  {data.detail}
+                </div>
+                <p className="text-2xl font-bold  text-[30px]">{data.amount}</p>
+              </div>
             </div>
           </div>
         );

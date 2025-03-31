@@ -1,7 +1,6 @@
 "use client";
-import React from 'react'
+import React from "react";
 import { useState, JSX } from "react";
-
 
 interface Claim {
   id: number;
@@ -12,18 +11,14 @@ interface Claim {
   action: string;
 }
 
-
 interface ClaimsListProps {
   claims: Claim[];
   onViewClaim: (claims: Claim) => void;
 }
 
 const ClaimsList: React.FC<ClaimsListProps> = ({ claims, onViewClaim }) => {
-
-
-
   return (
-    <div className="bg-[#413F54] text-white p-6 rounded-lg mt-16">
+    <div className="bg-gradient-dark text-white p-6 rounded-lg mt-16">
       <h2 className="text-xl px-8 font-semibold">Claims</h2>
       {claims.length === 0 ? (
         <div className="text-3xl py-20 flex justify-center items-center">
@@ -46,9 +41,12 @@ const ClaimsList: React.FC<ClaimsListProps> = ({ claims, onViewClaim }) => {
                 <td>{claim.date}</td>
                 <td>{claim.assetsOwner}</td>
                 <td>{claim.assets}</td>
-          <td>{claim.status}</td>
+                <td>{claim.status}</td>
                 <td>
-                  <button onClick={() => onViewClaim(claim)} className="text-[#8A55FF] hover:underline">
+                  <button
+                    onClick={() => onViewClaim(claim)}
+                    className="text-[#8A55FF] hover:underline"
+                  >
                     View Claim
                   </button>
                 </td>
@@ -57,7 +55,6 @@ const ClaimsList: React.FC<ClaimsListProps> = ({ claims, onViewClaim }) => {
           </tbody>
         </table>
       )}
-   
     </div>
   );
 };
