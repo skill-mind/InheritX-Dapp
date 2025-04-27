@@ -1,10 +1,13 @@
-import { Clock, BarChart2 } from "lucide-react"
+"use client";
+import { Clock, BarChart2 } from "lucide-react";
 
 export default function AdminRecentActivities() {
   return (
     <div className="px-4 sm:px-6 mt-10 pb-10">
       <div className="bg-[#29242F] bg-[linear-gradient(180deg,rgba(41,36,47,1)_55%,rgba(20,16,26,1)_100%)] rounded-lg p-4 sm:p-6 border border-[#413F54]">
-        <h2 className="text-xl lg:text-[32px] mb-4 sm:mb-6 font-[400]">Recent Activities</h2>
+        <h2 className="text-xl lg:text-[32px] mb-4 sm:mb-6 font-[400]">
+          Recent Activities
+        </h2>
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-[600px]">
@@ -51,18 +54,16 @@ export default function AdminRecentActivities() {
                 <td className="py-3">24 - 01 - 2025</td>
                 <td className="py-3">Support</td>
                 <td className="py-3">Added FAQ</td>
-                <td className="py-3"> 
+                <td className="py-3">
                   <a href="#" className="text-purple-500 hover:text-purple-400">
                     View FAQs
                   </a>
                 </td>
               </tr>
-
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

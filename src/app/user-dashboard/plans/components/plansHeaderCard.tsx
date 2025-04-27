@@ -1,3 +1,4 @@
+import { DirectionAnimation } from "@/motion/Animation";
 import { ClockIcon, Users } from "@/svg/Icons";
 import { BTCIcon } from "@/svg/tokenSvg";
 
@@ -32,15 +33,21 @@ export default function PlanCard() {
                 <div
                   className={`mb-2  rounded-full h-[30px] w-[64px]  hover:bg-opacity-[50%] bg-opacity-[40%] `}
                 >
-                  {data.icon}
+                  <DirectionAnimation>{data.icon}</DirectionAnimation>
                 </div>
               </div>
 
               <div>
                 <div className="text-white mb-3 font-extralight text-[13px] md:text-[14px]">
-                  {data.detail}
+                  <DirectionAnimation delay={0.2}>
+                    {data.detail}
+                  </DirectionAnimation>
                 </div>
-                <p className="text-2xl font-bold  text-[30px]">{data.amount}</p>
+                <p className="text-2xl font-bold  text-[30px]">
+                  <DirectionAnimation delay={0.4}>
+                    {data.amount}
+                  </DirectionAnimation>
+                </p>
               </div>
             </div>
           </div>

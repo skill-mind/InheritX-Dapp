@@ -7,6 +7,7 @@ import eth from "../../../../public/assets/Eth.png";
 import strk from "../../../../public/assets/strk.png";
 import usdc from "../../../../public/assets/usdc.png";
 import usdt from "../../../../public/assets/usdt.png";
+import { DirectionAnimation } from "@/motion/Animation";
 
 // Token type definition
 interface Token {
@@ -190,477 +191,488 @@ const Exchange = () => {
     <div className="min-h-screen p-2 sm:p-4 md:p-8">
       <div className="max-w-2xl mx-auto p-3 sm:p-6 rounded-lg shadow-lg bg-[#29252f]">
         {/* From Section */}
-        <div className="relative p-3 sm:p-6 bg-[#201f2a] text-white border rounded-[18px] border-[#A09FA9]">
-          <div className="flex justify-between items-center mb-4">
-            <span>From</span>
-            <div className="relative">
-              <button
-                className="flex items-center gap-1 sm:gap-2 bg-white text-black rounded-full py-1 px-2 sm:px-4 text-sm sm:text-base"
-                onClick={() => setShowFromDropdown(!showFromDropdown)}
-              >
-                {/* Replaced text with Image component */}
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center overflow-hidden">
-                  <Image
-                    src={fromToken.logo}
-                    alt={fromToken.symbol}
-                    width={24}
-                    height={24}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <span>{fromToken.symbol}</span>
-                <ChevronDown size={16} className="sm:hidden" />
-                <ChevronDown size={20} className="hidden sm:block" />
-              </button>
+        <DirectionAnimation>
+          <div className="relative p-3 sm:p-6 bg-[#201f2a] text-white border rounded-[18px] border-[#A09FA9]">
+            <div className="flex justify-between items-center mb-4">
+              <span>From</span>
+              <div className="relative">
+                <button
+                  className="flex items-center gap-1 sm:gap-2 bg-white text-black rounded-full py-1 px-2 sm:px-4 text-sm sm:text-base"
+                  onClick={() => setShowFromDropdown(!showFromDropdown)}
+                >
+                  {/* Replaced text with Image component */}
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center overflow-hidden">
+                    <Image
+                      src={fromToken.logo}
+                      alt={fromToken.symbol}
+                      width={24}
+                      height={24}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <span>{fromToken.symbol}</span>
+                  <ChevronDown size={16} className="sm:hidden" />
+                  <ChevronDown size={20} className="hidden sm:block" />
+                </button>
 
-              {/* From Token Dropdown */}
-              {showFromDropdown && (
-                <div className="absolute right-0 top-12 w-48 sm:w-64 bg-white rounded-lg shadow-lg z-10 text-gray-900">
-                  <div className="p-2 sm:p-3 border-b">
-                    <div className="flex space-x-1 sm:space-x-2">
-                      <button
-                        className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
-                          filterStable === null
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-gray-100"
-                        }`}
-                        onClick={() => setFilterStable(null)}
-                      >
-                        All
-                      </button>
-                      <button
-                        className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
-                          filterStable === true
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-gray-100"
-                        }`}
-                        onClick={() => setFilterStable(true)}
-                      >
-                        Stable
-                      </button>
-                      <button
-                        className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
-                          filterStable === false
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-gray-100"
-                        }`}
-                        onClick={() => setFilterStable(false)}
-                      >
-                        Unstable
-                      </button>
+                {/* From Token Dropdown */}
+                {showFromDropdown && (
+                  <div className="absolute right-0 top-12 w-48 sm:w-64 bg-white rounded-lg shadow-lg z-10 text-gray-900">
+                    <div className="p-2 sm:p-3 border-b">
+                      <div className="flex space-x-1 sm:space-x-2">
+                        <button
+                          className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
+                            filterStable === null
+                              ? "bg-blue-100 text-blue-700"
+                              : "bg-gray-100"
+                          }`}
+                          onClick={() => setFilterStable(null)}
+                        >
+                          All
+                        </button>
+                        <button
+                          className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
+                            filterStable === true
+                              ? "bg-blue-100 text-blue-700"
+                              : "bg-gray-100"
+                          }`}
+                          onClick={() => setFilterStable(true)}
+                        >
+                          Stable
+                        </button>
+                        <button
+                          className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
+                            filterStable === false
+                              ? "bg-blue-100 text-blue-700"
+                              : "bg-gray-100"
+                          }`}
+                          onClick={() => setFilterStable(false)}
+                        >
+                          Unstable
+                        </button>
+                      </div>
+                    </div>
+                    <div className="max-h-48 sm:max-h-60 overflow-y-auto">
+                      {filteredTokens.map((token) => (
+                        <div
+                          key={token.id}
+                          className={`p-2 sm:p-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${
+                            token.id === fromToken.id ? "bg-gray-50" : ""
+                          }`}
+                          onClick={() => selectFromToken(token)}
+                        >
+                          <div className="flex items-center gap-2 sm:gap-3">
+                            {/* Replaced text with Image component */}
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                              <Image
+                                src={token.logo}
+                                alt={token.symbol}
+                                width={32}
+                                height={32}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                            <div>
+                              <div className="font-medium text-sm sm:text-base">
+                                {token.name}
+                              </div>
+                              <div className="text-xs sm:text-sm text-gray-900">
+                                {token.symbol}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-right text-sm sm:text-base">
+                            <div>{token.balance.toLocaleString()}</div>
+                            <div className="text-xs sm:text-sm text-gray-900">
+                              ${(token.balance * token.value).toLocaleString()}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  <div className="max-h-48 sm:max-h-60 overflow-y-auto">
-                    {filteredTokens.map((token) => (
-                      <div
-                        key={token.id}
-                        className={`p-2 sm:p-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${
-                          token.id === fromToken.id ? "bg-gray-50" : ""
-                        }`}
-                        onClick={() => selectFromToken(token)}
-                      >
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          {/* Replaced text with Image component */}
-                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
-                            <Image
-                              src={token.logo}
-                              alt={token.symbol}
-                              width={32}
-                              height={32}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div>
-                            <div className="font-medium text-sm sm:text-base">
-                              {token.name}
-                            </div>
-                            <div className="text-xs sm:text-sm text-gray-900">
-                              {token.symbol}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right text-sm sm:text-base">
-                          <div>{token.balance.toLocaleString()}</div>
-                          <div className="text-xs sm:text-sm text-gray-900">
-                            ${(token.balance * token.value).toLocaleString()}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className="flex items-center space-x-2">
-            <div
-              contentEditable="true"
-              suppressContentEditableWarning={true}
-              onInput={(e) =>
-                handleFromAmountChange(e.currentTarget.textContent || "")
-              }
-              className="bg-transparent text-2xl sm:text-3xl md:text-4xl font-bold outline-none"
-            >
-              {fromAmount}
+            <div className="flex items-center space-x-2">
+              <div
+                contentEditable="true"
+                suppressContentEditableWarning={true}
+                onInput={(e) =>
+                  handleFromAmountChange(e.currentTarget.textContent || "")
+                }
+                className="bg-transparent text-2xl sm:text-3xl md:text-4xl font-bold outline-none"
+              >
+                {fromAmount}
+              </div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                {fromToken.symbol}
+              </div>{" "}
+              <div className="text-lg sm:text-xl hidden md:flex md:text-2xl text-gray-400">
+                ≈${(parseFloat(fromAmount) * fromToken.value).toLocaleString()}
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              {fromToken.symbol}
-            </div>{" "}
-            <div className="text-lg sm:text-xl hidden md:flex md:text-2xl text-gray-400">
+            <div className="text-gray-400 md:hidden">
               ≈${(parseFloat(fromAmount) * fromToken.value).toLocaleString()}
             </div>
+            <div className="pt-2 text-sm sm:text-base">
+              Balance: {fromToken.balance.toLocaleString()} {fromToken.symbol}
+              <span className="ml-1">
+                (${(fromToken.balance * fromToken.value).toLocaleString()})
+              </span>
+            </div>
           </div>
-          <div className="text-gray-400 md:hidden">
-            ≈${(parseFloat(fromAmount) * fromToken.value).toLocaleString()}
-          </div>
-          <div className="pt-2 text-sm sm:text-base">
-            Balance: {fromToken.balance.toLocaleString()} {fromToken.symbol}
-            <span className="ml-1">
-              (${(fromToken.balance * fromToken.value).toLocaleString()})
-            </span>
-          </div>
-        </div>
+        </DirectionAnimation>
+
         {/* Swap Button */}
-        <div className="flex justify-center relative h-0 z-10 mt-2 mb-2">
-          <button
-            className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black border shadow-lg flex items-center justify-center"
-            onClick={swapTokens}
-          >
-            <ArrowUpDown size={20} className="sm:hidden" />
-            <ArrowUpDown size={30} className="hidden sm:block" />
-          </button>
-        </div>
+        <DirectionAnimation delay={0.2}>
+          <div className="flex justify-center relative h-0 z-10 mt-2 mb-2">
+            <button
+              className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black border shadow-lg flex items-center justify-center"
+              onClick={swapTokens}
+            >
+              <ArrowUpDown size={20} className="sm:hidden" />
+              <ArrowUpDown size={30} className="hidden sm:block" />
+            </button>
+          </div>
+        </DirectionAnimation>
 
         {/* To Section */}
-        <div className="relative p-3 sm:p-6 bg-[#201f2a] text-white border rounded-[18px] border-[#A09FA9]">
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-gray-400">To</span>
-            <div className="relative">
-              <button
-                className="flex items-center gap-1 sm:gap-2 bg-white text-black rounded-full py-1 px-2 sm:px-4 text-sm sm:text-base"
-                onClick={() => setShowToDropdown(!showToDropdown)}
-              >
-                {/* Replaced text with Image component */}
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center overflow-hidden">
-                  <Image
-                    src={toToken.logo}
-                    alt={toToken.symbol}
-                    width={24}
-                    height={24}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <span>{toToken.symbol}</span>
-                <ChevronDown size={16} className="sm:hidden" />
-                <ChevronDown size={20} className="hidden sm:block" />
-              </button>
+        <DirectionAnimation delay={0.4}>
+          <div className="relative p-3 sm:p-6 bg-[#201f2a] text-white border rounded-[18px] border-[#A09FA9]">
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-gray-400">To</span>
+              <div className="relative">
+                <button
+                  className="flex items-center gap-1 sm:gap-2 bg-white text-black rounded-full py-1 px-2 sm:px-4 text-sm sm:text-base"
+                  onClick={() => setShowToDropdown(!showToDropdown)}
+                >
+                  {/* Replaced text with Image component */}
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center overflow-hidden">
+                    <Image
+                      src={toToken.logo}
+                      alt={toToken.symbol}
+                      width={24}
+                      height={24}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <span>{toToken.symbol}</span>
+                  <ChevronDown size={16} className="sm:hidden" />
+                  <ChevronDown size={20} className="hidden sm:block" />
+                </button>
 
-              {/* To token dropdown */}
-              {showToDropdown && (
-                <div className="absolute right-0 top-12 w-48 sm:w-64 bg-white rounded-lg shadow-lg z-10 text-gray-900">
-                  <div className="p-2 sm:p-3 border-b">
-                    <div className="flex space-x-1 sm:space-x-2">
-                      <button
-                        className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
-                          filterStable === null
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-gray-100"
-                        }`}
-                        onClick={() => setFilterStable(null)}
-                      >
-                        All
-                      </button>
-                      <button
-                        className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
-                          filterStable === true
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-gray-100"
-                        }`}
-                        onClick={() => setFilterStable(true)}
-                      >
-                        Stable
-                      </button>
-                      <button
-                        className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
-                          filterStable === false
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-gray-100"
-                        }`}
-                        onClick={() => setFilterStable(false)}
-                      >
-                        Unstable
-                      </button>
+                {/* To token dropdown */}
+                {showToDropdown && (
+                  <div className="absolute right-0 top-12 w-48 sm:w-64 bg-white rounded-lg shadow-lg z-10 text-gray-900">
+                    <div className="p-2 sm:p-3 border-b">
+                      <div className="flex space-x-1 sm:space-x-2">
+                        <button
+                          className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
+                            filterStable === null
+                              ? "bg-blue-100 text-blue-700"
+                              : "bg-gray-100"
+                          }`}
+                          onClick={() => setFilterStable(null)}
+                        >
+                          All
+                        </button>
+                        <button
+                          className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
+                            filterStable === true
+                              ? "bg-blue-100 text-blue-700"
+                              : "bg-gray-100"
+                          }`}
+                          onClick={() => setFilterStable(true)}
+                        >
+                          Stable
+                        </button>
+                        <button
+                          className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm ${
+                            filterStable === false
+                              ? "bg-blue-100 text-blue-700"
+                              : "bg-gray-100"
+                          }`}
+                          onClick={() => setFilterStable(false)}
+                        >
+                          Unstable
+                        </button>
+                      </div>
+                    </div>
+                    <div className="max-h-48 sm:max-h-60 overflow-y-auto">
+                      {filteredTokens.map((token) => (
+                        <div
+                          key={token.id}
+                          className={`p-2 sm:p-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${
+                            token.id === toToken.id ? "bg-gray-50" : ""
+                          }`}
+                          onClick={() => selectToToken(token)}
+                        >
+                          <div className="flex items-center gap-2 sm:gap-3">
+                            {/* Replaced text with Image component */}
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                              <Image
+                                src={token.logo}
+                                alt={token.symbol}
+                                width={32}
+                                height={32}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                            <div>
+                              <div className="font-medium text-sm sm:text-base">
+                                {token.name}
+                              </div>
+                              <div className="text-xs sm:text-sm text-gray-900">
+                                {token.symbol}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-right text-sm sm:text-base">
+                            <div className="text-xs sm:text-sm text-gray-900">
+                              ${(token.balance * token.value).toLocaleString()}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  <div className="max-h-48 sm:max-h-60 overflow-y-auto">
-                    {filteredTokens.map((token) => (
-                      <div
-                        key={token.id}
-                        className={`p-2 sm:p-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${
-                          token.id === toToken.id ? "bg-gray-50" : ""
-                        }`}
-                        onClick={() => selectToToken(token)}
-                      >
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          {/* Replaced text with Image component */}
-                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
-                            <Image
-                              src={token.logo}
-                              alt={token.symbol}
-                              width={32}
-                              height={32}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div>
-                            <div className="font-medium text-sm sm:text-base">
-                              {token.name}
-                            </div>
-                            <div className="text-xs sm:text-sm text-gray-900">
-                              {token.symbol}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right text-sm sm:text-base">
-                          <div className="text-xs sm:text-sm text-gray-900">
-                            ${(token.balance * token.value).toLocaleString()}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className="flex items-center space-x-2">
-            <div
-              contentEditable="true"
-              suppressContentEditableWarning={true}
-              onInput={(e) =>
-                handleToAmountChange(e.currentTarget.textContent || "")
-              }
-              className="bg-transparent text-2xl sm:text-3xl md:text-4xl font-bold outline-none"
-            >
-              {toAmount}
+            <div className="flex items-center space-x-2">
+              <div
+                contentEditable="true"
+                suppressContentEditableWarning={true}
+                onInput={(e) =>
+                  handleToAmountChange(e.currentTarget.textContent || "")
+                }
+                className="bg-transparent text-2xl sm:text-3xl md:text-4xl font-bold outline-none"
+              >
+                {toAmount}
+              </div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                {toToken.symbol}
+              </div>
+              <div className="text-lg hidden md:flex sm:text-xl md:text-2xl text-gray-400">
+                ≈${(parseFloat(toAmount) * toToken.value).toLocaleString()}
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              {toToken.symbol}
-            </div>
-            <div className="text-lg hidden md:flex sm:text-xl md:text-2xl text-gray-400">
+            <div className="text-gray-400 md:hidden">
               ≈${(parseFloat(toAmount) * toToken.value).toLocaleString()}
             </div>
-          </div>
-          <div className="text-gray-400 md:hidden">
-            ≈${(parseFloat(toAmount) * toToken.value).toLocaleString()}
-          </div>
 
-          <div className="flex items-center justify-between pt-2 text-sm sm:text-base">
-            <div>Gas Fee: 0.001 ETH</div>
+            <div className="flex items-center justify-between pt-2 text-sm sm:text-base">
+              <div>Gas Fee: 0.001 ETH</div>
+            </div>
           </div>
-        </div>
+        </DirectionAnimation>
         {/* Swap Button */}
-        <div className="pt-4">
-          <button
-            className="w-full py-4 sm:py-6 bg-white text-black rounded-[38px] text-lg sm:text-xl md:text-[24px] font-normal"
-            onClick={executeSwap}
-          >
-            Swap Tokens
-          </button>
-        </div>
+        <DirectionAnimation delay={0.6}>
+          <div className="pt-4">
+            <button
+              className="w-full py-4 sm:py-6 bg-white text-black rounded-[38px] text-lg sm:text-xl md:text-[24px] font-normal"
+              onClick={executeSwap}
+            >
+              Swap Tokens
+            </button>
+          </div>
+        </DirectionAnimation>
       </div>
 
       {/* Activity log */}
-      <div className="bg-gradient-dark rounded-[24px] shadow-md overflow-hidden mt-4 sm:mt-8">
-        <div className="p-4 sm:p-6">
-          <h2 className="text-xl sm:text-2xl">Activity Log</h2>
-        </div>
-        <div className="overflow-x-auto hidden md:flex">
-          <table className="w-full">
-            <thead>
-              <tr className="text-xs sm:text-sm">
-                <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
-                  Date
-                </th>
-                <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
-                  From
-                </th>
-                <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
-                  To
-                </th>
-                <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
-                  Transaction ID
-                </th>
-                <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
-                  Status
-                </th>
-              </tr>
-            </thead>
-            <tbody className="text-xs sm:text-sm">
-              {transactions.map((transaction) => (
-                <tr key={transaction.id}>
-                  <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+      <DirectionAnimation>
+        <div className="bg-gradient-dark rounded-[24px] shadow-md overflow-hidden mt-4 sm:mt-8">
+          <div className="p-4 sm:p-6">
+            <h2 className="text-xl sm:text-2xl">Activity Log</h2>
+          </div>
+          <div className="overflow-x-auto hidden md:flex">
+            <table className="w-full">
+              <thead>
+                <tr className="text-xs sm:text-sm">
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
+                    Date
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
+                    From
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
+                    To
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
+                    Transaction ID
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-white tracking-wider">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-xs sm:text-sm">
+                {transactions.map((transaction) => (
+                  <tr key={transaction.id}>
+                    <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                      {transaction.date}
+                    </td>
+                    <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                      <div className="flex items-center gap-1">
+                        {/* Added logo to transaction history */}
+                        <div className="w-4 h-4 rounded-full overflow-hidden">
+                          {getTokenImageBySymbol(transaction.fromToken) && (
+                            <Image
+                              src={getTokenImageBySymbol(transaction.fromToken)}
+                              alt={transaction.fromToken}
+                              width={16}
+                              height={16}
+                              className="w-full h-full object-contain"
+                            />
+                          )}
+                        </div>
+                        {transaction.fromAmount.toLocaleString()}{" "}
+                        {transaction.fromToken}
+                      </div>
+                    </td>
+                    <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                      <div className="flex items-center gap-1">
+                        {/* Added logo to transaction history */}
+                        <div className="w-4 h-4 rounded-full overflow-hidden">
+                          {getTokenImageBySymbol(transaction.toToken) && (
+                            <Image
+                              src={getTokenImageBySymbol(transaction.toToken)}
+                              alt={transaction.toToken}
+                              width={16}
+                              height={16}
+                              className="w-full h-full object-contain"
+                            />
+                          )}
+                        </div>
+                        {transaction.toAmount.toLocaleString()}{" "}
+                        {transaction.toToken}
+                      </div>
+                    </td>
+                    <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                      <span className="hidden sm:inline">{transaction.id}</span>
+                      <span className="sm:hidden">
+                        {transaction.id.substring(0, 8)}...
+                      </span>
+                    </td>
+                    <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                      <span
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          transaction.status === "Completed"
+                            ? "bg-green-100 text-green-800"
+                            : transaction.status === "Pending"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {transaction.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile card view - shown only on small screens */}
+          <div className="sm:hidden space-y-4">
+            {transactions.map((transaction) => (
+              <div
+                key={transaction.id}
+                className="bg-[#2B2A38] rounded-lg p-4 shadow"
+              >
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs text-gray-400">
                     {transaction.date}
-                  </td>
-                  <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                  </span>
+                  <span
+                    className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                      transaction.status === "Completed"
+                        ? "bg-green-100 text-green-800"
+                        : transaction.status === "Pending"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : "bg-red-100 text-red-800"
+                    }`}
+                  >
+                    {transaction.status}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex flex-col">
+                    <span className="text-xs text-gray-400 mb-1">From</span>
                     <div className="flex items-center gap-1">
-                      {/* Added logo to transaction history */}
-                      <div className="w-4 h-4 rounded-full overflow-hidden">
+                      <div className="w-5 h-5 rounded-full overflow-hidden">
                         {getTokenImageBySymbol(transaction.fromToken) && (
                           <Image
                             src={getTokenImageBySymbol(transaction.fromToken)}
                             alt={transaction.fromToken}
-                            width={16}
-                            height={16}
+                            width={20}
+                            height={20}
                             className="w-full h-full object-contain"
                           />
                         )}
                       </div>
-                      {transaction.fromAmount.toLocaleString()}{" "}
-                      {transaction.fromToken}
+                      <span className="font-medium">
+                        {transaction.fromAmount.toLocaleString()}{" "}
+                        {transaction.fromToken}
+                      </span>
                     </div>
-                  </td>
-                  <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                  </div>
+
+                  <div className="flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 text-gray-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+
+                  <div className="flex flex-col items-end">
+                    <span className="text-xs text-gray-400 mb-1">To</span>
                     <div className="flex items-center gap-1">
-                      {/* Added logo to transaction history */}
-                      <div className="w-4 h-4 rounded-full overflow-hidden">
+                      <div className="w-5 h-5 rounded-full overflow-hidden">
                         {getTokenImageBySymbol(transaction.toToken) && (
                           <Image
                             src={getTokenImageBySymbol(transaction.toToken)}
                             alt={transaction.toToken}
-                            width={16}
-                            height={16}
+                            width={20}
+                            height={20}
                             className="w-full h-full object-contain"
                           />
                         )}
                       </div>
-                      {transaction.toAmount.toLocaleString()}{" "}
-                      {transaction.toToken}
+                      <span className="font-medium">
+                        {transaction.toAmount.toLocaleString()}{" "}
+                        {transaction.toToken}
+                      </span>
                     </div>
-                  </td>
-                  <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
-                    <span className="hidden sm:inline">{transaction.id}</span>
-                    <span className="sm:hidden">
-                      {transaction.id.substring(0, 8)}...
-                    </span>
-                  </td>
-                  <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
-                    <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        transaction.status === "Completed"
-                          ? "bg-green-100 text-green-800"
-                          : transaction.status === "Pending"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
-                    >
-                      {transaction.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Mobile card view - shown only on small screens */}
-        <div className="sm:hidden space-y-4">
-          {transactions.map((transaction) => (
-            <div
-              key={transaction.id}
-              className="bg-[#2B2A38] rounded-lg p-4 shadow"
-            >
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-xs text-gray-400">
-                  {transaction.date}
-                </span>
-                <span
-                  className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                    transaction.status === "Completed"
-                      ? "bg-green-100 text-green-800"
-                      : transaction.status === "Pending"
-                      ? "bg-yellow-100 text-yellow-800"
-                      : "bg-red-100 text-red-800"
-                  }`}
-                >
-                  {transaction.status}
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-400 mb-1">From</span>
-                  <div className="flex items-center gap-1">
-                    <div className="w-5 h-5 rounded-full overflow-hidden">
-                      {getTokenImageBySymbol(transaction.fromToken) && (
-                        <Image
-                          src={getTokenImageBySymbol(transaction.fromToken)}
-                          alt={transaction.fromToken}
-                          width={20}
-                          height={20}
-                          className="w-full h-full object-contain"
-                        />
-                      )}
-                    </div>
-                    <span className="font-medium">
-                      {transaction.fromAmount.toLocaleString()}{" "}
-                      {transaction.fromToken}
-                    </span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-
-                <div className="flex flex-col items-end">
-                  <span className="text-xs text-gray-400 mb-1">To</span>
-                  <div className="flex items-center gap-1">
-                    <div className="w-5 h-5 rounded-full overflow-hidden">
-                      {getTokenImageBySymbol(transaction.toToken) && (
-                        <Image
-                          src={getTokenImageBySymbol(transaction.toToken)}
-                          alt={transaction.toToken}
-                          width={20}
-                          height={20}
-                          className="w-full h-full object-contain"
-                        />
-                      )}
-                    </div>
-                    <span className="font-medium">
-                      {transaction.toAmount.toLocaleString()}{" "}
-                      {transaction.toToken}
+                <div className="pt-2 border-t border-gray-700">
+                  <div className="flex items-center">
+                    <span className="text-xs text-gray-400 mr-2">TX ID:</span>
+                    <span className="text-xs font-mono">
+                      {transaction.id.substring(0, 10)}...
+                      {transaction.id.substring(transaction.id.length - 4)}
                     </span>
                   </div>
                 </div>
               </div>
-
-              <div className="pt-2 border-t border-gray-700">
-                <div className="flex items-center">
-                  <span className="text-xs text-gray-400 mr-2">TX ID:</span>
-                  <span className="text-xs font-mono">
-                    {transaction.id.substring(0, 10)}...
-                    {transaction.id.substring(transaction.id.length - 4)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </DirectionAnimation>
 
       {/* Success Modal */}
       <SuccessModal

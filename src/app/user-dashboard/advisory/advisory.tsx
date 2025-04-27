@@ -111,32 +111,34 @@ function Advisory() {
 
       {/* Option buttons */}
       <div className="p-4 border-t border-[#FFFFFF1A]">
-        <div className="max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
-          <button
-            onClick={() => handleButtonClick("Support")}
-            className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
-          >
-            Support
-          </button>
-          <button
-            onClick={() => handleButtonClick("Inheritance plan")}
-            className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
-          >
-            Inheritance plan
-          </button>
-          <button
-            onClick={() => handleButtonClick("Claim")}
-            className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
-          >
-            Claim
-          </button>
-          <button
-            onClick={() => handleButtonClick("Swap token")}
-            className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
-          >
-            Swap token
-          </button>
-        </div>
+        <DirectionAnimation>
+          <div className="max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+            <button
+              onClick={() => handleButtonClick("Support")}
+              className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
+            >
+              Support
+            </button>
+            <button
+              onClick={() => handleButtonClick("Inheritance plan")}
+              className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
+            >
+              Inheritance plan
+            </button>
+            <button
+              onClick={() => handleButtonClick("Claim")}
+              className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
+            >
+              Claim
+            </button>
+            <button
+              onClick={() => handleButtonClick("Swap token")}
+              className="p-2 text-sm bg-gradient-to-b from-gray-300/20 via-gray-500/20 to-gray-700/20 hover:bg-gray-700 rounded-md transition-colors"
+            >
+              Swap token
+            </button>
+          </div>
+        </DirectionAnimation>
 
         {/* Chat input */}
         <div className="max-w-3xl mx-auto">

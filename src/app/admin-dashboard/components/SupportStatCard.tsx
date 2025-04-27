@@ -1,3 +1,4 @@
+import { DirectionAnimation } from "@/motion/Animation";
 import Image from "next/image";
 
 interface Stat {
@@ -34,17 +35,23 @@ const SupportStatCard = () => {
         >
           <div className="mb-2">
             <div className="w-8 h-8">
-              <Image
-                src={stat.icon}
-                alt={`${stat.label} icon`}
-                width={20}
-                height={20}
-              />
+              <DirectionAnimation>
+                <Image
+                  src={stat.icon}
+                  alt={`${stat.label} icon`}
+                  width={20}
+                  height={20}
+                />
+              </DirectionAnimation>
             </div>
           </div>
           <div>
-            <span className="text-gray-300 text-[13px]">{stat.label}</span>
-            <p className="text-2xl font-normal">{stat.value}</p>
+            <span className="text-gray-300 text-[13px]">
+              <DirectionAnimation delay={0.2}>{stat.label}</DirectionAnimation>
+            </span>
+            <p className="text-2xl font-normal">
+              <DirectionAnimation delay={0.4}>{stat.value}</DirectionAnimation>
+            </p>
           </div>
         </div>
       ))}
