@@ -5,7 +5,7 @@ import { DirectionAnimation } from "@/motion/Animation";
 
 const AboutUs = () => {
   return (
-    <main className="relative  min-h-screen max-w-[1500px] mx-auto">
+    <main className="relative  min-h-screen md:max-w-[1000px] 2xl:max-w-[1400px] mx-auto">
       <section className="w-full flex justify-between items-center 2xl:px-[15rem] px-[2rem] flex-col md:flex-row  text-center md:text-left">
         <div className="max-w-xl flex-1">
           <DirectionAnimation>
