@@ -8,9 +8,13 @@ interface ClaimFormProps {
 
 const ClaimForm: React.FC<ClaimFormProps> = ({ onClaimSubmit }) => {
   const [claimCode, setClaimCode] = useState("");
+  const [error, setError] = useState(false);
 
   const handleClaimSubmit = () => {
-    if (claimCode.trim() === "") return;
+    if (claimCode.length < 2 || !claimCode) {
+      setError(true);
+    }
+
     onClaimSubmit(claimCode);
     setClaimCode("");
   };
@@ -25,14 +29,16 @@ const ClaimForm: React.FC<ClaimFormProps> = ({ onClaimSubmit }) => {
       <div className="w-10/12 md:w-4/12">
         <p className="mb-2">Claim Code</p>
         <input
-          placeholder="Enter Claim Code"
+          placeholder={error ? "Invalid Claim Code" : "Enter Claim Code"}
           value={claimCode}
-          onChange={(e) => setClaimCode(e.target.value)}
-          className="mb-4 py-3 px-3 rounded-lg w-full bg-[#21202A] border border-white  text-white "
+          onChange={(e) => (setClaimCode(e.target.value), setError(false))}
+          className={`mb-4 py-3 px-3 rounded-lg w-full bg-[#21202A] border ${
+            error ? "border-red-600" : "border-white"
+          }  text-white `}
         />
         <button
           onClick={handleClaimSubmit}
-          className="w-full bg-[#100030] hover:bg-[#413F54] py-3 rounded-3xl border border-white "
+          className={`w-full bg-[#100030] hover:bg-[#413F54] py-3 rounded-3xl border border-white `}
         >
           Claim Now
         </button>

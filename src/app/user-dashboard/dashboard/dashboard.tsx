@@ -9,6 +9,7 @@ import peopleIcon from "../../../../public/svg/people.svg";
 import midClockIcon from "../../../../public/svg/mdi_clock-plus.svg";
 import swapIcon from "../../../../public/svg/swap-icon.svg";
 import RecentActivities from "../component/RecentActivity";
+import { DirectionAnimation } from "@/motion/Animation";
 
 const stats = [
   {
@@ -61,15 +62,23 @@ function Dashboard() {
         <h2 className="text-[32px] font-[400] mb-7">Quick Actions</h2>
         <div className="flex overflow-x-scroll md:overflow-hidden gap-4 mb-5 pb-2 w-full">
           {quickActions.map((action, index) => (
-            <QuickActionButton
+            <DirectionAnimation
+              delay={0.2 * index}
+              direction="bottom-to-top"
               key={index}
-              icon={action.icon}
-              label={action.label}
-              sectionName={action.sectionName}
-            />
+            >
+              <QuickActionButton
+                key={index}
+                icon={action.icon}
+                label={action.label}
+                sectionName={action.sectionName}
+              />
+            </DirectionAnimation>
           ))}
         </div>
-        <RecentActivities />
+        <DirectionAnimation>
+          <RecentActivities />
+        </DirectionAnimation>
       </section>
     </main>
   );
