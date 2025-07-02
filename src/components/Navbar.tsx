@@ -1,16 +1,19 @@
+
+
+
 "use client";
 
 import React, { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAccount } from "@starknet-react/core";
 import { useDisconnect } from "@starknet-react/core";
 import { Plus, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import ConnectModal from "./ConnectModal";
 import navLogo from "@/svg/Logo.svg";
+import { ConnectButton } from "./connect-button";
 
 interface NavLink {
   name: string;
@@ -21,6 +24,44 @@ interface NavbarProps {
   onConnectWallet?: () => void;
 }
 
+interface WalletDisconnectModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onDisconnect: () => void;
+}
+
+// Simple disconnect modal component
+const WalletDisconnectModal: React.FC<WalletDisconnectModalProps> = ({
+  isOpen,
+  onClose,
+  onDisconnect,
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-[#211A1D] border border-[#413F54] rounded-2xl p-6 max-w-sm w-full mx-4">
+        <h3 className="text-white text-lg font-semibold mb-4">Disconnect Wallet</h3>
+        <p className="text-white/70 mb-6">Are you sure you want to disconnect your wallet?</p>
+        <div className="flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 px-4 py-2 border border-[#413F54] text-white rounded-lg hover:bg-[#413F54]/20 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onDisconnect}
+            className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Disconnect
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const navLinks: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about-us" },
@@ -30,7 +71,9 @@ const navLinks: NavLink[] = [
 const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDisconnectModalOpen, setIsDisconnectModalOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect({});
 
@@ -39,8 +82,18 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
   };
 
   const handleConnectWallet = () => {
-    setIsModalOpen(true);
-    onConnectWallet?.();
+    if (!isConnected) {
+      setIsModalOpen(true);
+      onConnectWallet?.();
+    } else {
+      // If connected, show disconnect modal
+      setIsDisconnectModalOpen(true);
+    }
+  };
+
+  const handleDisconnect = () => {
+    disconnect();
+    setIsDisconnectModalOpen(false);
   };
 
   const isActive = (href: string) => {
@@ -85,15 +138,9 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
           </div>
 
           <div className="hidden md:block">
-            {" "}
             <button
-              onClick={() => {
-                handleConnectWallet();
-                if (isConnected) {
-                  disconnect();
-                }
-              }}
-              className="border border-[#413F54] bg-[#211A1D]  text-white hover:bg-black  px-3 py-2 rounded-full transition-colors"
+              onClick={handleConnectWallet}
+              className="border border-[#413F54] bg-[#211A1D] text-white hover:bg-black px-3 py-2 rounded-full transition-colors"
             >
               {isConnected ? (
                 <div className="flex items-center gap-[16px] justify-between">
@@ -104,9 +151,8 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
                         alt="placeholder-wallet"
                       />
                     </div>
-
                     <div>
-                      {address?.slice(0, 6)}....${address?.slice(-4)}
+                      {address?.slice(0, 6)}....{address?.slice(-4)}
                     </div>
                   </div>
                   <div className="flex items-center gap-[2px]">
@@ -159,9 +205,6 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
               onClick={() => {
                 handleConnectWallet();
                 setIsOpen(false);
-                if (isConnected) {
-                  disconnect();
-                }
               }}
               className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full transition-colors text-base mt-2"
             >
@@ -174,9 +217,8 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
                         alt="placeholder-wallet"
                       />
                     </div>
-
                     <div>
-                      {address?.slice(0, 6)}....${address?.slice(-4)}
+                      {address?.slice(0, 6)}....{address?.slice(-4)}
                     </div>
                   </div>
                   <div className="flex items-center gap-[2px]">
@@ -191,12 +233,24 @@ const Navbar: React.FC<NavbarProps> = ({ onConnectWallet }) => {
           </div>
         </div>
       </div>
+
+      {/* Connect Modal */}
       {isModalOpen && (
-        <ConnectModal
-          isModalOpen={isModalOpen}
+        <ConnectButton
+          isOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          onSelect={(walletId: string) => {
+            console.log("Selected wallet:", walletId);
+          }}
         />
       )}
+
+      {/* Disconnect Modal */}
+      <WalletDisconnectModal
+        isOpen={isDisconnectModalOpen}
+        onClose={() => setIsDisconnectModalOpen(false)}
+        onDisconnect={handleDisconnect}
+      />
     </nav>
   );
 };
