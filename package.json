@@ -27,6 +27,7 @@
     "react-icons": "^5.4.0",
     "sharp": "^0.33.5",
     "starknet": "^6.11.0",
+    "starknetkit": "^2.12.1",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7"
   },

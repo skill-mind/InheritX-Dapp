@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Providers } from "@/components/Providers";
 import { METADATA_CONFIG } from "../../Config/app.config";
 import "./globals.css";
+import ClientProviders from "@/components/client-providers";
+import { WalletProvider } from "@/components/wallet-connect-context";
 
 export const metadata: Metadata = METADATA_CONFIG;
 
@@ -21,7 +22,9 @@ export default function RootLayout({
         />
       </head>
       <body className="">
-        <Providers>{children}</Providers>
+         <ClientProviders>
+          <WalletProvider>{children}</WalletProvider>
+        </ClientProviders>
       </body>
     </html>
   );
