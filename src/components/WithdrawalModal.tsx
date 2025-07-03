@@ -6,6 +6,7 @@ import moneyBagIcon from "../../public/modalIcon/moneyIcon.svg";
 import strkImg from "../../public/modalIcon/strk.svg";
 import ethImg from "../../public/modalIcon/ethIcon.png";
 import btcImg from "../../public/modalIcon/bcIcon.png";
+import { useAccount } from "@starknet-react/core";
 
 interface WithdrawalModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export default function WithdrawalModal({
   const [amount, setAmount] = useState("");
   const [selectedToken, setSelectedToken] = useState(tokens[0]);
   const [showTokenDropdown, setShowTokenDropdown] = useState(false);
+  const { address } = useAccount();
 
   if (!isOpen) return null;
 
@@ -131,7 +133,9 @@ export default function WithdrawalModal({
               <div className="flex gap-2 items-center">
                 <User size={32} />
                 <div className="flex flex-col">
-                  <div>0x0596....0fe3</div>
+                  <div>
+                    ${address?.slice(0, 6)}....${address?.slice(-4)}
+                  </div>
                   <div className="flex items-center gap-2 text-[16px] text-[#38DA38]">
                     <CircleCheck size={18} />
                     Valid Address

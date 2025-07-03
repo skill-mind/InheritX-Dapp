@@ -1,20 +1,20 @@
 "use client";
 import Image from "next/image";
 import React, { MouseEventHandler, useContext } from "react";
-import { DashBoardContext } from "../../useContext/dashboardContext";
+import { DashBoardContext } from "../../../useContext/dashboardContext";
 import Link from "next/link";
 
 // Import icons
-import Logo from "../../../../public/svg/whitelogo.svg";
-import dashboardIcon from "../../../../public/svg/dashboardIcon.svg";
-import assetsIcon from "../../../../public/svg/assetsIcon.svg";
-import plansIcon from "../../../../public/svg/plansIcon.svg";
-import exchangeIcon from "../../../../public/svg/exchangeIcon.svg";
-import claimsIcon from "../../../../public/svg/claimsIcons.svg";
-import notificationIcon from "../../../../public/svg/bell.svg";
-import advisoryIcon from "../../../../public/svg/advisoryIcons.svg";
-import ProfileIcon from "../../../../public/svg/profileIcon.svg";
-import SupportIcon from "../../../../public/svg/SupportIcon.svg";
+import Logo from "../../../../../public/svg/whitelogo.svg";
+import dashboardIcon from "../../../../../public/svg/dashboardIcon.svg";
+import assetsIcon from "../../../../../public/svg/assetsIcon.svg";
+import plansIcon from "../../../../../public/svg/plansIcon.svg";
+import exchangeIcon from "../../../../../public/svg/exchangeIcon.svg";
+import claimsIcon from "../../../../../public/svg/claimsIcons.svg";
+import notificationIcon from "../../../../../public/svg/bell.svg";
+import advisoryIcon from "../../../../../public/svg/advisoryIcons.svg";
+import ProfileIcon from "../../../../../public/svg/profileIcon.svg";
+import SupportIcon from "../../../../../public/svg/SupportIcon.svg";
 import { DirectionAnimation } from "@/motion/Animation";
 
 // NavItem component

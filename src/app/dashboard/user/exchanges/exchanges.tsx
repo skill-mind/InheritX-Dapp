@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Image from "next/image";
 import SuccessModal from "./SuccessModal";
 import { ChevronDown, ArrowUpDown } from "lucide-react";
-import btc from "../../../../public/assets/btc.png";
-import eth from "../../../../public/assets/Eth.png";
-import strk from "../../../../public/assets/strk.png";
-import usdc from "../../../../public/assets/usdc.png";
-import usdt from "../../../../public/assets/usdt.png";
+import btc from "../../../../../public/assets/btc.png";
+import eth from "../../../../../public/assets/Eth.png";
+import strk from "../../../../../public/assets/strk.png";
+import usdc from "../../../../../public/assets/usdc.png";
+import usdt from "../../../../../public/assets/usdt.png";
 import { DirectionAnimation } from "@/motion/Animation";
 
 // Token type definition

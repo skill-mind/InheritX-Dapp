@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import SupportAddQuestion from "../components/SupportAddQuestion"; 
-import SupportEditQuestion from "../components/SupportEditQuestion";
+import SupportAddQuestion from "./SupportAddQuestion";
+import SupportEditQuestion from "./SupportEditQuestion";
 
 interface FAQ {
   question: string;
@@ -15,8 +15,9 @@ interface FAQ {
 export default function SupportFaqs() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [selectedQuestion, setSelectedQuestion] = useState<FAQ | undefined>(undefined);
-
+  const [selectedQuestion, setSelectedQuestion] = useState<FAQ | undefined>(
+    undefined
+  );
 
   const faqs: FAQ[] = [
     {
@@ -25,7 +26,8 @@ export default function SupportFaqs() {
       category: "Security",
     },
     {
-      question: "What makes InheritX different from traditional inheritance platforms?",
+      question:
+        "What makes InheritX different from traditional inheritance platforms?",
       answer: `InheritX leverages blockchain technology to ensure automated execution of inheritance plans through smart contracts, eliminating the need for intermediaries while maintaining decentralized security. Our platform provides transparent verification of inheritance conditions, enabling beneficiaries to access assets with complete trust. Additionally, immutable record-keeping ensures that all transactions and inheritance plans remain tamper-proof and permanently verifiable on the blockchain.`,
       category: "Security",
     },
@@ -48,7 +50,12 @@ export default function SupportFaqs() {
         </button>
 
         <button className="text-white hover:text-gray-300 flex items-center">
-          <Image src="/svg/filter.svg" alt="Filter Icon" width={15} height={15} />
+          <Image
+            src="/svg/filter.svg"
+            alt="Filter Icon"
+            width={15}
+            height={15}
+          />
           <p className="ml-2">Security</p>
         </button>
       </div>
@@ -65,9 +72,13 @@ export default function SupportFaqs() {
 
       <div className="bg-[#29242F] bg-[linear-gradient(180deg,rgba(41,36,47,1)_55%,rgba(20,16,26,1)_100%)] rounded-lg p-4 sm:p-6 border border-[#413F54]">
         <div className="flex justify-between">
-          <h2 className="text-xl lg:text-[32px] mb-4 sm:mb-6 font-[400]">FAQs</h2>
+          <h2 className="text-xl lg:text-[32px] mb-4 sm:mb-6 font-[400]">
+            FAQs
+          </h2>
           <div className="flex">
-            <p className="text-[#5000FF] hover:text-[#5100ffb0]">View All Questions</p>
+            <p className="text-[#5000FF] hover:text-[#5100ffb0]">
+              View All Questions
+            </p>
             <ChevronDown className="w-5 h-5 mt-1 ml-1" />
           </div>
         </div>

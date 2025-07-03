@@ -4,14 +4,16 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { Menu, X, Plus, Bell } from "lucide-react";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowDown, MdPlusOne } from "react-icons/md";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import Avatar from "../../../../public/svg/Avatar.svg";
-import Notification from "../../../../public/svg/notification.svg";
-import { DashBoardContext } from "../../useContext/dashboardContext";
-import { useWalletContext } from "../../useContext/WalletContext";
+import Avatar from "../../../../../public/svg/Avatar.svg";
+import Notification from "../../../../../public/svg/notification.svg";
+import { DashBoardContext } from "../../../useContext/dashboardContext";
+import { useWalletContext } from "../../../useContext/WalletContext";
 import NotificationDropdown from "./NotificationDropdown";
+import { useAccount, useDisconnect } from "@starknet-react/core";
+import WalletDisconnectModal from "@/components/Wallet-disconnect-modal";
 
 // Add to props
 interface HeaderProps {
@@ -20,13 +22,14 @@ interface HeaderProps {
 
 function Header({ onMenuClick }: HeaderProps) {
   const { activeSection } = useContext(DashBoardContext);
-  const { account, disconnectWallet } = useWalletContext();
+  const { address } = useAccount();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
+  const { disconnect } = useDisconnect({});
 
   // Handle click outside
   useEffect(() => {
@@ -87,6 +90,10 @@ function Header({ onMenuClick }: HeaderProps) {
   useEffect(() => {
     setIsNotificationOpen(false);
   }, [pathname]);
+
+  const handleDisconnect = () => {
+    disconnect();
+  };
 
   return (
     <header className="pt-2 relative">
@@ -158,7 +165,9 @@ function Header({ onMenuClick }: HeaderProps) {
                 className="rounded-full"
                 alt="Avatar"
               />
-              <div className="font-extralight">0x8a53....3279</div>
+              <div className="font-extralight">
+                {address?.slice(0, 6)}....{address?.slice(-4)}
+              </div>
 
               <Plus size={15} className="text-white" />
               <MdOutlineKeyboardArrowDown className="text-white" />
@@ -166,13 +175,11 @@ function Header({ onMenuClick }: HeaderProps) {
 
             {/* Dropdown Menu */}
             {isProfileOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-[#161716] rounded-lg border border-[#2f2e33] shadow-lg overflow-hidden z-50">
-                <div className="p-3 border-b border-[#413F54]">
-                  <span className="text-sm text-[#F3F5FF] break-all">
-                    {account ? account : "Not connected"}
-                  </span>
-                </div>
-              </div>
+                    <WalletDisconnectModal
+                      isOpen={true}
+                onClose={() => setIsProfileOpen(false)}
+                      onDisconnect={handleDisconnect}
+                    />
             )}
           </div>
         </div>
@@ -207,7 +214,9 @@ function Header({ onMenuClick }: HeaderProps) {
                   alt="Avatar"
                 />
                 <span className="text-sm text-[#F3F5FF]">
-                  {account ? account : "Not connected"}
+                  {address
+                    ? `${address?.slice(0, 6)}....${address?.slice(-4)}`
+                    : "Not connected"}
                 </span>
               </div>
               <Plus size={18} />

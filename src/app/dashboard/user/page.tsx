@@ -1,6 +1,5 @@
 "use client";
 import { useContext } from "react";
-import { DashBoardContext } from "../useContext/dashboardContext";
 import Notification from "./notification/notification";
 import Support from "./support/support";
 import Profile from "./profile/profile";
@@ -10,6 +9,7 @@ import Plans from "./plans/plans";
 import Claims from "./claims/claims";
 import Advisory from "./advisory/advisory";
 import Exchange from "./exchanges/exchanges";
+import { DashBoardContext } from "@/app/useContext/dashboardContext";
 
 function Page() {
   const { activeSection } = useContext(DashBoardContext);

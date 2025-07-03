@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import SupportTicketDetailUnanswered from "../components/SupportTicketDetailUnanswered";
-import SupportTicketDetailAnswered from "../components/SupportTicketDetailAnswered";
+import SupportTicketDetailUnanswered from "./SupportTicketDetailUnanswered";
+import SupportTicketDetailAnswered from "./SupportTicketDetailAnswered";
 
 interface SupportTicketType {
   date: string;
@@ -11,22 +11,26 @@ interface SupportTicketType {
   email: string;
   subject: string;
   status: string;
-  userId: string; 
-  description: string; 
+  userId: string;
+  description: string;
   attachments: string[];
 }
 
 export default function SupportTicket() {
-  
-  const [selectedTicket, setSelectedTicket] = useState<SupportTicketType | null>(null);
+  const [selectedTicket, setSelectedTicket] =
+    useState<SupportTicketType | null>(null);
 
   return (
     <div className="px-4 sm:px-6 mt-10 pb-10">
       <div className="bg-[#29242F] bg-[linear-gradient(180deg,rgba(41,36,47,1)_55%,rgba(20,16,26,1)_100%)] rounded-lg p-4 sm:p-6 border border-[#413F54]">
         <div className="flex justify-between">
-          <h2 className="text-xl lg:text-[32px] mb-4 sm:mb-6 font-[400]">Support Tickets</h2>
+          <h2 className="text-xl lg:text-[32px] mb-4 sm:mb-6 font-[400]">
+            Support Tickets
+          </h2>
           <div className="flex">
-            <p className="text-[#5000FF] hover:text-[#5100ffb0] cursor-pointer">View All Tickets</p>
+            <p className="text-[#5000FF] hover:text-[#5100ffb0] cursor-pointer">
+              View All Tickets
+            </p>
             <ChevronDown className="w-5 h-5 mt-1 ml-1" />
           </div>
         </div>
@@ -45,10 +49,28 @@ export default function SupportTicket() {
             </thead>
             <tbody className="font-light">
               {[
-                { date: "24 - 01 - 2025", id: "24224", email: "danielochoja@gmail.com", subject: "Inheritance", status: "Answered" },
-                { date: "24 - 01 - 2025", id: "34263", email: "daviechoe@inherix.com", subject: "Claims", status: "Answered" },
-                { date: "24 - 01 - 2025", id: "35521", email: "nazried@jaspertech.org", subject: "Assets", status: "Unanswered" }
-              ].map(ticket => (
+                {
+                  date: "24 - 01 - 2025",
+                  id: "24224",
+                  email: "danielochoja@gmail.com",
+                  subject: "Inheritance",
+                  status: "Answered",
+                },
+                {
+                  date: "24 - 01 - 2025",
+                  id: "34263",
+                  email: "daviechoe@inherix.com",
+                  subject: "Claims",
+                  status: "Answered",
+                },
+                {
+                  date: "24 - 01 - 2025",
+                  id: "35521",
+                  email: "nazried@jaspertech.org",
+                  subject: "Assets",
+                  status: "Unanswered",
+                },
+              ].map((ticket) => (
                 <tr key={ticket.id}>
                   <td className="py-3">{ticket.date}</td>
                   <td className="py-3">{ticket.id}</td>
@@ -62,12 +84,11 @@ export default function SupportTicket() {
                         e.preventDefault();
                         setSelectedTicket({
                           ...ticket,
-                          userId: "N/A", 
-                          description: "No description available.", 
-                          attachments: [], 
+                          userId: "N/A",
+                          description: "No description available.",
+                          attachments: [],
                         });
                       }}
-                      
                     >
                       View
                     </button>
@@ -80,12 +101,18 @@ export default function SupportTicket() {
       </div>
 
       {/* Ticket Details Modal - Render based on status */}
-      {selectedTicket && (
-        selectedTicket.status === "Answered" ? 
-          <SupportTicketDetailAnswered ticket={selectedTicket} onClose={() => setSelectedTicket(null)} /> 
-          : 
-          <SupportTicketDetailUnanswered ticket={selectedTicket} onClose={() => setSelectedTicket(null)} />
-      )}
+      {selectedTicket &&
+        (selectedTicket.status === "Answered" ? (
+          <SupportTicketDetailAnswered
+            ticket={selectedTicket}
+            onClose={() => setSelectedTicket(null)}
+          />
+        ) : (
+          <SupportTicketDetailUnanswered
+            ticket={selectedTicket}
+            onClose={() => setSelectedTicket(null)}
+          />
+        ))}
     </div>
   );
 }

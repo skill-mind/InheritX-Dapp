@@ -1,11 +1,13 @@
+"use client"
 import React, { useState } from "react";
 import { ChevronDown, Files, QrCode, X } from "lucide-react";
-import NftIcon from "../../../../public/svg/NFT.svg";
+import NftIcon from "../../../../../public/svg/NFT.svg";
 import Image from "next/image";
 import ethIcon from "@/svg/ethIcon.svg";
 import usdtIcon from "@/svg/usctIcon.svg";
 import usdcIcon from "@/svg/usdc.svg";
 import { DirectionAnimation } from "@/motion/Animation";
+import { useAccount } from "@starknet-react/core";
 
 interface AssetData {
   name: string;
@@ -34,7 +36,7 @@ const Assets = () => {
   const [activeTab, setActiveTab] = useState<"tokens" | "nfts">("tokens");
   const totalBalance = "$2,521.23";
   const [selectedNft, setSelectedNft] = useState<NftData | null>(null);
-
+  const { address } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const currencies = ["USD", "ETH", "USDC", "USDT"];
@@ -205,7 +207,7 @@ const Assets = () => {
                 </svg>
               </div>
               <div className="flex items-center text-gray-400 text-sm mb-2">
-                0x8a53...3279
+                ${address?.slice(0, 6)}....${address?.slice(-4)}
                 <Files className="w-4 h-4 ml-1 cursor-pointer" />
               </div>
             </div>
