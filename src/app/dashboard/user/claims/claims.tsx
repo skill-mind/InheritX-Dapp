@@ -1,19 +1,19 @@
 "use client";
 import { useState, JSX } from "react";
 import Image from "next/image";
-import bitcoinIcon from "../../../../public/svg/bitcoin.svg";
-import clockIcon from "../../../../public/svg/plansIcon.svg";
-import peopleIcon from "../../../../public/svg/people.svg";
+import bitcoinIcon from "../../../../../public/svg/bitcoin.svg";
+import clockIcon from "../../../../../public/svg/plansIcon.svg";
+import peopleIcon from "../../../../../public/svg/people.svg";
 import ClaimForm from "../component/ClaimForm";
 import ClaimList from "../component/ClaimList";
 import ClaimModal from "../component/ClaimModal";
 import AcceptedModal from "../component/AcceptedModal";
-import WithdrawalModal from "../../../components/WithdrawalModal";
 import { ClaimStatCard } from "../component/ClaimStatCard";
-import checkCicle from "../../../../public/modalIcon/checkCircle.svg";
-import warningIcon from "../../../../public/modalIcon/Warning.svg";
-import hourglassIcon from "../../../../public/modalIcon/hourGlassIcon.svg";
+import checkCicle from "../../../../../public/modalIcon/checkCircle.svg";
+import warningIcon from "../../../../../public/modalIcon/Warning.svg";
+import hourglassIcon from "../../../../../public/modalIcon/hourGlassIcon.svg";
 import { DirectionAnimation } from "@/motion/Animation";
+import WithdrawalModal from "@/components/WithdrawalModal";
 
 interface Claim {
   id: number;
@@ -192,13 +192,13 @@ function Claims() {
     <main className="flex-1 px-2 md:px-8 pb-8 pt-2 mt-2 mb-4 overflow-scroll scrollbar-hide w-full">
       <div
         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${
-          claims.length > 0 ? "4" : "3"
+          stats.length > 0 ? "4" : "3"
         } gap-6 `}
       >
         {stats.map((stat, index) => (
           <ClaimStatCard key={index} {...stat} />
         ))}
-        {claims.length > 0 && (
+        {stats.length > 0 && (
           <ClaimStatCard
             isAction={true}
             actionText="Withdraw Funds"

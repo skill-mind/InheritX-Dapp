@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import React, { useState } from "react";
@@ -14,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import navLogo from "@/svg/Logo.svg";
 import { ConnectButton } from "./connect-button";
+import { useWalletContext } from "@/app/useContext/WalletContext";
 
 interface NavLink {
   name: string;
@@ -31,7 +29,7 @@ interface WalletDisconnectModalProps {
 }
 
 // Simple disconnect modal component
-const WalletDisconnectModal: React.FC<WalletDisconnectModalProps> = ({
+export const WalletDisconnectModal: React.FC<WalletDisconnectModalProps> = ({
   isOpen,
   onClose,
   onDisconnect,

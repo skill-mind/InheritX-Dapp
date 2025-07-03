@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "./component/DashboardHeader";
 import { Sidebar } from "./component/UserDashboardSidebar";
 import { MobileNav } from "./component/MobileNav";
-import DashBoardContextProvider from "../useContext/dashboardContext";
+import DashBoardContextProvider from "../../useContext/dashboardContext";
 
 export default function DashboardLayout({
   children,

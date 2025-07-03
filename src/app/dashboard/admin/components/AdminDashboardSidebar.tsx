@@ -13,25 +13,25 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    href: "/admin-dashboard",
+    href: "/dashboard/admin",
     icon: "/svg/dashboardIcon.svg",
     label: "Dashboard",
     id: 1,
   },
   {
-    href: "/admin-dashboard/plans",
+    href: "/dashboard/admin/plans",
     icon: "/svg/plansIcon.svg", // "bg-[#1E0B40] border border-[#807F8D]"
     label: "Plans",
     id: 2,
   },
   {
-    href: "/admin-dashboard/claims",
+    href: "/dashboard/admin/claims",
     icon: "/svg/claimsIcons.svg",
     label: "Claims",
     id: 3,
   },
   {
-    href: "/admin-dashboard/support",
+    href: "/dashboard/admin/support",
     icon: "/svg/supportIcon.svg",
     label: "Support",
     id: 4,

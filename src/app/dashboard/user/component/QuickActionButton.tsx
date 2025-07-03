@@ -1,4 +1,4 @@
-import { DashBoardContext } from '../../useContext/dashboardContext';
+import { DashBoardContext } from '../../../useContext/dashboardContext';
 import { useContext } from 'react';
 import { ReactNode } from 'react';
 

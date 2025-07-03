@@ -3,6 +3,8 @@
 import Hero from "@/components/home/Hero";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useAccount } from "@starknet-react/core";
+import { useEffect } from "react";
 
  const metadata = {
   title: "Landing page | InheritX",
@@ -19,6 +21,13 @@ import Footer from "@/components/Footer";
 };
 
 export default function Home() {
+  const { account } = useAccount()
+  
+  useEffect(() => {
+    if (account) {
+      window.location.href = "/dashboard/user";
+    }
+  },[account?.address])
   return (
     <>
       <Navbar />

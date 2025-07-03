@@ -1,42 +1,54 @@
+"use client";
+
 import { useState } from "react";
 import { FileText, Link } from "lucide-react";
-import SupportReply from "../components/SupportReply"; 
+import SupportReply from "./SupportReply";
 
-interface SupportTicket {
+interface SupportTicketType {
   id: string;
-  userId: string;
+  userId?: string;
   subject: string;
   email: string;
   status: string;
-  description: string;
-  attachments: string[];
+  description?: string;
+  attachments?: string[];
 }
 
-interface Props {
-  ticket: SupportTicket;
+interface SupportTicketDetailsAnsweredProps {
+  ticket: SupportTicketType;
   onClose: () => void;
 }
 
-export default function SupportTicketDetailsUnanswered({ ticket, onClose }: Props) {
-  const [isReplyOpen, setIsReplyOpen] = useState(false);  
+export default function SupportTicketDetailsAnswered({
+  ticket,
+  onClose,
+}: SupportTicketDetailsAnsweredProps) {
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   if (!ticket) {
-    return null; 
+    return null;
   }
 
-  const defaultUserId = "12345"; 
+  const defaultUserId = "12345";
   const defaultDescription = `For some reason, I can't create an inheritance plan.
-  How do I go about this? I want to leave a huge sum of money for my daughter.`;    
-  const defaultAttachments = ["Screenshot23422332", "Screenshot23422332"]; 
+  How do I go about this? I want to leave a huge sum of money for my daughter.`;
+  const defaultAttachments = ["Screenshot23422332", "Screenshot23422332"];
 
   if (isReplyOpen) {
-    return <SupportReply isOpen={isReplyOpen} onClose={() => setIsReplyOpen(false)} />;
+    return (
+      <SupportReply
+        isOpen={isReplyOpen}
+        onClose={() => setIsReplyOpen(false)}
+      />
+    );
   }
 
   return (
     <div className="fixed inset-0 bg-[#0D0D11CC] bg-opacity-50 flex items-center justify-center">
       <div className="bg-[#21202A] p-10 rounded-lg max-w-2xl w-full h-[90%] text-white border border-[#615F71]">
-        <h2 className="text-xl font-bold text-center mt-[-10px]">Ticket Details</h2>
+        <h2 className="text-xl font-bold text-center mt-[-10px]">
+          Ticket Details
+        </h2>
 
         <div className="space-y-3 mt-2">
           <TicketRow label="Ticket ID" value={ticket.id || "N/A"} />
@@ -44,45 +56,70 @@ export default function SupportTicketDetailsUnanswered({ ticket, onClose }: Prop
           <TicketRow label="Subject" value={ticket.subject || "No Subject"} />
           <TicketRow label="Email" value={ticket.email || "No Email"} />
           <TicketRow label="Status" value={ticket.status || "Pending"} />
-          <TicketRow label="Description" value={ticket.description || defaultDescription} multiLine />
+          <TicketRow
+            label="Description"
+            value={ticket.description || defaultDescription}
+            multiLine
+          />
 
           <div className="bg-[#2B2A38] p-2 rounded-lg border border-[#413F54]">
             <span className="text-white">Attachment(s)</span>
             <div className="space-y-1 mt-1">
               {ticket.attachments && ticket.attachments.length > 0
-                ? ticket.attachments.map((file, index) => <Attachment key={index} fileName={file} />)
-                : defaultAttachments.map((file, index) => <Attachment key={index} fileName={file} />)}
+                ? ticket.attachments.map((file, index) => (
+                    <Attachment key={index} fileName={file} />
+                  ))
+                : defaultAttachments.map((file, index) => (
+                    <Attachment key={index} fileName={file} />
+                  ))}
             </div>
           </div>
         </div>
 
         <div className="flex justify-center space-x-4 mt-4">
-          <button 
-            onClick={() => setIsReplyOpen(true)} 
+          <button
+            onClick={() => setIsReplyOpen(true)}
             className="bg-[#280080] border border-[#C0BFC6] px-10 py-1 rounded-2xl hover:bg-[#290080a4]"
           >
             Reply
           </button>
-          <button className="bg-transparent border border-[#C0BFC6] px-8 py-1 rounded-2xl hover:bg-[#C0BFC6]">
-            Mark as answered
-          </button>
-          <button onClick={onClose} className="bg-[#F23821] border border-[#C0BFC6] px-8 py-1 rounded-2xl hover:bg-[#f23921b6]">
+          <button
+            onClick={onClose}
+            className="bg-[#F23821] border border-[#C0BFC6] px-10 py-1 rounded-2xl hover:bg-[#f23921b6]"
+          >
             Close
           </button>
         </div>
       </div>
+
+      <SupportReply
+        isOpen={isReplyOpen}
+        onClose={() => setIsReplyOpen(false)}
+      />
     </div>
   );
 }
 
-const TicketRow = ({ label, value, multiLine }: { label: string; value: string; multiLine?: boolean }) => (
+interface TicketRowProps {
+  label: string;
+  value: string;
+  multiLine?: boolean;
+}
+
+const TicketRow = ({ label, value, multiLine }: TicketRowProps) => (
   <div className="flex justify-between bg-[#2B2A38] text-sm border border-[#413F54] p-2 rounded-lg">
     <span className="text-white">{label}</span>
-    <span className={`text-white ${multiLine ? "max-w-md text-right" : ""}`}>{value}</span>
+    <span className={`text-white ${multiLine ? "max-w-md text-right" : ""}`}>
+      {value}
+    </span>
   </div>
 );
 
-const Attachment = ({ fileName }: { fileName: string }) => (
+interface AttachmentProps {
+  fileName: string;
+}
+
+const Attachment = ({ fileName }: AttachmentProps) => (
   <div className="flex items-center justify-between bg-[#21202A] p-2 rounded-md">
     <div className="flex items-center space-x-2">
       <FileText className="w-4 h-4 text-gray-400" />

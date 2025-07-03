@@ -3,11 +3,11 @@
 import { StatCard } from "../component/StatCard";
 import Image from "next/image";
 import { QuickActionButton } from "../component/QuickActionButton";
-import bitcoinIcon from "../../../../public/svg/bitcoin.svg";
-import clockIcon from "../../../../public/svg/plansIcon.svg";
-import peopleIcon from "../../../../public/svg/people.svg";
-import midClockIcon from "../../../../public/svg/mdi_clock-plus.svg";
-import swapIcon from "../../../../public/svg/swap-icon.svg";
+import bitcoinIcon from "../../../../../public/svg/bitcoin.svg";
+import clockIcon from "../../../../../public/svg/plansIcon.svg";
+import peopleIcon from "../../../../../public/svg/people.svg";
+import midClockIcon from "../../../../../public/svg/mdi_clock-plus.svg";
+import swapIcon from "../../../../../public/svg/swap-icon.svg";
 import RecentActivities from "../component/RecentActivity";
 import { DirectionAnimation } from "@/motion/Animation";
 
