@@ -4,7 +4,10 @@ import "./globals.css";
 import ClientProviders from "@/components/client-providers";
 import { WalletProvider } from "@/components/wallet-connect-context";
 
-export const metadata: Metadata = METADATA_CONFIG;
+// export const metadata: Metadata = METADATA_CONFIG;
+export const metadata: Metadata = {
+  title: "InheritX",
+};
 
 export default function RootLayout({
   children,
