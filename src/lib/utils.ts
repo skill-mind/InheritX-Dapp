@@ -1,8 +1,9 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { CairoCustomEnum, RpcProvider } from "starknet";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // Helper function to shorten address
@@ -15,3 +16,21 @@ export const formatAmount = (hex: string) => {
   const decimal = parseInt(hex, 16);
   return decimal.toString();
 };
+
+export const myProvider = new RpcProvider({
+  nodeUrl: process.env.NEXT_PUBLIC_RPC_URL,
+});
+
+// For converting Hex to contract address
+export function bigIntToHex(value: bigint): `0x${string}` {
+  return `0x${value.toString(16)}`;
+}
+
+export function toEpochTime(date: string | Date): number {
+  const d = typeof date === "string" ? new Date(date) : date;
+  return Math.floor(d.getTime() / 1000);
+}
+
+export function createCairoEnum(value: string): CairoCustomEnum {
+  return new CairoCustomEnum({ [value]: {} });
+}
